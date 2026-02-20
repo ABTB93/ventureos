@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workflow-instructions name="team-formation">
+
+  <overview>
+    Set up the venture team operational foundation in Week 1. Creates the Team Charter covering: team composition, roles, weekly cadence, tools, ways of working, budget, and team identity.
+  </overview>
+
+  <step n="1" name="venture-challenge">
+    <title>Frame the Venture Challenge</title>
+    <agent>venture-ops</agent>
+    <instructions>
+      Work with the user to frame the venture challenge statement:
+      1. Load venture-canvas.md if it exists — use as starting point
+      2. Facilitate: "How might we [solve problem] for [customer] so that [outcome]?"
+      3. Articulate WHY this venture exists — the reason for incubating this specific idea now
+      4. Confirm: entry point (domain exploration or specific idea?)
+      5. Set the timeline: incubation start date, Week 8 check-in gate, Week 12 final gate
+    </instructions>
+  </step>
+
+  <step n="2" name="team-composition">
+    <title>Define Team Composition and Roles</title>
+    <agent>venture-ops</agent>
+    <instructions>
+      Map the team:
+      1. Who is on the venture team? Names, roles, backgrounds, % allocation
+      2. Identify gaps: What skills are missing? How will gaps be filled (hire, contract, mothership resource)?
+      3. Confirm the Sponsor (mothership corporate champion)
+      4. Identify the NVB / reporting structure
+      5. Clarify: who makes day-to-day decisions vs. who needs to be consulted?
+    </instructions>
+  </step>
+
+  <step n="3" name="cadence-tools">
+    <title>Establish Cadence and Tools</title>
+    <agent>venture-ops</agent>
+    <instructions>
+      Set up how the team operates:
+      1. Define weekly meeting cadence (stand-up, deep work session, review)
+      2. Select tools: project management, comms, docs, research, prototype/build, analytics
+      3. Define how decisions get made and escalated
+      4. Establish how the team will communicate with the Sponsor and NVB
+      5. Set up the output folder structure for venture artifacts
+    </instructions>
+  </step>
+
+  <step n="4" name="team-identity">
+    <title>Create Team Identity</title>
+    <agent>venture-ops</agent>
+    <instructions>
+      Build the team's identity and culture:
+      1. Name/codename for the venture team
+      2. 3-5 team values (what we stand for, how we work)
+      3. Working norms: what we commit to, what we will always do, what we will never do
+      4. How will the team celebrate wins and process learnings?
+      5. Energy: what's exciting about this venture for each team member?
+    </instructions>
+  </step>
+
+  <step n="5" name="budget-constraints">
+    <title>Confirm Budget and Constraints</title>
+    <agent>venture-ops</agent>
+    <instructions>
+      Confirm the operational boundaries:
+      1. Incubation budget total and breakdown (research, experiments, travel, tech)
+      2. Legal and IP support — who, contact, availability
+      3. Technology/infrastructure support from mothership
+      4. Key constraints: regulatory, IP, market segments off-limits
+      5. Hard timeline deadlines — what cannot move?
+    </instructions>
+  </step>
+
+  <step n="6" name="team-charter-output">
+    <title>Produce Team Charter</title>
+    <agent>venture-ops</agent>
+    <instructions>
+      Compile all inputs into the Team Charter using the team-charter.md template.
+      Fill all sections. Review with user. Save to output folder.
+      Update venture-state.yaml: mark team-charter as complete in category_progress.team.
+    </instructions>
+    <template-output file="{output_folder}/{venture_name}/team-charter.md">
+      Save completed Team Charter.
+    </template-output>
+    <state-update file="{project-root}/ventureOS/_memory/venture-sidecar/venture-state.yaml">
+      Update: completed_artifacts, category_progress.team, guiding_questions.setup answers
+    </state-update>
+  </step>
+
+</workflow-instructions>

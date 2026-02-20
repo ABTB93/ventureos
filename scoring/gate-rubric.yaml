@@ -1,0 +1,100 @@
+# Gate Evaluation Rubric — weighted scoring for Go/Pivot/Kill decisions
+# Used by Venture Evaluator at both Check-in Gate (~Week 8) and Final Gate (~Week 12)
+
+rubric:
+  criteria:
+    - id: customer_pain_validation
+      label: "Customer Pain Validation"
+      weight: 0.20
+      description: "Evidence of real, validated customer pain (frequency, intensity, prevalence)"
+      scoring_guide:
+        5: "Strong quantitative pain scores across 20+ interviews; clear FIP data; buyer and user both identified"
+        4: "Good pain evidence from 10-20 interviews; pain atomization complete; ICP defined"
+        3: "Some interview evidence; pain hypothesis partially validated; ICP emerging"
+        2: "Minimal interviews; pain mostly hypothetical; ICP unclear"
+        1: "No customer interviews; pain assumed not validated"
+
+    - id: market_opportunity
+      label: "Market Opportunity Size"
+      weight: 0.15
+      description: "Market size attractiveness and growth trajectory"
+      scoring_guide:
+        5: "Large, fast-growing market (TAM >$1B); clear SAM/SOM; barriers identified and manageable"
+        4: "Solid market ($500M-$1B TAM); growing; some barriers identified"
+        3: "Moderate market ($100M-$500M TAM); moderate growth"
+        2: "Small or unclear market (<$100M TAM); slow growth"
+        1: "Tiny market or no sizing done"
+
+    - id: wedge_differentiation
+      label: "Wedge Clarity & Differentiation"
+      weight: 0.15
+      description: "Clarity of wedge strategy and unique value vs. existing alternatives"
+      scoring_guide:
+        5: "Crystal clear wedge definition; strong tested value proposition; validated differentiation; wedge-to-vision scaling hypothesis articulated"
+        4: "Clear wedge with tested value props; some differentiation evidence"
+        3: "Wedge defined but not yet fully tested; differentiation assumed"
+        2: "Vague wedge; value props untested"
+        1: "No wedge defined"
+
+    - id: business_model_viability
+      label: "Business Model & Revenue Viability"
+      weight: 0.15
+      description: "Clear path to revenue with diverse, robust revenue streams"
+      scoring_guide:
+        5: "Multiple validated revenue streams; pricing tested; monetisation plan clear; unit economics positive"
+        4: "Revenue model defined; pricing strategy developed; basic unit economics"
+        3: "Revenue model selected; pricing exploratory"
+        2: "Revenue model vague; no pricing work"
+        1: "No business model thinking"
+
+    - id: traction_experiments
+      label: "Traction / Market Experiment Results"
+      weight: 0.15
+      description: "Evidence from real market experiments (landing pages, pilots, conversions)"
+      scoring_guide:
+        5: "Landing page live with conversion data; CAC calculated; pilot customers engaged; A/B test results; strong desirability scores"
+        4: "Some experiment results; pilot pipeline identified; early conversion data"
+        3: "Experiments planned; pilot outreach started"
+        2: "No experiments run; pipeline empty"
+        1: "No market testing at all"
+
+    - id: technical_feasibility
+      label: "Technical Feasibility"
+      weight: 0.10
+      description: "Evidence the solution can be built (build/buy/partner/invest)"
+      scoring_guide:
+        5: "Prototype built; feasibility fully assessed; build/buy/partner strategy decided; ecosystem mapped"
+        4: "Feasibility assessed; prototype in progress; clear technical path"
+        3: "Feasibility analysis done; technical path defined"
+        2: "High-level feasibility only; many unknowns"
+        1: "No feasibility assessment"
+
+    - id: mothership_team_readiness
+      label: "Mothership Advantage & Team Readiness"
+      weight: 0.10
+      description: "Leverage of mothership assets and team capability to execute"
+      scoring_guide:
+        5: "Asset Jam complete; clear mothership advantages being leveraged; sponsor aligned; team charter complete; operating plan ready"
+        4: "Key mothership assets identified; sponsor engaged; team roles clear"
+        3: "Some mothership assets identified; team partially formed"
+        2: "Minimal mothership leverage; team incomplete"
+        1: "No mothership engagement; team undefined"
+
+thresholds:
+  go:
+    min_score: 3.5
+    description: "Venture is ready for acceleration and investor pitch"
+  pivot:
+    min_score: 2.5
+    max_score: 3.49
+    description: "Venture shows promise but needs directional change before continuing"
+  kill:
+    max_score: 2.49
+    description: "Evidence does not support continued investment; archive with learnings"
+
+checkin_gate:
+  note: "At check-in gate, traction/experiments and full business model are not yet expected. Focus evaluation on pain validation, market opportunity, and wedge hypothesis."
+  focus_criteria:
+    - customer_pain_validation
+    - market_opportunity
+    - wedge_differentiation

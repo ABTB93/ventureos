@@ -1,0 +1,73 @@
+# Pivot Triggers — conditions that suggest a pivot is needed
+# Referenced by Venture Evaluator when deciding between GO / PIVOT / KILL
+
+pivot_types:
+  customer_pivot:
+    label: "Customer Pivot"
+    description: "Same problem, different customer segment"
+    triggers:
+      - "Evidence shows a different customer segment has stronger pain"
+      - "Current target segment is too small or hard to reach"
+      - "Buyer and user are different; focusing on the wrong one"
+      - "ICP definition keeps shifting across interviews"
+    reentry_phase: "3-find-pain"
+    preserve: ["market-research.md", "market-sizing.md", "competitive-analysis.md"]
+    regenerate: ["customer-synthesis.md", "icp-profile.md", "pain-atomization.md", "pain-journey-map.md"]
+
+  problem_pivot:
+    label: "Problem Pivot"
+    description: "Same customer, different problem to solve"
+    triggers:
+      - "Validated customer segment but their most painful problem differs from hypothesis"
+      - "Pain scores low on original hypothesis; a different pain emerges with high FIP scores"
+      - "Customer interviews consistently surface a different priority problem"
+    reentry_phase: "3-find-pain"
+    preserve: ["market-research.md", "market-sizing.md", "stakeholder-map.md", "icp-profile.md"]
+    regenerate: ["pain-hypothesis.md", "pain-atomization.md", "pain-journey-map.md", "interview-synthesis.md"]
+
+  solution_pivot:
+    label: "Solution Pivot"
+    description: "Same customer and problem, different solution/wedge"
+    triggers:
+      - "Solution testing interviews show the product concept is not preferred over alternatives"
+      - "Technical feasibility analysis reveals the current solution cannot be built"
+      - "Value proposition testing fails; a different approach resonates better"
+      - "Concept card interviews consistently prefer a different solution direction"
+    reentry_phase: "4-define-solution"
+    preserve: ["customer-synthesis.md", "pain-atomization.md", "icp-profile.md", "pain-journey-map.md"]
+    regenerate: ["wedge-definition.md", "value-proposition.md", "concept-card.md", "solution-feasibility.md"]
+
+  model_pivot:
+    label: "Business Model Pivot"
+    description: "Same product, different way to make money"
+    triggers:
+      - "Unit economics do not work with current pricing/revenue model"
+      - "CAC is too high relative to LTV in current channel/model"
+      - "Customer interviews reveal willingness to pay differs from hypothesis"
+      - "Pilot customers prefer a different engagement/pricing model"
+    reentry_phase: "6-design-business"
+    preserve: ["customer-synthesis.md", "wedge-definition.md", "solution-feasibility.md", "product-roadmap.md"]
+    regenerate: ["business-model-canvas.md", "pricing-model.md", "monetisation-plan.md", "financial-model.md"]
+
+  market_pivot:
+    label: "Market Pivot"
+    description: "Different domain/market altogether"
+    triggers:
+      - "Market is too small, too regulated, or has insurmountable barriers"
+      - "Competitive analysis reveals no differentiation is possible"
+      - "The strongest opportunity discovered during incubation is in a different domain"
+      - "All pain scoring points to a completely different market"
+    reentry_phase: "0-exploration"
+    preserve: ["team-charter.md", "mothership-asset-map.md"]
+    regenerate: ["all domain, pain, solution, and business artifacts"]
+
+kill_triggers:
+  description: "Conditions under which killing the venture is the right decision"
+  triggers:
+    - "Pain validation consistently fails across multiple customer segments (FIP score <2 in all tested)"
+    - "Market sizing reveals TAM <$50M with no meaningful growth trajectory"
+    - "Technical feasibility is impossible via build/buy/partner/invest"
+    - "Two or more pivots have been attempted with no improvement in validation scores"
+    - "Mothership explicitly withdraws support or funding"
+    - "A major competitor launches an identical product before the wedge is ready"
+    - "Regulatory environment makes the business model illegal or unviable"

@@ -1,0 +1,28 @@
+# VB Workflow: Initial Business Case (Phase 5 — Weeks 7-10)
+name: initial-business-case
+description: "Build the initial business case: identify and mitigate venture killer risks, create the operating and experiment plan for Phase 6, establish budget and operational support, build a pilot customer pipeline."
+author: "VB"
+
+config_source: "{project-root}/ventureOS/config.yaml"
+output_folder: "{config_source}:output_folder"
+venture_name: "{config_source}:venture_name"
+user_name: "{config_source}:user_name"
+communication_language: "{config_source}:communication_language"
+date: system-generated
+
+installed_path: "{project-root}/ventureOS/workflows/5-business-case/initial-business-case"
+instructions: "{installed_path}/instructions.xml"
+
+templates:
+  - "{project-root}/ventureOS/data/templates/venture-killer-risks.md"
+  - "{project-root}/ventureOS/data/templates/experiment-plan.md"
+
+tags:
+  - business-case
+  - risk-assessment
+  - experiment-plan
+  - phase-5
+
+execution_hints:
+  interactive: true
+  autonomous: false

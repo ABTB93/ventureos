@@ -1,0 +1,46 @@
+# VB Workflow: Domain Deep Dive (Phase 0 — Pre-incubation)
+name: domain-deep-dive
+description: "Full opportunity scan for a domain. Maps market landscape, competitive dynamics, customer pain signals, and identifies top venture opportunity areas. Entry point for users who have a domain but no specific idea."
+author: "VB"
+
+# Config
+config_source: "{project-root}/ventureOS/config.yaml"
+output_folder: "{config_source}:output_folder"
+venture_name: "{config_source}:venture_name"
+user_name: "{config_source}:user_name"
+communication_language: "{config_source}:communication_language"
+research_depth: "{config_source}:research_depth"
+date: system-generated
+
+# Workflow paths
+installed_path: "{project-root}/ventureOS/workflows/0-explore/domain-deep-dive"
+instructions: "{installed_path}/instructions.xml"
+
+# Output
+default_output_folder: "{output_folder}/{venture_name}/domain-research/"
+
+# Templates used
+templates:
+  - "{project-root}/ventureOS/data/templates/venture-canvas.md"
+  - "{project-root}/ventureOS/data/templates/market-sizing.md"
+  - "{project-root}/ventureOS/data/templates/stakeholder-map.md"
+
+# Data files
+data:
+  brainstorming: "{project-root}/ventureOS/data/techniques/brainstorming-techniques.csv"
+
+tags:
+  - exploration
+  - domain-research
+  - market-mapping
+  - pre-incubation
+
+execution_hints:
+  interactive: true
+  autonomous: false
+  iterative: true
+  web_search_required: true
+  checkpoints:
+    - after_market_landscape
+    - after_competitive_analysis
+    - after_opportunity_identification

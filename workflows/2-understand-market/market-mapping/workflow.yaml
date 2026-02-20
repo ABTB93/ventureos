@@ -1,0 +1,29 @@
+# VB Workflow: Market Mapping (Phase 2 — Weeks 2-3)
+name: market-mapping
+description: "Map the domain's competitive landscape, market size, and key trends. Produces: competitive analysis, TAM/SAM/SOM market sizing, barrier-to-entry assessment. Web search enabled."
+author: "VB"
+
+config_source: "{project-root}/ventureOS/config.yaml"
+output_folder: "{config_source}:output_folder"
+venture_name: "{config_source}:venture_name"
+user_name: "{config_source}:user_name"
+communication_language: "{config_source}:communication_language"
+research_depth: "{config_source}:research_depth"
+date: system-generated
+
+installed_path: "{project-root}/ventureOS/workflows/2-understand-market/market-mapping"
+instructions: "{installed_path}/instructions.xml"
+
+templates:
+  - "{project-root}/ventureOS/data/templates/market-sizing.md"
+
+tags:
+  - market-mapping
+  - competitive-analysis
+  - market-sizing
+  - phase-2
+
+execution_hints:
+  interactive: true
+  autonomous: true
+  web_search_required: true
