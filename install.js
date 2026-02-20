@@ -102,8 +102,8 @@ output_folder: "_ventures"
 # deep     = exhaustive multi-source research with cross-validation
 research_depth: "${researchDepth}"
 
-# Your primary AI tool
-# Options: claude-code | cursor | windsurf | other
+# Your AI provider
+# Options: anthropic | openai | gemini
 llm: "${llm}"
 
 # Execution mode for workflows
@@ -113,35 +113,12 @@ default_mode: "${defaultMode}"
 `;
 }
 
-function showNextSteps(llm, ventureOSDir, targetDir) {
-  const rel = path.relative(targetDir, ventureOSDir);
-
+function showNextSteps(ventureOSDir, targetDir) {
   console.log('\n' + line());
   console.log('  How to start VentureOS');
   console.log(line() + '\n');
-
-  if (llm === 'claude-code') {
-    console.log('  Option A — In Claude Code:\n');
-    console.log(`    @${rel}/venture-master.md\n`);
-    console.log('  Option B — Terminal chat:\n');
-    console.log(`    npx ventureos start\n`);
-  } else if (llm === 'cursor') {
-    console.log('  Option A — In Cursor, attach the file in chat:\n');
-    console.log(`    Click paperclip → select ${rel}/venture-master.md\n`);
-    console.log('  Option B — Terminal chat:\n');
-    console.log(`    npx ventureos start\n`);
-  } else if (llm === 'windsurf') {
-    console.log('  Option A — In Windsurf Cascade:\n');
-    console.log(`    Load ${rel}/venture-master.md\n`);
-    console.log('  Option B — Terminal chat:\n');
-    console.log(`    npx ventureos start\n`);
-  } else {
-    console.log('  Start VentureOS from the terminal:\n');
-    console.log(`    npx ventureos start\n`);
-    console.log('  Connects directly to Claude, ChatGPT, or Gemini — no copy-pasting.\n');
-  }
-
-  console.log(line());
+  console.log('  Run this command from your project folder:\n');
+  console.log('    npx ventureos start\n');
   console.log('  Victor (your VentureOS orchestrator) will:');
   console.log(line() + '\n');
   console.log('    1. Read your config and venture state');
@@ -193,15 +170,14 @@ async function install() {
     const nameInput = await rl.question('  👤 Your name: ');
     const userName = nameInput.trim() || 'Founder';
 
-    // Step 3: AI tool
-    console.log('\n  🤖 Which AI tool do you use for coding?\n');
-    console.log('     1.  Claude Code  (recommended)');
-    console.log('     2.  Cursor');
-    console.log('     3.  Windsurf');
-    console.log('     4.  Other\n');
-    const llmInput = await rl.question('     Select [1-4]: ');
-    const llmMap = { '1': 'claude-code', '2': 'cursor', '3': 'windsurf', '4': 'other' };
-    const llm = llmMap[llmInput.trim()] ?? 'claude-code';
+    // Step 3: AI provider
+    console.log('\n  🤖 Which AI provider do you use?\n');
+    console.log('     1.  Claude (Anthropic)  (recommended)');
+    console.log('     2.  ChatGPT (OpenAI)');
+    console.log('     3.  Gemini (Google)\n');
+    const llmInput = await rl.question('     Select [1-3]: ');
+    const llmMap = { '1': 'anthropic', '2': 'openai', '3': 'gemini' };
+    const llm = llmMap[llmInput.trim()] ?? 'anthropic';
 
     // Step 4: Research depth
     console.log('\n  🔍 Research depth for market and domain analysis?\n');
@@ -250,7 +226,7 @@ async function install() {
     console.log('  ✅ VentureOS is ready!');
     console.log(line());
 
-    showNextSteps(llm, ventureOSDir, targetDir);
+    showNextSteps(ventureOSDir, targetDir);
 
   } catch (err) {
     rl.close();
@@ -300,19 +276,8 @@ async function startChat() {
   const config = parseSimpleYaml(fs.readFileSync(configPath, 'utf8'));
   const rl = readline.createInterface({ input, output });
 
-  // ── Select provider ────────────────────────────────────────────────────────
-  let providerKey;
-  if (config.llm === 'claude-code') {
-    providerKey = 'anthropic';
-  } else {
-    console.log('  🤖 Which AI provider do you want to use?\n');
-    console.log('     1.  Claude (Anthropic)');
-    console.log('     2.  ChatGPT (OpenAI)');
-    console.log('     3.  Gemini (Google)\n');
-    const choice = await rl.question('     Select [1-3]: ');
-    providerKey = ({ '1': 'anthropic', '2': 'openai', '3': 'gemini' })[choice.trim()] ?? 'anthropic';
-  }
-
+  // ── Select provider from config ────────────────────────────────────────────
+  const providerKey = PROVIDERS[config.llm] ? config.llm : 'anthropic';
   const provider = PROVIDERS[providerKey];
 
   // ── Get API key ────────────────────────────────────────────────────────────
@@ -334,7 +299,7 @@ async function startChat() {
     .replace(/\{project-root\}/g, projectRoot)
     .replace(/\{communication_language\}/g, 'English')
     .replace(/\{user_name\}/g, config.user_name || 'Founder')
-    .replace(/\{llm\}/g, config.llm || 'other')
+    .replace(/\{llm\}/g, config.llm || 'anthropic')
     .replace(/\{research_depth\}/g, config.research_depth || 'standard')
     .replace(/\{default_mode\}/g, config.default_mode || 'guided')
     .replace(/\{output_folder\}/g, config.output_folder || '_ventures');
