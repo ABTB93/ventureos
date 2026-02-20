@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workflow-instructions name="feasibility-assessment">
+
+  <overview>
+    Assess whether the wedge solution can be built. Evaluate all four routes: Build (internal development), Buy (acquire technology), Partner (use a third party), Invest (stake in an existing company). Map the technology ecosystem. Recommend the optimal implementation approach.
+  </overview>
+
+  <step n="1" name="solution-requirements">
+    <title>Define Technical Requirements</title>
+    <agent>product-strategist</agent>
+    <instructions>
+      Load wedge-definition.md and value-proposition.md.
+      Define the technical requirements for the wedge:
+      1. Core capabilities required (what must the system do?)
+      2. Data requirements (what data is needed? where does it come from?)
+      3. Integration requirements (what systems must it connect to?)
+      4. AI/ML requirements (if applicable)
+      5. Security and compliance requirements
+      6. Scalability requirements
+      Document in solution-feasibility.md Step 1 section.
+    </instructions>
+  </step>
+
+  <step n="2" name="build-buy-partner">
+    <title>Build / Buy / Partner / Invest Analysis</title>
+    <agent>product-strategist</agent>
+    <instructions>
+      For each route, assess feasibility using the solution-feasibility.md template:
+
+      BUILD: Can we build the core capability in-house? What tech stack? What team? Timeline?
+      BUY: Are there existing products or APIs that provide this capability? (Web search for options)
+      PARTNER: Are there companies with this capability we could white-label, resell, or integrate with?
+      INVEST: Are there early-stage companies with this capability worth investing in?
+
+      Use web search to find candidate technologies, APIs, and partners for BUY/PARTNER routes.
+      Score each option 1-5 on feasibility.
+      Recommend a route (or hybrid approach).
+    </instructions>
+    <template-output file="{output_folder}/{venture_name}/solution-feasibility.md">
+      Save feasibility analysis with all four routes evaluated.
+    </template-output>
+  </step>
+
+  <step n="3" name="ecosystem-map">
+    <title>Ecosystem Mapping</title>
+    <agent>product-strategist</agent>
+    <instructions>
+      Map the technology ecosystem the solution operates within using the ecosystem-map.md template:
+      1. Key suppliers and enablers (what does our solution depend on?)
+      2. Competitors and substitutes (using web research — already done in Phase 2 but refresh for solution context)
+      3. Complementors (who enhances our solution or vice versa)
+      4. Platform dependencies (APIs, data platforms, cloud providers)
+      5. Integration landscape (what systems our ICP already uses that we must integrate with)
+      6. Partnership candidates — who would make a valuable partnership?
+
+      Use web search to identify technology players, platforms, and ecosystem participants.
+    </instructions>
+    <template-output file="{output_folder}/{venture_name}/ecosystem-map.md">
+      Save ecosystem map with partnership candidates.
+    </template-output>
+  </step>
+
+  <step n="4" name="feasibility-verdict">
+    <title>Feasibility Verdict and Build Plan</title>
+    <agent>product-strategist</agent>
+    <instructions>
+      Produce the feasibility verdict:
+      1. Overall feasibility: Feasible / Feasible with caveats / Not feasible
+      2. Recommended implementation approach (build/buy/partner/invest or hybrid)
+      3. Biggest technical risk and mitigation
+      4. Prototype-to-wedge build plan (phases and timelines)
+      5. Mothership technology assets that can accelerate development
+
+      Update venture-state.yaml: completed_artifacts, guiding_questions.solution (technical feasibility question)
+    </instructions>
+    <state-update file="{project-root}/ventureOS/_memory/venture-sidecar/venture-state.yaml">
+      Update: completed_artifacts (solution-feasibility, ecosystem-map), guiding_questions.solution
+    </state-update>
+  </step>
+
+</workflow-instructions>

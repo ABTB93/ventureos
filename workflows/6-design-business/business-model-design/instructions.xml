@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workflow-instructions name="business-model-design">
+
+  <overview>
+    Design the venture's business model in Phase 6 (Week 10). Run a business model exploration exercise to compare 5+ options, select the best fit, and then build the Business Model Canvas, pricing model, and monetisation plan.
+  </overview>
+
+  <step n="1" name="business-model-exploration">
+    <title>Business Model Exploration</title>
+    <agent>business-architect</agent>
+    <instructions>
+      Run the "business-model-exploration" brainstorming technique from brainstorming-techniques.csv.
+      Load icp-profile.md, wedge-definition.md, and value-proposition.md.
+
+      Generate 5+ distinct business model options:
+      1. SaaS / Subscription — recurring per seat or company
+      2. Usage-based — pay per use / transaction
+      3. Freemium — free tier + paid upgrade
+      4. Marketplace — % take on transactions
+      5. Data / API monetisation — license data or provide API access
+      6. Professional services + software — hybrid
+      7. Platform / ecosystem — others build on us
+
+      For each: describe the model, estimate revenue potential, assess CAC implications, implementation complexity, and fit with mothership assets.
+      Present comparison matrix. Ask user (in Guided mode) to select or narrow to 1-2 options for full development.
+    </instructions>
+  </step>
+
+  <step n="2" name="business-model-canvas">
+    <title>Business Model Canvas</title>
+    <agent>business-architect</agent>
+    <instructions>
+      Using the selected business model and the business-model-canvas.md template, complete the full BMC:
+      - Customer Segments, Value Propositions, Channels, Customer Relationships
+      - Revenue Streams, Key Resources, Key Activities, Key Partnerships, Cost Structure
+      Include unit economics summary: ACV, Gross Margin, LTV, CAC, LTV:CAC ratio, Payback Period.
+    </instructions>
+    <template-output file="{output_folder}/{venture_name}/business-model-canvas.md">
+      Save Business Model Canvas.
+    </template-output>
+  </step>
+
+  <step n="3" name="pricing-model">
+    <title>Pricing Model</title>
+    <agent>business-architect</agent>
+    <instructions>
+      Using the pricing-model.md template:
+      1. Select pricing strategy (value-based / cost-plus / competitor-anchored / freemium / usage-based)
+      2. Design pricing tiers (2-3 tiers typical)
+      3. Set pricing mechanics (billing frequency, seat/company/usage-based)
+      4. Research willingness to pay (from interviews + competitor pricing via web search)
+      5. Design a pricing validation experiment (landing page A/B, customer interview, pilot pricing)
+      6. Calculate revenue implications per tier
+    </instructions>
+    <template-output file="{output_folder}/{venture_name}/pricing-model.md">
+      Save pricing model with tiers and validation plan.
+    </template-output>
+  </step>
+
+  <step n="4" name="monetisation-plan">
+    <title>Monetisation Plan</title>
+    <agent>business-architect</agent>
+    <instructions>
+      Using the monetisation-plan.md template:
+      1. Define primary revenue stream (detail: mechanism, ACV, gross margin, timeline to revenue)
+      2. Define 2 secondary revenue streams (diversification)
+      3. Revenue diversification assessment — no stream should be >70% by Year 3
+      4. Create monetisation timeline (first revenue, break-even, ARR milestones)
+      5. Unit economics by stream
+      6. Monetisation risks and experiments to validate
+
+      Update venture-state.yaml: completed_artifacts, guiding_questions.design_business
+    </instructions>
+    <template-output file="{output_folder}/{venture_name}/monetisation-plan.md">
+      Save monetisation plan.
+    </template-output>
+    <state-update file="{project-root}/ventureOS/_memory/venture-sidecar/venture-state.yaml">
+      Update: completed_artifacts (business-model-canvas, pricing-model, monetisation-plan), guiding_questions.design_business
+    </state-update>
+  </step>
+
+</workflow-instructions>

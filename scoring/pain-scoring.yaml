@@ -1,0 +1,63 @@
+# Pain Scoring Framework — Frequency / Intensity / Prevalence (FIP)
+# Used by Customer Discovery Specialist during Phase 3 (Find Customer Pain)
+
+framework:
+  name: "FIP Pain Scoring"
+  description: "Score each pain on Frequency, Intensity, and Prevalence to determine if it is strong enough to support a business"
+  formula: "(frequency + intensity + prevalence) / 3"
+
+dimensions:
+  frequency:
+    label: "Frequency"
+    question: "How often does the customer experience this pain?"
+    scale:
+      5: "Daily or multiple times per day"
+      4: "Weekly"
+      3: "Monthly"
+      2: "Quarterly or less"
+      1: "Rarely / one-off"
+
+  intensity:
+    label: "Intensity"
+    question: "How severe is the pain when experienced?"
+    scale:
+      5: "Extremely painful — stops work, costs significant money, or causes major frustration"
+      4: "Very painful — significant workaround required; notable time or money lost"
+      3: "Moderately painful — annoying, some workaround exists"
+      2: "Mildly painful — minor inconvenience"
+      1: "Almost no pain — barely noticed"
+
+  prevalence:
+    label: "Prevalence"
+    question: "What percentage of the target market experiences this pain?"
+    scale:
+      5: ">75% of target market has this pain"
+      4: "50-75% of target market"
+      3: "25-50% of target market"
+      2: "10-25% of target market"
+      1: "<10% of target market"
+
+thresholds:
+  strong:
+    min: 4.0
+    label: "Strong pain — sufficient to anchor a venture"
+  moderate:
+    min: 3.0
+    max: 3.99
+    label: "Moderate pain — warrants further investigation"
+  weak:
+    max: 2.99
+    label: "Weak pain — unlikely to support a business alone"
+
+atomization_template:
+  pain_statement: ""
+  trigger: ""           # What situation triggers the pain?
+  consequence: ""       # What happens as a result?
+  current_fix: ""       # How do they solve it today?
+  fix_satisfaction: null  # 1-5, how satisfied with current fix?
+  frequency_score: null
+  intensity_score: null
+  prevalence_score: null
+  fip_average: null
+  representative_quote: ""
+  interview_count: 0    # How many interviews mentioned this pain

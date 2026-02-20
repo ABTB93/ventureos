@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workflow-instructions name="venture-status">
+
+  <overview>
+    Read the venture state and produce a structured dashboard showing: current position in the 12-week incubation, category progress, guiding questions answered vs. pending, completed artifacts, and recommended next actions. This workflow reads state only — it does not modify anything.
+  </overview>
+
+  <step n="1" name="load-state">
+    <title>Load Venture State</title>
+    <instructions>
+      Load and parse:
+      1. {project-root}/ventureOS/_memory/venture-sidecar/venture-state.yaml
+      2. {project-root}/ventureOS/_memory/venture-sidecar/pivot-history.yaml
+      3. {project-root}/ventureOS/config.yaml (for venture_name, user_name)
+    </instructions>
+  </step>
+
+  <step n="2" name="produce-dashboard">
+    <title>Produce Status Dashboard</title>
+    <instructions>
+      Produce a structured, readable dashboard in this format:
+
+      ═══════════════════════════════════════════════════
+      🚀 VENTURE STATUS DASHBOARD
+      ═══════════════════════════════════════════════════
+
+      Venture: {venture_name}
+      Current Phase: {current_phase} ({phase name})
+      Current Week: {current_week} / 12
+      Entry Point: {entry_point}
+      Status: {status}
+      Pivot Count: {pivot_count}
+      Started: {started}
+
+      ───────────────────────────────────────────────────
+      CATEGORY PROGRESS
+      ───────────────────────────────────────────────────
+      🧑‍💼 Team:        {category_progress.team}
+      🔭 Venture:     {category_progress.venture}
+      🏢 Mothership:  {category_progress.mothership}
+
+      ───────────────────────────────────────────────────
+      GUIDING QUESTIONS ANSWERED
+      ───────────────────────────────────────────────────
+      For each phase, list: ✅ Answered | ⏳ Pending | ❌ Not started
+      Format:
+      Phase 1 - Setup Team:
+        ✅ What is the venture's reason to exist? (evidence: venture-canvas.md)
+        ✅ Who is in the team? (evidence: team-charter.md)
+        ⏳ Does the team understand mothership capabilities?
+
+      Phase 2 - Understand Domain:
+        [list questions with status]
+
+      Phase 3 - Find Pain:
+        [list questions with status]
+
+      Phase 4 - Define Solution:
+        [list questions with status]
+
+      Phase 5 - Business Case:
+        [list questions with status]
+
+      Phase 6 - Design Business:
+        [list questions with status]
+
+      ───────────────────────────────────────────────────
+      COMPLETED ARTIFACTS ({count} total)
+      ───────────────────────────────────────────────────
+      List all completed artifacts with their file paths
+
+      ───────────────────────────────────────────────────
+      GATE HISTORY
+      ───────────────────────────────────────────────────
+      Check-in Gate: {date} | Decision: {decision} | Score: {score}
+      Final Gate:    {date} | Decision: {decision} | Score: {score}
+
+      ───────────────────────────────────────────────────
+      PIVOT HISTORY ({pivot_count} pivots)
+      ───────────────────────────────────────────────────
+      [List any pivots with: date, type, reason, re-entry phase]
+
+      ───────────────────────────────────────────────────
+      RECOMMENDED NEXT ACTIONS
+      ───────────────────────────────────────────────────
+      Based on current_phase and unanswered guiding questions:
+      1. [Most urgent action — what must happen next to progress]
+      2. [Second priority]
+      3. [Third priority]
+
+      ═══════════════════════════════════════════════════
+
+      Calibrate recommendations based on current_phase and what guiding questions remain unanswered.
+    </instructions>
+  </step>
+
+</workflow-instructions>

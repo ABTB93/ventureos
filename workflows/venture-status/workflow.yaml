@@ -1,0 +1,24 @@
+# VB Workflow: Venture Status Dashboard
+name: venture-status
+description: "Display a comprehensive venture status dashboard: current phase, week, category progress (Team/Venture/Mothership), guiding questions answered vs pending, completed artifacts, next recommended actions, gate history, and pivot history."
+author: "VB"
+
+config_source: "{project-root}/ventureOS/config.yaml"
+output_folder: "{config_source}:output_folder"
+venture_name: "{config_source}:venture_name"
+user_name: "{config_source}:user_name"
+communication_language: "{config_source}:communication_language"
+date: system-generated
+
+installed_path: "{project-root}/ventureOS/workflows/venture-status"
+instructions: "{installed_path}/instructions.xml"
+
+tags:
+  - status
+  - dashboard
+  - meta
+
+execution_hints:
+  interactive: false
+  autonomous: true
+  always_available: true

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workflow-instructions name="initial-business-case">
+
+  <overview>
+    Build the initial business case for the venture before the check-in gate. Identify and remove venture killer risks. Create the operating and experiment plan for Phase 6. Establish the pilot customer pipeline.
+  </overview>
+
+  <step n="1" name="reverse-pitch">
+    <title>Reverse Pitch — Surface Hidden Risks</title>
+    <agent>venture-ops</agent>
+    <instructions>
+      Run the "reverse-pitch" brainstorming technique from brainstorming-techniques.csv:
+      1. Each team member (or persona if solo) argues WHY this venture should be KILLED
+      2. Collect all kill arguments — the more uncomfortable, the better
+      3. Group kill arguments into categories (market, competitive, technical, business model, regulatory, team/mothership)
+      4. Assess each: is this a real risk or a manageable one?
+      5. Identify the top 5 venture killer risks that require active mitigation
+
+      Record all kill arguments in venture-killer-risks.md (Reverse Pitch section).
+    </instructions>
+  </step>
+
+  <step n="2" name="risk-registry">
+    <title>Venture Killer Risk Registry</title>
+    <agent>venture-ops</agent>
+    <instructions>
+      Using the venture-killer-risks.md template, build a comprehensive risk registry:
+      1. Market and customer risks
+      2. Competitive risks
+      3. Technical and product risks
+      4. Business model risks
+      5. Regulatory and legal risks
+      6. Mothership and organizational risks
+
+      For each risk: likelihood (1-5), impact (1-5), risk score, priority, owner, mitigation action.
+      Identify the Top 5 Venture Killer Risks and assign mitigation owners and deadlines.
+    </instructions>
+    <template-output file="{output_folder}/{venture_name}/venture-killer-risks.md">
+      Save completed risk registry.
+    </template-output>
+  </step>
+
+  <step n="3" name="experiment-plan">
+    <title>Operating and Experiment Plan</title>
+    <agent>venture-ops</agent>
+    <instructions>
+      Create the experiment and operating plan for the next phase (Weeks 10-12) using experiment-plan.md:
+      1. Phase objectives: what must we prove in Phase 6?
+      2. Experiments to run: landing page test, paid acquisition, outbound/B2B demos, pilot engagement
+      3. For each experiment: hypothesis, metric, success threshold, owner, timeline, budget
+      4. KPIs for the plan period
+      5. Pilot customer pipeline targets
+      6. Budget and resource requirements
+      7. Decisions needed from NVB / Sponsor
+
+      This plan feeds directly into the check-in pitch.
+    </instructions>
+    <template-output file="{output_folder}/{venture_name}/experiment-plan.md">
+      Save operating and experiment plan.
+    </template-output>
+  </step>
+
+  <step n="4" name="pilot-pipeline">
+    <title>Pilot Customer Pipeline</title>
+    <agent>growth-strategist</agent>
+    <instructions>
+      Build the initial pilot customer pipeline:
+      1. Define target account criteria (based on ICP)
+      2. Identify 15-20 target accounts by name
+      3. For each: company name, contact name/role, source, status, next action
+      4. Outreach strategy: what message, what channel, what offer?
+      5. Pilot structure: what do pilot customers get? What do we get? Timeline?
+      6. Success metric for the pilot: what defines a successful pilot?
+
+      Save pilot pipeline to experiment-plan.md (Pilot section).
+      Update venture-state.yaml with guiding_questions.business_case answers.
+    </instructions>
+    <state-update file="{project-root}/ventureOS/_memory/venture-sidecar/venture-state.yaml">
+      Update: completed_artifacts, guiding_questions.business_case
+    </state-update>
+  </step>
+
+</workflow-instructions>

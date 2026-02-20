@@ -1,0 +1,32 @@
+# VB Workflow: Business Model Design (Phase 6 — Week 10)
+name: business-model-design
+description: "Design the venture's business model. Creates the Business Model Canvas, revenue streams, pricing model, and monetisation plan. Includes business model exploration exercise to compare 5+ options before selecting."
+author: "VB"
+
+config_source: "{project-root}/ventureOS/config.yaml"
+output_folder: "{config_source}:output_folder"
+venture_name: "{config_source}:venture_name"
+user_name: "{config_source}:user_name"
+communication_language: "{config_source}:communication_language"
+date: system-generated
+
+installed_path: "{project-root}/ventureOS/workflows/6-design-business/business-model-design"
+instructions: "{installed_path}/instructions.xml"
+
+templates:
+  - "{project-root}/ventureOS/data/templates/business-model-canvas.md"
+  - "{project-root}/ventureOS/data/templates/pricing-model.md"
+  - "{project-root}/ventureOS/data/templates/monetisation-plan.md"
+
+data:
+  brainstorming: "{project-root}/ventureOS/data/techniques/brainstorming-techniques.csv"
+
+tags:
+  - business-model
+  - pricing
+  - monetisation
+  - phase-6
+
+execution_hints:
+  interactive: true
+  autonomous: false

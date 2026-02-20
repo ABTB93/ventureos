@@ -1,0 +1,43 @@
+{
+  "name": "ventureos",
+  "version": "1.0.0",
+  "description": "VentureOS — AI-powered venture building framework. From raw idea to investor-ready pitch in 12 structured weeks.",
+  "type": "module",
+  "bin": {
+    "ventureos": "./install.js"
+  },
+  "scripts": {
+    "install-local": "node install.js"
+  },
+  "files": [
+    "install.js",
+    "venture-master.md",
+    "workflow-engine.md",
+    "config.yaml",
+    "README.md",
+    "SETUP.md",
+    "agents/",
+    "workflows/",
+    "templates/",
+    "scoring/",
+    "techniques/",
+    "_memory/"
+  ],
+  "keywords": [
+    "venture-building",
+    "startup",
+    "incubation",
+    "ai-agents",
+    "pitch-deck",
+    "product-strategy"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR_USERNAME/ventureos.git"
+  },
+  "homepage": "https://github.com/YOUR_USERNAME/ventureos#readme"
+}
