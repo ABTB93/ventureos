@@ -19,6 +19,25 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const PACKAGE_ROOT = path.dirname(__filename);
 
+// Must be defined before startChat() runs (accessed synchronously before first await)
+const PROVIDERS = {
+  anthropic: {
+    label:        'Claude (Anthropic)',
+    envVar:       'ANTHROPIC_API_KEY',
+    defaultModel: 'claude-opus-4-6',
+  },
+  openai: {
+    label:        'ChatGPT (OpenAI)',
+    envVar:       'OPENAI_API_KEY',
+    defaultModel: 'gpt-4o',
+  },
+  gemini: {
+    label:        'Gemini (Google)',
+    envVar:       'GOOGLE_API_KEY',
+    defaultModel: 'gemini-2.0-flash',
+  },
+};
+
 const cmd = process.argv[2];
 
 if (cmd === 'start') {
@@ -237,24 +256,6 @@ async function install() {
 }
 
 // ─── Start / Chat ──────────────────────────────────────────────────────────────
-
-const PROVIDERS = {
-  anthropic: {
-    label:        'Claude (Anthropic)',
-    envVar:       'ANTHROPIC_API_KEY',
-    defaultModel: 'claude-opus-4-6',
-  },
-  openai: {
-    label:        'ChatGPT (OpenAI)',
-    envVar:       'OPENAI_API_KEY',
-    defaultModel: 'gpt-4o',
-  },
-  gemini: {
-    label:        'Gemini (Google)',
-    envVar:       'GOOGLE_API_KEY',
-    defaultModel: 'gemini-2.0-flash',
-  },
-};
 
 async function startChat() {
   console.log('\n');
