@@ -12,7 +12,7 @@ VentureOS guides teams from a raw domain or idea all the way to an investor-read
 npx ventureos install
 ```
 
-The installer asks 5 questions (your name, AI tool, language, research depth, execution mode), then sets up the full framework in your project in under 30 seconds.
+The installer asks a few questions (your name, AI tool, language, research depth, execution mode), then sets up the full framework in your project in under 30 seconds.
 
 **Requirements:** Node.js 18+
 
