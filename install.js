@@ -20,6 +20,8 @@ const __filename = fileURLToPath(import.meta.url);
 const PACKAGE_ROOT = path.dirname(__filename);
 
 // Must be defined before startChat() runs (accessed synchronously before first await)
+let _spinner;
+
 const PROVIDERS = {
   anthropic: {
     label:        'Claude (Anthropic)',
@@ -384,8 +386,6 @@ async function startChat() {
 }
 
 // ─── Spinner ───────────────────────────────────────────────────────────────────
-
-let _spinner;
 function showSpinner(msg) {
   const frames = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];
   let i = 0;
