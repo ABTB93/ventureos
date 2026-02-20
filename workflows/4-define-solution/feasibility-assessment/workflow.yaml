@@ -1,0 +1,29 @@
+# VB Workflow: Feasibility Assessment (Phase 4)
+name: feasibility-assessment
+description: "Technical feasibility analysis for the wedge solution. Evaluates build/buy/partner/invest options. Maps the technology ecosystem and identifies the recommended implementation approach."
+author: "VB"
+
+config_source: "{project-root}/ventureOS/config.yaml"
+output_folder: "{config_source}:output_folder"
+venture_name: "{config_source}:venture_name"
+user_name: "{config_source}:user_name"
+communication_language: "{config_source}:communication_language"
+date: system-generated
+
+installed_path: "{project-root}/ventureOS/workflows/4-define-solution/feasibility-assessment"
+instructions: "{installed_path}/instructions.xml"
+
+templates:
+  - "{project-root}/ventureOS/data/templates/solution-feasibility.md"
+  - "{project-root}/ventureOS/data/templates/ecosystem-map.md"
+
+tags:
+  - feasibility
+  - technical-assessment
+  - ecosystem-map
+  - phase-4
+
+execution_hints:
+  interactive: true
+  autonomous: true
+  web_search_required: true

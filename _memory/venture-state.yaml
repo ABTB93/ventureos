@@ -1,0 +1,142 @@
+# VentureOS Venture State
+# This file is managed automatically by VentureOS agents.
+# Do not edit manually unless you know what you are doing.
+# ─────────────────────────────────────────────────────────
+
+venture_name: ""
+current_phase: ""          # 0-explore | 1-setup-team | 2-understand-market | 3-find-pain | 4-define-solution | 5-business-case | 6-design-business
+current_week: 0
+entry_point: ""            # domain | idea
+started: ""                # ISO date: YYYY-MM-DD
+status: ""                 # active | pivoted | killed | funded
+
+# Progress across three activity categories
+category_progress:
+  team: "not-started"        # not-started | in-progress | complete
+  venture: "not-started"     # not-started | in-progress | complete
+  mothership: "not-started"  # not-started | in-progress | complete
+
+# Working hypotheses — updated as evidence accumulates
+hypotheses:
+  customer: ""
+  problem: ""
+  solution: ""
+  wedge: ""
+
+# Guiding questions tracker — one entry per question per phase
+guiding_questions:
+  explore: []
+  setup:
+    - question: "What is the Venture's reason to exist?"
+      answered: false
+      evidence: ""
+    - question: "What software and tools do we use? What is our weekly cadence?"
+      answered: false
+      evidence: ""
+    - question: "Who is in our team? Who is our sponsor? Who supports us?"
+      answered: false
+      evidence: ""
+    - question: "Does the venture team know which parent organization capabilities can be leveraged?"
+      answered: false
+      evidence: ""
+  market:
+    - question: "Is the market large and growing? What are the potential barriers to entry?"
+      answered: false
+      evidence: ""
+    - question: "Who matters most? Who most likely has the primary pain to solve?"
+      answered: false
+      evidence: ""
+    - question: "What is the size of the market? (# customers, market value, geographic hot spots)"
+      answered: false
+      evidence: ""
+    - question: "What companies and products currently operate in the market?"
+      answered: false
+      evidence: ""
+    - question: "Does the team understand the broader context and goals their customer operates in?"
+      answered: false
+      evidence: ""
+  pain:
+    - question: "Can the team prioritize the most important pain to solve?"
+      answered: false
+      evidence: ""
+    - question: "Is the pain frequent, intense, and/or prevalent enough to support a business?"
+      answered: false
+      evidence: ""
+    - question: "Has the team validated the pain exists? Can they identify their ideal customer?"
+      answered: false
+      evidence: ""
+    - question: "Does the team understand who the buyer is (if different to the user)?"
+      answered: false
+      evidence: ""
+  solution:
+    - question: "Can the team describe the wedge (smallest part that can be quickly brought to market)?"
+      answered: false
+      evidence: ""
+    - question: "Can the team articulate the big vision for the product/service?"
+      answered: false
+      evidence: ""
+    - question: "Is the solution technically feasible? Can it be built (build, buy, partner, invest)?"
+      answered: false
+      evidence: ""
+    - question: "What makes the solution special and what new value does it provide?"
+      answered: false
+      evidence: ""
+    - question: "Does the team have a hypothesis for how the solution scales from wedge to big vision?"
+      answered: false
+      evidence: ""
+    - question: "Can the target customer use the product? Do they find value in it?"
+      answered: false
+      evidence: ""
+  business_case:
+    - question: "Has the board reviewed venture progress and agreed the venture should continue?"
+      answered: false
+      evidence: ""
+    - question: "Has the team defined an operating/experiment plan for the next phase?"
+      answered: false
+      evidence: ""
+    - question: "Does the team have a pipeline of eager pilot customers?"
+      answered: false
+      evidence: ""
+  design_business:
+    - question: "Has the team defined diverse and robust revenue streams?"
+      answered: false
+      evidence: ""
+    - question: "Are desirability scores, CAC, and signup rates strong enough to support a healthy business?"
+      answered: false
+      evidence: ""
+    - question: "Can the team attract users via marketing or sales? Convert pilot users?"
+      answered: false
+      evidence: ""
+
+# Completed artifacts — updated after each workflow step
+completed_artifacts: []
+# Format:
+# - name: "artifact-name"
+#   path: "_ventures/{venture_name}/artifact-name.md"
+#   phase: "1-setup-team"
+#   date: "YYYY-MM-DD"
+
+# Decision gate history
+gate_history:
+  - gate: "checkin"
+    date: null
+    score: null
+    decision: null   # GO | PIVOT | KILL | null
+    notes: ""
+  - gate: "final"
+    date: null
+    score: null
+    decision: null   # GO | PIVOT | KILL | null
+    notes: ""
+
+# Pivot tracking
+pivot_count: 0
+pivot_history: []
+# Format:
+# - pivot_n: 1
+#   date: "YYYY-MM-DD"
+#   type: "customer | problem | solution | model | market"
+#   reason: ""
+#   re_entry_phase: ""
+#   archive_path: "_ventures/{venture_name}/pivots/pivot-1/"
+#   preserved_artifacts: []

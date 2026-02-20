@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workflow-instructions name="domain-deep-dive">
+
+  <overview>
+    Full domain opportunity scan. User provides a domain (e.g., "energy management systems", "employee wellness", "supply chain visibility"). This workflow maps the market landscape, identifies competitive dynamics, surfaces unmet needs, and produces a ranked list of 3-5 venture opportunity areas.
+
+    Ask the user upfront:
+    1. What domain are we exploring?
+    2. Any specific geographic focus? (default: North America + Europe)
+    3. Any segments to exclude?
+    4. Research depth: light (overview) / standard (structured analysis) / deep (exhaustive multi-source)?
+    5. Guided mode (pause at each checkpoint) or Yolo mode (run all steps, present results at end)?
+  </overview>
+
+  <step n="1" name="market-landscape">
+    <title>Market Landscape Mapping</title>
+    <agent>domain-explorer</agent>
+    <instructions>
+      Using web search (required), map the domain's market landscape:
+      1. Define the market boundaries — what's in scope and out of scope
+      2. Identify 5-7 key market segments and how they differ
+      3. Map key trends shaping the market (use STEEP: Social, Technology, Economic, Environmental, Political)
+      4. Identify technology disruption signals (AI, automation, regulatory shift)
+      5. Note geographic hotspots — where is the activity concentrated?
+      6. Assess market maturity: Emerging / Growing / Mature / Declining
+
+      Cite all sources. Label AI-synthesized estimates clearly.
+    </instructions>
+    <template-output file="{output_folder}/{venture_name}/domain-research/market-landscape.md">
+      Save a structured market landscape report.
+    </template-output>
+    <checkpoint>
+      GUIDED MODE: Present market landscape findings to user. Ask: "Does this match your understanding of the domain? Any areas to go deeper?"
+      YOLO MODE: Proceed directly to Step 2.
+    </checkpoint>
+  </step>
+
+  <step n="2" name="competitive-analysis">
+    <title>Competitive Analysis</title>
+    <agent>domain-explorer</agent>
+    <instructions>
+      Using web search, map the competitive landscape:
+      1. Identify 8-12 key players (startups + incumbents)
+      2. For each: what they do, their positioning, funding/scale, known strengths, known weaknesses
+      3. Map competitive clusters — who is fighting for the same customer?
+      4. Identify white space — where are there underserved needs or no good solutions?
+      5. Note recent strategic moves: funding, acquisitions, product launches, partnerships
+      6. Identify 2-3 areas where differentiation is possible
+    </instructions>
+    <template-output file="{output_folder}/{venture_name}/domain-research/competitive-analysis.md">
+      Save competitive analysis with differentiation map.
+    </template-output>
+    <checkpoint>
+      GUIDED MODE: Present competitive findings. Ask: "Are there competitors we should look at more closely?"
+      YOLO MODE: Proceed to Step 3.
+    </checkpoint>
+  </step>
+
+  <step n="3" name="market-sizing">
+    <title>Initial Market Sizing</title>
+    <agent>domain-explorer</agent>
+    <instructions>
+      Using web search and the market-sizing.md template:
+      1. Top-down TAM: find 2-3 analyst/industry report estimates, reconcile
+      2. Define SAM based on accessible geography and segment
+      3. Estimate SOM based on realistic 3-year capture with modest resources
+      4. Note market growth rate (CAGR) from credible sources
+      5. Flag if market is too small (&lt;$100M TAM) — potential kill signal
+    </instructions>
+    <template-output file="{output_folder}/{venture_name}/domain-research/market-sizing.md">
+      Save market sizing with all sources cited.
+    </template-output>
+  </step>
+
+  <step n="4" name="pain-signal-scan">
+    <title>Customer Pain Signal Scan</title>
+    <agent>domain-explorer</agent>
+    <instructions>
+      Scan for unmet needs and pain signals in the domain:
+      1. Apply DOMAIN OPPORTUNITY SCAN (brainstorming technique from techniques CSV)
+      2. Review competitor reviews, G2/Capterra ratings, community forums, Reddit for pain signals
+      3. Identify 5-8 customer pain hypotheses — specific, observable, potentially frequent/intense
+      4. For each pain: who experiences it, rough FIP estimate, current workaround
+      5. Rank pains by: FIP potential × market size × competitive white space
+    </instructions>
+    <template-output file="{output_folder}/{venture_name}/domain-research/pain-signals.md">
+      Save ranked pain signal scan.
+    </template-output>
+  </step>
+
+  <step n="5" name="opportunity-ranking">
+    <title>Opportunity Identification and Ranking</title>
+    <agent>domain-explorer</agent>
+    <instructions>
+      Synthesize all research into 3-5 ranked venture opportunity areas:
+      For each opportunity:
+      - Name / description
+      - Target customer (preliminary ICP)
+      - Core pain addressed
+      - Why now (timing signal)
+      - Market size signal (from Step 3)
+      - Competitive white space (from Step 2)
+      - Preliminary FIP estimate
+      - Key risk or question to validate
+      - Mothership fit (any obvious asset leverage)
+
+      Rank by overall opportunity score: market × pain × timing × differentiation potential
+    </instructions>
+    <template-output file="{output_folder}/{venture_name}/domain-research/opportunity-ranking.md">
+      Save ranked opportunity areas.
+    </template-output>
+    <checkpoint>
+      GUIDED MODE: Present top 3-5 opportunities. Ask user to select or refine one to take into incubation.
+      YOLO MODE: Present all outputs together. Recommend top opportunity.
+    </checkpoint>
+  </step>
+
+  <step n="6" name="venture-canvas">
+    <title>Venture Canvas — Frame the Selected Opportunity</title>
+    <agent>venture-master</agent>
+    <instructions>
+      For the selected opportunity, create the venture canvas:
+      1. Use the venture-canvas.md template
+      2. Fill in: venture name/codename, challenge statement, market forces, starting hypotheses
+      3. Set entry_point: "domain" in venture-state.yaml
+      4. Initialize venture-state.yaml with the new venture details
+      5. Ask user: "Is this the opportunity you want to take into incubation? If yes, we move to Phase 1: Setup the Team."
+    </instructions>
+    <template-output file="{output_folder}/{venture_name}/venture-canvas.md">
+      Save venture canvas as starting artifact.
+    </template-output>
+    <state-update file="{project-root}/ventureOS/_memory/venture-sidecar/venture-state.yaml">
+      Update: venture_name, entry_point: "domain", current_phase: "1-setup-team", completed_artifacts with all domain research files
+    </state-update>
+  </step>
+
+</workflow-instructions>

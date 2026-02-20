@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workflow-instructions name="stakeholder-identification">
+
+  <overview>
+    Map the ecosystem stakeholders and create initial persona hypotheses. Answers: Who matters most? Who has the primary pain? Who is the buyer vs. the user? Who are the advocates and blockers? Produces the Stakeholder Map and initial Pain Hypothesis.
+  </overview>
+
+  <step n="1" name="stakeholder-brainstorm">
+    <title>Stakeholder Brainstorm</title>
+    <agent>domain-explorer</agent>
+    <instructions>
+      Map all stakeholder categories in the venture's ecosystem:
+      1. Who creates the problem / pain?
+      2. Who experiences the pain most directly? (primary sufferer)
+      3. Who pays for solutions to the pain? (buyer — may differ from user)
+      4. Who influences the buying decision?
+      5. Who would block or resist a new solution?
+      6. Who would champion a new solution?
+      7. Who regulates this space?
+      Use the stakeholder-map.md template to organize all stakeholders.
+    </instructions>
+  </step>
+
+  <step n="2" name="buyer-user-analysis">
+    <title>Buyer vs. User Analysis</title>
+    <agent>domain-explorer</agent>
+    <instructions>
+      Determine if buyer and user are the same person:
+      1. Who uses the solution day-to-day?
+      2. Who signs the check / approves the budget?
+      3. If they are different: what does each need to be convinced?
+      4. Which pain is more acute — the user's operational pain or the buyer's strategic/cost pain?
+      5. Which stakeholder should the venture prioritize first to get a sale?
+      Note: In B2B, buyer ≠ user is common. This affects the sales motion fundamentally.
+    </instructions>
+  </step>
+
+  <step n="3" name="ai-persona-hypotheses">
+    <title>AI Stakeholder Persona Hypotheses</title>
+    <agent>domain-explorer</agent>
+    <instructions>
+      Create 2-3 initial persona hypotheses using AI synthesis (NOT real data — clearly labeled):
+      For each persona:
+      - Name / archetype
+      - Role and company context
+      - Day in the life (how they operate)
+      - Primary pain related to the venture domain
+      - How they solve it today (workaround)
+      - What success looks like for them
+      - What would make them change behavior
+
+      Label each persona: "⚠️ HYPOTHESIS — AI-synthesized, not based on real interviews. To be validated."
+    </instructions>
+  </step>
+
+  <step n="4" name="pain-hypothesis">
+    <title>Initial Pain Hypothesis</title>
+    <agent>domain-explorer</agent>
+    <instructions>
+      Based on the stakeholder analysis, formulate the initial pain hypothesis:
+      1. Primary pain hypothesis: who, what pain, when it triggers, what consequence
+      2. 2-3 secondary pain hypotheses (alternatives to explore)
+      3. Preliminary FIP estimate for each (Frequency / Intensity / Prevalence)
+      4. Key assumptions to test in Phase 3 interviews
+      5. Interview target: who to interview first, how many, what types
+      Use the pain-hypothesis.md template.
+    </instructions>
+    <template-output file="{output_folder}/{venture_name}/pain-hypothesis.md">
+      Save initial pain hypothesis with assumptions to test.
+    </template-output>
+  </step>
+
+  <step n="5" name="stakeholder-map-output">
+    <title>Produce Stakeholder Map</title>
+    <agent>domain-explorer</agent>
+    <instructions>
+      Compile all stakeholder work into the Stakeholder Map using the stakeholder-map.md template.
+      Fill all sections including the Power/Interest grid.
+      Note which mothership relationships can be leveraged for access.
+      Update venture-state.yaml with completed artifacts and guiding_questions.domain answers.
+    </instructions>
+    <template-output file="{output_folder}/{venture_name}/stakeholder-map.md">
+      Save completed Stakeholder Map.
+    </template-output>
+    <state-update file="{project-root}/ventureOS/_memory/venture-sidecar/venture-state.yaml">
+      Update: completed_artifacts, hypotheses.customer, guiding_questions.domain
+    </state-update>
+  </step>
+
+</workflow-instructions>

@@ -1,0 +1,28 @@
+# VB Workflow: Stakeholder Identification (Phase 2 — Weeks 2-3)
+name: stakeholder-identification
+description: "Map key stakeholders in the venture's ecosystem. Identify who has the primary pain, who buys, who uses, who influences, and who blocks. Produce stakeholder map and initial persona hypotheses."
+author: "VB"
+
+config_source: "{project-root}/ventureOS/config.yaml"
+output_folder: "{config_source}:output_folder"
+venture_name: "{config_source}:venture_name"
+user_name: "{config_source}:user_name"
+communication_language: "{config_source}:communication_language"
+date: system-generated
+
+installed_path: "{project-root}/ventureOS/workflows/2-understand-market/stakeholder-identification"
+instructions: "{installed_path}/instructions.xml"
+
+templates:
+  - "{project-root}/ventureOS/data/templates/stakeholder-map.md"
+  - "{project-root}/ventureOS/data/templates/pain-hypothesis.md"
+
+tags:
+  - stakeholder-mapping
+  - personas
+  - pain-hypothesis
+  - phase-2
+
+execution_hints:
+  interactive: true
+  autonomous: false
