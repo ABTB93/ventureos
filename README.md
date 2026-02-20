@@ -6,21 +6,24 @@ VentureOS guides teams from a raw domain or idea all the way to an investor-read
 
 ---
 
-## Install
+## Getting Started
+
+**Requirements:** Node.js 18+ — [download here](https://nodejs.org) if you don't have it.
+
+### Step 1 — Create a project folder and install VentureOS inside it
+
+Open your terminal and run:
 
 ```bash
+mkdir my-venture && cd my-venture
 npx ventureos install
 ```
 
-The installer asks a few questions (your name, AI tool, language, research depth, execution mode), then sets up the full framework in your project in under 30 seconds.
+> **Important:** always run this inside a project folder. VentureOS installs a `ventureOS/` directory in whatever folder you are in when you run the command.
 
-**Requirements:** Node.js 18+
+The installer asks a few questions (your name, AI tool, research depth, execution mode), then sets up the full framework in under 30 seconds.
 
-**Works with:** Claude Code, Cursor, Windsurf, ChatGPT, Gemini, and any other AI tool.
-
----
-
-## Start
+### Step 2 — Start a session
 
 ```bash
 npx ventureos start
@@ -28,13 +31,15 @@ npx ventureos start
 
 Launches an interactive terminal chat with Victor — no copy-pasting files. Connects directly to the LLM API of your choice.
 
-Supports **Claude (Anthropic)**, **ChatGPT (OpenAI)**, and **Gemini (Google)** out of the box. Set your API key as an environment variable to skip the prompt:
+Supports **Claude (Anthropic)**, **ChatGPT (OpenAI)**, and **Gemini (Google)**. Set your API key as an environment variable to skip the prompt on future sessions:
 
 ```bash
 export ANTHROPIC_API_KEY=your-key   # for Claude
 export OPENAI_API_KEY=your-key      # for ChatGPT
 export GOOGLE_API_KEY=your-key      # for Gemini
 ```
+
+**If you use Claude Code, Cursor, or Windsurf**, you can also load VentureOS directly in your AI tool instead of using the terminal — see [SETUP.md](SETUP.md) for instructions.
 
 ---
 
@@ -133,17 +138,6 @@ ventureOS/
 ```
 
 Outputs are saved to: `_ventures/{venture_name}/`
-
----
-
-## Quick Start
-
-1. Edit `ventureOS/config.yaml` — add your name, venture name, preferred language
-2. Load `ventureOS/venture-master.md` into your AI tool (see `SETUP.md` for your specific tool)
-3. Victor greets you, shows the phase-aware menu, and asks what you want to work on
-4. Type a command or number — Victor routes you to the right agent and workflow
-
-See `SETUP.md` for detailed installation instructions for Claude Code, Cursor, Windsurf, and other tools.
 
 ---
 

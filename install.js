@@ -82,7 +82,7 @@ function copyDir(src, dest, skipSet = new Set()) {
   }
 }
 
-function generateConfig({ userName, language, researchDepth, llm, defaultMode }) {
+function generateConfig({ userName, researchDepth, llm, defaultMode }) {
   return `# VentureOS Configuration
 # Edit this file anytime to update your settings.
 # ─────────────────────────────────────────
@@ -92,10 +92,6 @@ user_name: "${userName}"
 
 # Active venture name — leave blank to start a new venture
 venture_name: ""
-
-# Language for all agent communication
-# Options: English | French | Arabic | Spanish | Portuguese | Other
-communication_language: "${language}"
 
 # Where venture outputs are saved (relative to project root)
 output_folder: "_ventures"
@@ -207,23 +203,7 @@ async function install() {
     const llmMap = { '1': 'claude-code', '2': 'cursor', '3': 'windsurf', '4': 'other' };
     const llm = llmMap[llmInput.trim()] ?? 'claude-code';
 
-    // Step 4: Language
-    console.log('\n  🌍 Language for agent communication?\n');
-    console.log('     1.  English     (default)');
-    console.log('     2.  French');
-    console.log('     3.  Arabic');
-    console.log('     4.  Spanish');
-    console.log('     5.  Portuguese');
-    console.log('     6.  Other\n');
-    const langInput = await rl.question('     Select [1-6]: ');
-    const langMap = { '1': 'English', '2': 'French', '3': 'Arabic', '4': 'Spanish', '5': 'Portuguese' };
-    let language = langMap[langInput.trim()] ?? 'English';
-    if (langInput.trim() === '6') {
-      const custom = await rl.question('     Specify language: ');
-      language = custom.trim() || 'English';
-    }
-
-    // Step 5: Research depth
+    // Step 4: Research depth
     console.log('\n  🔍 Research depth for market and domain analysis?\n');
     console.log('     1.  Standard  — structured analysis with sourced data  (recommended)');
     console.log('     2.  Light     — high-level overview, fast');
@@ -249,7 +229,7 @@ async function install() {
     copyDir(PACKAGE_ROOT, ventureOSDir, SKIP);
     console.log('  ✓ Framework files installed');
 
-    const config = generateConfig({ userName, language, researchDepth, llm, defaultMode });
+    const config = generateConfig({ userName, researchDepth, llm, defaultMode });
     fs.writeFileSync(path.join(ventureOSDir, 'config.yaml'), config, 'utf8');
     console.log('  ✓ Configuration written  →  ventureOS/config.yaml');
 
@@ -351,7 +331,13 @@ async function startChat() {
   // ── Load system prompt ─────────────────────────────────────────────────────
   const masterPath = path.join(projectRoot, 'ventureOS', 'venture-master.md');
   let systemPrompt = fs.readFileSync(masterPath, 'utf8')
-    .replace(/\{project-root\}/g, projectRoot);
+    .replace(/\{project-root\}/g, projectRoot)
+    .replace(/\{communication_language\}/g, 'English')
+    .replace(/\{user_name\}/g, config.user_name || 'Founder')
+    .replace(/\{llm\}/g, config.llm || 'other')
+    .replace(/\{research_depth\}/g, config.research_depth || 'standard')
+    .replace(/\{default_mode\}/g, config.default_mode || 'guided')
+    .replace(/\{output_folder\}/g, config.output_folder || '_ventures');
 
   // ── Inject config + venture state as context ───────────────────────────────
   const configContent = fs.readFileSync(configPath, 'utf8');
