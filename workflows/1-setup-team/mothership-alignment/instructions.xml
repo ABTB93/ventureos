@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workflow-instructions name="mothership-alignment">
+
+  <overview>
+    Identify and document all mothership assets the venture can leverage. Run the "Asset Jam" — a structured exercise to surface IP, technology, data, customer relationships, brand, and talent that give the venture unfair competitive advantages. Then align the Sponsor on venture direction and support needs.
+  </overview>
+
+  <step n="1" name="asset-jam-intro">
+    <title>Asset Jam — Frame the Exercise</title>
+    <agent>venture-ops</agent>
+    <instructions>
+      Introduce the Asset Jam:
+      "We are going to systematically identify every mothership capability this venture can leverage. Be exhaustive — even assets that seem tangential can be powerful unfair advantages. We'll cover: IP, technology, data, customer relationships, brand, distribution, talent, regulatory access, and financial resources."
+      Ask user: Who should be in the room for this exercise? (Venture team + any mothership experts)
+    </instructions>
+  </step>
+
+  <step n="2" name="ip-technology">
+    <title>IP and Technology Assets</title>
+    <agent>venture-ops</agent>
+    <instructions>
+      Identify all IP and technology assets:
+      1. Patents relevant to the venture domain
+      2. Proprietary algorithms, models, or data processing capabilities
+      3. Internal software that could be productized or adapted
+      4. Research and development outputs not yet commercialized
+      5. Trademarks and brand assets in the domain
+      For each asset: describe it, assess relevance to venture, identify access level, name the internal owner/contact.
+    </instructions>
+  </step>
+
+  <step n="3" name="customer-data">
+    <title>Customer, Data, and Distribution Assets</title>
+    <agent>venture-ops</agent>
+    <instructions>
+      Identify customer and market access:
+      1. Existing customer base — are any in the venture's ICP? Can we interview/pilot with them?
+      2. Key customer relationships — who has deep relationships with target customers?
+      3. Distribution channels — sales teams, partner networks, digital channels
+      4. Proprietary data sets relevant to the problem we're solving
+      5. Market intelligence or industry reports only the mothership has access to
+    </instructions>
+  </step>
+
+  <step n="4" name="brand-talent">
+    <title>Brand, Reputation, and Human Capital</title>
+    <agent>venture-ops</agent>
+    <instructions>
+      Assess softer but critical assets:
+      1. Brand recognition in the domain — does the mothership name open doors?
+      2. Industry credibility and trust signals
+      3. Regulatory licenses or certifications the venture can leverage
+      4. Internal domain experts who can advise the venture
+      5. Executive relationships in the target customer ecosystem
+    </instructions>
+  </step>
+
+  <step n="5" name="asset-map-output">
+    <title>Produce Mothership Asset Map</title>
+    <agent>venture-ops</agent>
+    <instructions>
+      Compile all assets into the Mothership Asset Map using the mothership-asset-map.md template.
+      Prioritize: identify Top 3 Unfair Advantages. List assets to activate in next 30 days.
+      Save to output folder. Update venture-state.yaml.
+    </instructions>
+    <template-output file="{output_folder}/{venture_name}/mothership-asset-map.md">
+      Save completed Mothership Asset Map.
+    </template-output>
+  </step>
+
+  <step n="6" name="sponsor-alignment">
+    <title>Sponsor Alignment</title>
+    <agent>venture-ops</agent>
+    <instructions>
+      Document and structure the Sponsor alignment:
+      1. What does the Sponsor need to understand about the venture challenge?
+      2. What resources has the Sponsor committed (budget, time, relationships)?
+      3. What are the Sponsor's key concerns or red lines?
+      4. How will the team keep the Sponsor informed? (cadence, format)
+      5. What decisions require Sponsor approval?
+      Add Sponsor details to mothership-asset-map.md (Sponsor Alignment section).
+      Update venture-state.yaml: category_progress.mothership = "complete".
+    </instructions>
+    <state-update file="{project-root}/ventureOS/_memory/venture-sidecar/venture-state.yaml">
+      Update: completed_artifacts, category_progress.mothership, guiding_questions.setup answers for mothership questions
+    </state-update>
+  </step>
+
+</workflow-instructions>

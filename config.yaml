@@ -1,0 +1,33 @@
+# VentureOS Configuration
+# Edit this file before your first session.
+# ─────────────────────────────────────────
+
+# Your name — used by agents to address you
+user_name: ""
+
+# Active venture name — leave blank to start a new venture
+venture_name: ""
+
+# Language for all agent communication
+# Options: English | French | Arabic | Spanish | Portuguese | Other
+communication_language: "English"
+
+# Where venture outputs are saved (relative to project root)
+# Default: _ventures/{venture_name}/
+output_folder: "_ventures"
+
+# Research depth for domain and market research agents
+# light    = high-level overview, fast
+# standard = structured analysis with sourced data (recommended)
+# deep     = exhaustive multi-source research with cross-validation
+research_depth: "standard"
+
+# Your primary AI tool
+# Affects how agents describe file loading and tool usage in instructions
+# Options: claude-code | cursor | windsurf | other
+llm: "claude-code"
+
+# Execution mode for workflows
+# guided = agent pauses at each checkpoint for review and approval (recommended)
+# yolo   = agent runs the full workflow autonomously and presents all outputs at the end
+default_mode: "guided"

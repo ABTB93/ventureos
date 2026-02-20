@@ -1,0 +1,28 @@
+# VB Workflow: Mothership Alignment (Phase 1 — Week 1)
+name: mothership-alignment
+description: "Asset Jam + Sponsor alignment. Identify all parent organization capabilities the venture can leverage. Map mothership assets (IP, tech, data, customers, brand, distribution). Align sponsor on venture challenge and support needs."
+author: "VB"
+
+config_source: "{project-root}/ventureOS/config.yaml"
+output_folder: "{config_source}:output_folder"
+venture_name: "{config_source}:venture_name"
+user_name: "{config_source}:user_name"
+communication_language: "{config_source}:communication_language"
+date: system-generated
+
+installed_path: "{project-root}/ventureOS/workflows/1-setup-team/mothership-alignment"
+instructions: "{installed_path}/instructions.xml"
+
+templates:
+  - "{project-root}/ventureOS/data/templates/mothership-asset-map.md"
+  - "{project-root}/ventureOS/data/templates/stakeholder-map.md"
+
+tags:
+  - mothership
+  - asset-jam
+  - sponsor-alignment
+  - phase-1
+
+execution_hints:
+  interactive: true
+  autonomous: false

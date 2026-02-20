@@ -1,0 +1,30 @@
+# VB Workflow: Team Formation (Phase 1 — Week 1)
+name: team-formation
+description: "Set up the venture team: define roles, create team charter, establish cadence and tools, and create team identity. Outputs the Team Charter — the operational foundation for the 12-week incubation."
+author: "VB"
+
+config_source: "{project-root}/ventureOS/config.yaml"
+output_folder: "{config_source}:output_folder"
+venture_name: "{config_source}:venture_name"
+user_name: "{config_source}:user_name"
+communication_language: "{config_source}:communication_language"
+date: system-generated
+
+installed_path: "{project-root}/ventureOS/workflows/1-setup-team/team-formation"
+instructions: "{installed_path}/instructions.xml"
+
+default_output_folder: "{output_folder}/{venture_name}/"
+
+templates:
+  - "{project-root}/ventureOS/data/templates/team-charter.md"
+  - "{project-root}/ventureOS/data/templates/venture-canvas.md"
+
+tags:
+  - setup-team
+  - team-charter
+  - phase-1
+
+execution_hints:
+  interactive: true
+  autonomous: false
+  iterative: false
