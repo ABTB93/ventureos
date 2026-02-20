@@ -16,7 +16,25 @@ The installer asks a few questions (your name, AI tool, language, research depth
 
 **Requirements:** Node.js 18+
 
-**Works with:** Claude Code, Cursor, Windsurf, and any other AI coding tool.
+**Works with:** Claude Code, Cursor, Windsurf, ChatGPT, Gemini, and any other AI tool.
+
+---
+
+## Start
+
+```bash
+npx ventureos start
+```
+
+Launches an interactive terminal chat with Victor — no copy-pasting files. Connects directly to the LLM API of your choice.
+
+Supports **Claude (Anthropic)**, **ChatGPT (OpenAI)**, and **Gemini (Google)** out of the box. Set your API key as an environment variable to skip the prompt:
+
+```bash
+export ANTHROPIC_API_KEY=your-key   # for Claude
+export OPENAI_API_KEY=your-key      # for ChatGPT
+export GOOGLE_API_KEY=your-key      # for Gemini
+```
 
 ---
 

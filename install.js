@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 /**
- * VentureOS Installer
- * Usage: npx ventureos install
- *        npx ventureos
+ * VentureOS CLI
+ * Usage:
+ *   npx ventureos install   — interactive installer
+ *   npx ventureos start     — launch Victor chat (Claude, ChatGPT, or Gemini)
+ *   npx ventureos           — same as install
  *
- * Zero npm dependencies — pure Node.js (readline/promises, fs, path, url)
+ * Zero npm dependencies — pure Node.js (readline/promises, fs, path, url, fetch)
  * Requires Node.js >= 18.0.0
  */
 
@@ -17,19 +19,54 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const PACKAGE_ROOT = path.dirname(__filename);
 
-// These files live in the npm package but should NOT be copied to the user's project
-const SKIP = new Set([
-  'install.js',
-  'package.json',
-  'package-lock.json',
-  '.gitignore',
-  'config.yaml',   // We generate a populated one from user answers
-  'node_modules',
-  '.git',
-  '.DS_Store',
-]);
+const cmd = process.argv[2];
 
-// ─── Utilities ───────────────────────────────────────────────────────────────
+if (cmd === 'start') {
+  startChat().catch(err => {
+    if (err.code !== 'ERR_USE_AFTER_CLOSE') {
+      console.error('\n  ❌ Error:', err.message, '\n');
+      process.exit(1);
+    }
+  });
+} else {
+  install().catch(err => {
+    if (err.code !== 'ERR_USE_AFTER_CLOSE') {
+      console.error('\n  ❌ Installation error:', err.message);
+      process.exit(1);
+    }
+  });
+}
+
+// ─── Shared Utilities ──────────────────────────────────────────────────────────
+
+function line() {
+  return '  ' + '─'.repeat(50);
+}
+
+function parseSimpleYaml(text) {
+  const result = {};
+  for (const rawLine of text.split('\n')) {
+    const l = rawLine.trim();
+    if (!l || l.startsWith('#')) continue;
+    const colonIdx = l.indexOf(':');
+    if (colonIdx === -1) continue;
+    const key = l.slice(0, colonIdx).trim();
+    let value = l.slice(colonIdx + 1).trim();
+    if ((value.startsWith('"') && value.endsWith('"')) ||
+        (value.startsWith("'") && value.endsWith("'"))) {
+      value = value.slice(1, -1);
+    }
+    result[key] = value;
+  }
+  return result;
+}
+
+// ─── Install ───────────────────────────────────────────────────────────────────
+
+const SKIP = new Set([
+  'install.js', 'package.json', 'package-lock.json',
+  '.gitignore', 'config.yaml', 'node_modules', '.git', '.DS_Store',
+]);
 
 function copyDir(src, dest, skipSet = new Set()) {
   fs.mkdirSync(dest, { recursive: true });
@@ -38,7 +75,7 @@ function copyDir(src, dest, skipSet = new Set()) {
     const srcPath = path.join(src, entry);
     const destPath = path.join(dest, entry);
     if (fs.statSync(srcPath).isDirectory()) {
-      copyDir(srcPath, destPath); // Recurse — no skip needed for subdirs
+      copyDir(srcPath, destPath);
     } else {
       fs.copyFileSync(srcPath, destPath);
     }
@@ -61,7 +98,6 @@ venture_name: ""
 communication_language: "${language}"
 
 # Where venture outputs are saved (relative to project root)
-# Default: _ventures/{venture_name}/
 output_folder: "_ventures"
 
 # Research depth for domain and market research agents
@@ -71,13 +107,12 @@ output_folder: "_ventures"
 research_depth: "${researchDepth}"
 
 # Your primary AI tool
-# Affects how agents describe file loading and tool usage in instructions
 # Options: claude-code | cursor | windsurf | other
 llm: "${llm}"
 
 # Execution mode for workflows
 # guided = agent pauses at each checkpoint for review and approval (recommended)
-# yolo   = agent runs the full workflow autonomously and presents all outputs at the end
+# yolo   = agent runs the full workflow autonomously
 default_mode: "${defaultMode}"
 `;
 }
@@ -90,25 +125,24 @@ function showNextSteps(llm, ventureOSDir, targetDir) {
   console.log(line() + '\n');
 
   if (llm === 'claude-code') {
-    console.log('  In Claude Code, reference the orchestrator:\n');
+    console.log('  Option A — In Claude Code:\n');
     console.log(`    @${rel}/venture-master.md\n`);
-    console.log('  Or from the terminal:\n');
-    console.log(`    claude ${rel}/venture-master.md\n`);
+    console.log('  Option B — Terminal chat:\n');
+    console.log(`    npx ventureos start\n`);
   } else if (llm === 'cursor') {
-    console.log('  In Cursor, attach the file in chat:\n');
-    console.log(`    1. Open chat (Cmd+L or Ctrl+L)`);
-    console.log(`    2. Click the paperclip icon`);
-    console.log(`    3. Select: ${rel}/venture-master.md\n`);
-    console.log('  Or type in chat:\n');
-    console.log(`    Load @${rel}/venture-master.md and activate Victor.\n`);
+    console.log('  Option A — In Cursor, attach the file in chat:\n');
+    console.log(`    Click paperclip → select ${rel}/venture-master.md\n`);
+    console.log('  Option B — Terminal chat:\n');
+    console.log(`    npx ventureos start\n`);
   } else if (llm === 'windsurf') {
-    console.log('  In Windsurf Cascade, type:\n');
-    console.log(`    Load ${rel}/venture-master.md and follow the activation instructions.\n`);
+    console.log('  Option A — In Windsurf Cascade:\n');
+    console.log(`    Load ${rel}/venture-master.md\n`);
+    console.log('  Option B — Terminal chat:\n');
+    console.log(`    npx ventureos start\n`);
   } else {
-    console.log('  To start VentureOS:\n');
-    console.log(`    1. Open ${rel}/venture-master.md`);
-    console.log(`    2. Copy the full file contents`);
-    console.log(`    3. Paste as your first message in a new AI conversation\n`);
+    console.log('  Start VentureOS from the terminal:\n');
+    console.log(`    npx ventureos start\n`);
+    console.log('  Connects directly to Claude, ChatGPT, or Gemini — no copy-pasting.\n');
   }
 
   console.log(line());
@@ -124,31 +158,20 @@ function showNextSteps(llm, ventureOSDir, targetDir) {
   console.log(line() + '\n');
 }
 
-function line() {
-  return '  ' + '─'.repeat(50);
-}
-
-function banner() {
+async function install() {
   console.log('\n');
   console.log('  ┌' + '─'.repeat(52) + '┐');
   console.log('  │                                                    │');
   console.log('  │   🚀  VentureOS                                    │');
   console.log('  │   AI-Powered Venture Building Framework            │');
-  console.log('  │   v1.0.0                                           │');
   console.log('  │                                                    │');
   console.log('  └' + '─'.repeat(52) + '┘');
   console.log('\n');
-}
-
-// ─── Main ────────────────────────────────────────────────────────────────────
-
-async function main() {
-  banner();
 
   const rl = readline.createInterface({ input, output });
 
   try {
-    // ── Step 1: Installation directory ───────────────────────────────────────
+    // Step 1: Installation directory
     const defaultTarget = process.cwd();
     console.log('  📁 Installation directory');
     console.log(`     Default: ${defaultTarget}`);
@@ -156,7 +179,6 @@ async function main() {
     const targetDir = path.resolve(targetInput.trim() || defaultTarget);
     const ventureOSDir = path.join(targetDir, 'ventureOS');
 
-    // Existing installation check
     if (fs.existsSync(ventureOSDir)) {
       console.log('\n  ⚠️  VentureOS is already installed in this directory.');
       const ans = await rl.question('     Update/reinstall? (y/N): ');
@@ -168,15 +190,14 @@ async function main() {
       console.log('\n  Updating existing installation...');
     }
 
-    // ── Step 2: User name ─────────────────────────────────────────────────────
+    // Step 2: User name
     console.log('\n' + line());
     console.log('  About you');
     console.log(line() + '\n');
-
     const nameInput = await rl.question('  👤 Your name: ');
     const userName = nameInput.trim() || 'Founder';
 
-    // ── Step 3: AI tool ───────────────────────────────────────────────────────
+    // Step 3: AI tool
     console.log('\n  🤖 Which AI tool do you use for coding?\n');
     console.log('     1.  Claude Code  (recommended)');
     console.log('     2.  Cursor');
@@ -186,7 +207,7 @@ async function main() {
     const llmMap = { '1': 'claude-code', '2': 'cursor', '3': 'windsurf', '4': 'other' };
     const llm = llmMap[llmInput.trim()] ?? 'claude-code';
 
-    // ── Step 4: Language ──────────────────────────────────────────────────────
+    // Step 4: Language
     console.log('\n  🌍 Language for agent communication?\n');
     console.log('     1.  English     (default)');
     console.log('     2.  French');
@@ -195,17 +216,14 @@ async function main() {
     console.log('     5.  Portuguese');
     console.log('     6.  Other\n');
     const langInput = await rl.question('     Select [1-6]: ');
-    const langMap = {
-      '1': 'English', '2': 'French', '3': 'Arabic',
-      '4': 'Spanish', '5': 'Portuguese',
-    };
+    const langMap = { '1': 'English', '2': 'French', '3': 'Arabic', '4': 'Spanish', '5': 'Portuguese' };
     let language = langMap[langInput.trim()] ?? 'English';
     if (langInput.trim() === '6') {
       const custom = await rl.question('     Specify language: ');
       language = custom.trim() || 'English';
     }
 
-    // ── Step 5: Research depth ────────────────────────────────────────────────
+    // Step 5: Research depth
     console.log('\n  🔍 Research depth for market and domain analysis?\n');
     console.log('     1.  Standard  — structured analysis with sourced data  (recommended)');
     console.log('     2.  Light     — high-level overview, fast');
@@ -214,7 +232,7 @@ async function main() {
     const depthMap = { '1': 'standard', '2': 'light', '3': 'deep' };
     const researchDepth = depthMap[depthInput.trim()] ?? 'standard';
 
-    // ── Step 6: Default mode ──────────────────────────────────────────────────
+    // Step 6: Default mode
     console.log('\n  ⚙️  Default workflow execution mode?\n');
     console.log('     1.  Guided  — agent pauses for your review at each step  (recommended)');
     console.log('     2.  Yolo    — agent runs full workflows autonomously\n');
@@ -223,21 +241,18 @@ async function main() {
 
     rl.close();
 
-    // ── Install ───────────────────────────────────────────────────────────────
+    // Install files
     console.log('\n' + line());
     console.log('  Installing...');
     console.log(line() + '\n');
 
-    // 1. Copy framework files
     copyDir(PACKAGE_ROOT, ventureOSDir, SKIP);
     console.log('  ✓ Framework files installed');
 
-    // 2. Write populated config.yaml
     const config = generateConfig({ userName, language, researchDepth, llm, defaultMode });
     fs.writeFileSync(path.join(ventureOSDir, 'config.yaml'), config, 'utf8');
     console.log('  ✓ Configuration written  →  ventureOS/config.yaml');
 
-    // 3. Create _ventures output directory
     const venturesDir = path.join(targetDir, '_ventures');
     if (!fs.existsSync(venturesDir)) {
       fs.mkdirSync(venturesDir, { recursive: true });
@@ -245,18 +260,12 @@ async function main() {
     }
     console.log('  ✓ Output folder ready    →  _ventures/');
 
-    // 4. Create .gitignore if missing
     const gitignorePath = path.join(targetDir, '.gitignore');
     if (!fs.existsSync(gitignorePath)) {
-      fs.writeFileSync(
-        gitignorePath,
-        '# VentureOS outputs\n_ventures/\nnode_modules/\n.DS_Store\n',
-        'utf8'
-      );
+      fs.writeFileSync(gitignorePath, '# VentureOS outputs\n_ventures/\nnode_modules/\n.DS_Store\n', 'utf8');
       console.log('  ✓ .gitignore created');
     }
 
-    // ── Done ──────────────────────────────────────────────────────────────────
     console.log('\n' + line());
     console.log('  ✅ VentureOS is ready!');
     console.log(line());
@@ -265,10 +274,275 @@ async function main() {
 
   } catch (err) {
     rl.close();
-    if (err.code === 'ERR_USE_AFTER_CLOSE') return; // User Ctrl+C'd
+    if (err.code === 'ERR_USE_AFTER_CLOSE') return;
     console.error('\n  ❌ Installation error:', err.message);
     process.exit(1);
   }
 }
 
-main();
+// ─── Start / Chat ──────────────────────────────────────────────────────────────
+
+const PROVIDERS = {
+  anthropic: {
+    label:        'Claude (Anthropic)',
+    envVar:       'ANTHROPIC_API_KEY',
+    defaultModel: 'claude-opus-4-6',
+  },
+  openai: {
+    label:        'ChatGPT (OpenAI)',
+    envVar:       'OPENAI_API_KEY',
+    defaultModel: 'gpt-4o',
+  },
+  gemini: {
+    label:        'Gemini (Google)',
+    envVar:       'GOOGLE_API_KEY',
+    defaultModel: 'gemini-2.0-flash',
+  },
+};
+
+async function startChat() {
+  console.log('\n');
+  console.log('  ┌' + '─'.repeat(52) + '┐');
+  console.log('  │                                                    │');
+  console.log('  │   🚀  VentureOS — Starting Victor                  │');
+  console.log('  │                                                    │');
+  console.log('  └' + '─'.repeat(52) + '┘');
+  console.log('\n');
+
+  const projectRoot = process.cwd();
+  const configPath = path.join(projectRoot, 'ventureOS', 'config.yaml');
+
+  if (!fs.existsSync(configPath)) {
+    console.error('  ❌ VentureOS is not installed here. Run: npx ventureos install\n');
+    process.exit(1);
+  }
+
+  const config = parseSimpleYaml(fs.readFileSync(configPath, 'utf8'));
+  const rl = readline.createInterface({ input, output });
+
+  // ── Select provider ────────────────────────────────────────────────────────
+  let providerKey;
+  if (config.llm === 'claude-code') {
+    providerKey = 'anthropic';
+  } else {
+    console.log('  🤖 Which AI provider do you want to use?\n');
+    console.log('     1.  Claude (Anthropic)');
+    console.log('     2.  ChatGPT (OpenAI)');
+    console.log('     3.  Gemini (Google)\n');
+    const choice = await rl.question('     Select [1-3]: ');
+    providerKey = ({ '1': 'anthropic', '2': 'openai', '3': 'gemini' })[choice.trim()] ?? 'anthropic';
+  }
+
+  const provider = PROVIDERS[providerKey];
+
+  // ── Get API key ────────────────────────────────────────────────────────────
+  let apiKey = process.env[provider.envVar];
+  if (!apiKey) {
+    console.log(`\n  🔑 ${provider.envVar} not set in environment.`);
+    apiKey = (await rl.question(`     Enter your ${provider.label} API key: `)).trim();
+    if (!apiKey) {
+      console.error('\n  ❌ No API key provided.\n');
+      rl.close();
+      process.exit(1);
+    }
+    console.log(`\n  💡 Tip: export ${provider.envVar}=your-key  to skip this next time.\n`);
+  }
+
+  // ── Load system prompt ─────────────────────────────────────────────────────
+  const masterPath = path.join(projectRoot, 'ventureOS', 'venture-master.md');
+  let systemPrompt = fs.readFileSync(masterPath, 'utf8')
+    .replace(/\{project-root\}/g, projectRoot);
+
+  // ── Inject config + venture state as context ───────────────────────────────
+  const configContent = fs.readFileSync(configPath, 'utf8');
+  const statePath = path.join(projectRoot, 'ventureOS', '_memory', 'venture-state.yaml');
+  const stateContent = fs.existsSync(statePath)
+    ? fs.readFileSync(statePath, 'utf8')
+    : 'No venture state yet — this is a fresh start.';
+
+  const activationMsg =
+    `Activate.\n\n` +
+    `--- ventureOS/config.yaml ---\n${configContent}\n\n` +
+    `--- ventureOS/_memory/venture-state.yaml ---\n${stateContent}`;
+
+  console.log(line());
+  console.log(`  ✓ Connected to ${provider.label}`);
+  console.log(`  ✓ Type your message and press Enter. Type "exit" or Ctrl+C to quit.`);
+  console.log(line() + '\n');
+
+  const messages = [];
+
+  // ── Initial activation call ────────────────────────────────────────────────
+  showSpinner('  Victor is thinking');
+  let firstResponse;
+  try {
+    firstResponse = await callLLM(providerKey, apiKey, provider.defaultModel, systemPrompt, [
+      { role: 'user', content: activationMsg },
+    ]);
+  } catch (err) {
+    stopSpinner();
+    console.error(`\n  ❌ API error: ${err.message}`);
+    console.error(`  Check your API key and try again.\n`);
+    rl.close();
+    process.exit(1);
+  }
+  stopSpinner();
+
+  console.log('\n' + indentText(firstResponse) + '\n');
+  messages.push({ role: 'user', content: activationMsg });
+  messages.push({ role: 'assistant', content: firstResponse });
+  await autoLoadAgents(firstResponse, messages, projectRoot);
+
+  // ── Main chat loop ─────────────────────────────────────────────────────────
+  while (true) {
+    let userInput;
+    try {
+      userInput = await rl.question('  You: ');
+    } catch {
+      break; // Ctrl+C
+    }
+
+    const trimmed = userInput.trim();
+    if (!trimmed) continue;
+    if (['exit', 'quit', 'da', '/exit'].includes(trimmed.toLowerCase())) {
+      console.log('\n  Victor: Safe travels. Your venture state has been saved. 🚀\n');
+      break;
+    }
+
+    messages.push({ role: 'user', content: trimmed });
+
+    showSpinner('  Victor is thinking');
+    let response;
+    try {
+      response = await callLLM(providerKey, apiKey, provider.defaultModel, systemPrompt, messages);
+    } catch (err) {
+      stopSpinner();
+      console.error(`\n  ❌ API error: ${err.message}\n`);
+      messages.pop();
+      continue;
+    }
+    stopSpinner();
+
+    console.log('\n' + indentText(response) + '\n');
+    messages.push({ role: 'assistant', content: response });
+    await autoLoadAgents(response, messages, projectRoot);
+  }
+
+  rl.close();
+}
+
+// ─── Spinner ───────────────────────────────────────────────────────────────────
+
+let _spinner;
+function showSpinner(msg) {
+  const frames = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];
+  let i = 0;
+  process.stdout.write('\n');
+  _spinner = setInterval(() => {
+    process.stdout.write(`\r  ${frames[i++ % frames.length]}  ${msg}...`);
+  }, 80);
+}
+
+function stopSpinner() {
+  clearInterval(_spinner);
+  process.stdout.write('\r' + ' '.repeat(60) + '\r');
+}
+
+// ─── Agent auto-loading ────────────────────────────────────────────────────────
+
+async function autoLoadAgents(response, messages, projectRoot) {
+  const pattern = /ventureOS\/agents\/([\w-]+\.md)/g;
+  const files = [...new Set([...response.matchAll(pattern)].map(m => m[1]))];
+
+  for (const filename of files) {
+    const alreadyLoaded = messages.some(
+      m => m.role === 'user' && m.content.includes(`ventureOS/agents/${filename}`)
+    );
+    if (alreadyLoaded) continue;
+
+    const agentPath = path.join(projectRoot, 'ventureOS', 'agents', filename);
+    if (!fs.existsSync(agentPath)) continue;
+
+    const content = fs.readFileSync(agentPath, 'utf8');
+    messages.push({
+      role: 'user',
+      content: `Here is the content of ventureOS/agents/${filename}:\n\n${content}`,
+    });
+    messages.push({
+      role: 'assistant',
+      content: `Agent file loaded: ${filename}. Operating in the appropriate specialist mode.`,
+    });
+  }
+}
+
+// ─── Formatting ───────────────────────────────────────────────────────────────
+
+function indentText(text) {
+  return text.split('\n').map(l => '  ' + l).join('\n');
+}
+
+// ─── LLM API calls — zero dependencies, native fetch ──────────────────────────
+
+async function callLLM(provider, apiKey, model, system, messages) {
+  if (provider === 'anthropic') return callAnthropic(apiKey, model, system, messages);
+  if (provider === 'openai')    return callOpenAI(apiKey, model, system, messages);
+  if (provider === 'gemini')    return callGemini(apiKey, model, system, messages);
+  throw new Error(`Unknown provider: ${provider}`);
+}
+
+async function callAnthropic(apiKey, model, system, messages) {
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'x-api-key': apiKey,
+      'anthropic-version': '2023-06-01',
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify({ model, max_tokens: 8192, system, messages }),
+  });
+  if (!res.ok) {
+    const e = await res.json().catch(() => ({}));
+    throw new Error(e.error?.message || `HTTP ${res.status}`);
+  }
+  return (await res.json()).content[0].text;
+}
+
+async function callOpenAI(apiKey, model, system, messages) {
+  const res = await fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      model,
+      messages: [{ role: 'system', content: system }, ...messages],
+    }),
+  });
+  if (!res.ok) {
+    const e = await res.json().catch(() => ({}));
+    throw new Error(e.error?.message || `HTTP ${res.status}`);
+  }
+  return (await res.json()).choices[0].message.content;
+}
+
+async function callGemini(apiKey, model, system, messages) {
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+  const contents = messages.map(m => ({
+    role: m.role === 'assistant' ? 'model' : 'user',
+    parts: [{ text: m.content }],
+  }));
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      system_instruction: { parts: [{ text: system }] },
+      contents,
+    }),
+  });
+  if (!res.ok) {
+    const e = await res.json().catch(() => ({}));
+    throw new Error(e.error?.message || `HTTP ${res.status}`);
+  }
+  return (await res.json()).candidates[0].content.parts[0].text;
+}
