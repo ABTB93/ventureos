@@ -326,6 +326,19 @@ async function startChat() {
     }
   }
 
+  // ── If using Claude CLI, redirect to native Claude Code experience ─────────
+  if (useCLI && cliCmd === 'claude') {
+    console.log(line());
+    console.log('  Use Claude Code natively — it\'s a much better experience.\n');
+    console.log('  In Claude Code, start your VentureOS session by typing:\n');
+    console.log('    @ventureOS/venture-master.md\n');
+    console.log('  That gives you full markdown rendering, streaming, and all');
+    console.log('  native Claude Code features — no terminal wrapper needed.');
+    console.log(line() + '\n');
+    rl.close();
+    process.exit(0);
+  }
+
   // ── Load system prompt ─────────────────────────────────────────────────────
   const masterPath = path.join(projectRoot, 'ventureOS', 'venture-master.md');
   let systemPrompt = fs.readFileSync(masterPath, 'utf8')
@@ -472,10 +485,50 @@ async function autoLoadAgents(response, messages, projectRoot) {
   }
 }
 
-// ─── Formatting ───────────────────────────────────────────────────────────────
+// ─── Markdown renderer (terminal-friendly, zero deps) ─────────────────────────
 
 function indentText(text) {
-  return text.split('\n').map(l => '  ' + l).join('\n');
+  const B = '\x1b[1m', D = '\x1b[2m', R = '\x1b[0m', C = '\x1b[36m';
+  let inCode = false;
+  const out = [];
+
+  for (const raw of text.split('\n')) {
+    // Code fence toggle
+    if (raw.trimStart().startsWith('```')) {
+      inCode = !inCode;
+      out.push(D + '  ' + '─'.repeat(40) + R);
+      continue;
+    }
+    if (inCode) { out.push(D + '  ' + raw + R); continue; }
+
+    // Horizontal rule
+    if (/^[-─]{3,}$/.test(raw.trim())) { out.push('  ' + '─'.repeat(50)); continue; }
+
+    // Headings
+    if (raw.startsWith('### ')) { out.push('\n  ' + B + raw.slice(4).trim() + R); continue; }
+    if (raw.startsWith('## '))  { out.push('\n  ' + B + raw.slice(3).trim() + R); continue; }
+    if (raw.startsWith('# '))   { out.push('\n  ' + B + raw.slice(2).trim().toUpperCase() + R); continue; }
+
+    // Table separator — skip
+    if (/^\|[\s|:-]+\|$/.test(raw.trim())) continue;
+
+    // Table row
+    if (raw.trim().startsWith('|') && raw.trim().endsWith('|')) {
+      const cells = raw.split('|').slice(1, -1).map(c => c.trim());
+      out.push('  ' + cells.join('  │  ').replace(/\*\*(.+?)\*\*/g, B + '$1' + R));
+      continue;
+    }
+
+    // Inline: bold, italic, code
+    const line = raw
+      .replace(/\*\*(.+?)\*\*/g, B + '$1' + R)
+      .replace(/\*(.+?)\*/g, '$1')
+      .replace(/`([^`]+)`/g, D + '$1' + R);
+
+    out.push('  ' + line);
+  }
+
+  return out.join('\n');
 }
 
 // ─── LLM API calls — zero dependencies, native fetch ──────────────────────────
