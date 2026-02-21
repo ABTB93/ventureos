@@ -15,6 +15,7 @@ import { stdin as input, stdout as output } from 'process';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { spawnSync } from 'child_process';
 
 const __filename = fileURLToPath(import.meta.url);
 const PACKAGE_ROOT = path.dirname(__filename);
@@ -38,6 +39,11 @@ const PROVIDERS = {
     envVar:       'GOOGLE_API_KEY',
     defaultModel: 'gemini-2.0-flash',
   },
+};
+
+// CLI tools that can be used instead of an API key
+const CLI_TOOLS = {
+  anthropic: { cmd: 'claude', label: 'Claude CLI' },
 };
 
 const cmd = process.argv[2];
@@ -283,17 +289,41 @@ async function startChat() {
   const providerKey = PROVIDERS[config.llm] ? config.llm : 'anthropic';
   const provider = PROVIDERS[providerKey];
 
-  // ── Get API key ────────────────────────────────────────────────────────────
+  // ── Get API key or use CLI mode ────────────────────────────────────────────
   let apiKey = process.env[provider.envVar];
+  let useCLI = false;
+  let cliCmd = null;
+
   if (!apiKey) {
-    console.log(`\n  🔑 ${provider.envVar} not set in environment.`);
-    apiKey = (await rl.question(`     Enter your ${provider.label} API key: `)).trim();
-    if (!apiKey) {
-      console.error('\n  ❌ No API key provided.\n');
-      rl.close();
-      process.exit(1);
+    const cli = detectCLI(providerKey);
+    if (cli) {
+      console.log(`\n  🔑 ${provider.envVar} not set in environment.\n`);
+      console.log(`     How would you like to connect?\n`);
+      console.log(`     1.  Enter API key`);
+      console.log(`     2.  Use ${cli.label} (detected on your system)\n`);
+      const choice = (await rl.question('     Select [1-2]: ')).trim();
+      if (choice === '2') {
+        useCLI = true;
+        cliCmd = cli.cmd;
+      } else {
+        apiKey = (await rl.question(`\n     Enter your ${provider.label} API key: `)).trim();
+        if (!apiKey) {
+          console.error('\n  ❌ No API key provided.\n');
+          rl.close();
+          process.exit(1);
+        }
+        console.log(`\n  💡 Tip: export ${provider.envVar}=your-key  to skip this next time.\n`);
+      }
+    } else {
+      console.log(`\n  🔑 ${provider.envVar} not set in environment.`);
+      apiKey = (await rl.question(`     Enter your ${provider.label} API key: `)).trim();
+      if (!apiKey) {
+        console.error('\n  ❌ No API key provided.\n');
+        rl.close();
+        process.exit(1);
+      }
+      console.log(`\n  💡 Tip: export ${provider.envVar}=your-key  to skip this next time.\n`);
     }
-    console.log(`\n  💡 Tip: export ${provider.envVar}=your-key  to skip this next time.\n`);
   }
 
   // ── Load system prompt ─────────────────────────────────────────────────────
@@ -320,7 +350,7 @@ async function startChat() {
     `--- ventureOS/_memory/venture-state.yaml ---\n${stateContent}`;
 
   console.log(line());
-  console.log(`  ✓ Connected to ${provider.label}`);
+  console.log(`  ✓ Connected ${useCLI ? `via ${cliCmd} CLI` : `to ${provider.label}`}`);
   console.log(`  ✓ Type your message and press Enter. Type "exit" or Ctrl+C to quit.`);
   console.log(line() + '\n');
 
@@ -330,9 +360,9 @@ async function startChat() {
   showSpinner('  Victor is thinking');
   let firstResponse;
   try {
-    firstResponse = await callLLM(providerKey, apiKey, provider.defaultModel, systemPrompt, [
-      { role: 'user', content: activationMsg },
-    ]);
+    firstResponse = useCLI
+      ? await callViaCLI(cliCmd, systemPrompt, [{ role: 'user', content: activationMsg }])
+      : await callLLM(providerKey, apiKey, provider.defaultModel, systemPrompt, [{ role: 'user', content: activationMsg }]);
   } catch (err) {
     stopSpinner();
     console.error(`\n  ❌ API error: ${err.message}`);
@@ -368,7 +398,9 @@ async function startChat() {
     showSpinner('  Victor is thinking');
     let response;
     try {
-      response = await callLLM(providerKey, apiKey, provider.defaultModel, systemPrompt, messages);
+      response = useCLI
+        ? await callViaCLI(cliCmd, systemPrompt, messages)
+        : await callLLM(providerKey, apiKey, provider.defaultModel, systemPrompt, messages);
     } catch (err) {
       stopSpinner();
       console.error(`\n  ❌ API error: ${err.message}\n`);
@@ -383,6 +415,19 @@ async function startChat() {
   }
 
   rl.close();
+}
+
+// ─── CLI Detection ─────────────────────────────────────────────────────────────
+
+function detectCLI(providerKey) {
+  const tool = CLI_TOOLS[providerKey];
+  if (!tool) return null;
+  try {
+    const result = spawnSync('which', [tool.cmd], { encoding: 'utf8', stdio: 'pipe' });
+    return result.status === 0 && result.stdout.trim() ? tool : null;
+  } catch {
+    return null;
+  }
 }
 
 // ─── Spinner ───────────────────────────────────────────────────────────────────
@@ -440,6 +485,31 @@ async function callLLM(provider, apiKey, model, system, messages) {
   if (provider === 'openai')    return callOpenAI(apiKey, model, system, messages);
   if (provider === 'gemini')    return callGemini(apiKey, model, system, messages);
   throw new Error(`Unknown provider: ${provider}`);
+}
+
+async function callViaCLI(cliCmd, system, messages) {
+  // Build full context: system + conversation history + latest user message
+  let prompt = system + '\n\n';
+
+  for (const msg of messages.slice(0, -1)) {
+    const role = msg.role === 'user' ? 'Human' : 'Assistant';
+    prompt += `${role}: ${msg.content}\n\n`;
+  }
+
+  const lastMsg = messages[messages.length - 1];
+  prompt += `Human: ${lastMsg.content}`;
+
+  const result = spawnSync(cliCmd, ['-p', prompt], {
+    encoding: 'utf8',
+    maxBuffer: 10 * 1024 * 1024,
+    timeout: 120000,
+  });
+
+  if (result.error) throw result.error;
+  if (result.status !== 0) {
+    throw new Error(result.stderr?.trim() || `${cliCmd} CLI exited with code ${result.status}`);
+  }
+  return result.stdout.trim();
 }
 
 async function callAnthropic(apiKey, model, system, messages) {
