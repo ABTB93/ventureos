@@ -15,7 +15,7 @@ import { stdin as input, stdout as output } from 'process';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { spawnSync } from 'child_process';
+import { spawnSync, spawn } from 'child_process';
 
 const __filename = fileURLToPath(import.meta.url);
 const PACKAGE_ROOT = path.dirname(__filename);
@@ -488,7 +488,9 @@ async function callLLM(provider, apiKey, model, system, messages) {
 }
 
 async function callViaCLI(cliCmd, system, messages) {
-  // Build full context: system + conversation history + latest user message
+  // Build full context: system + conversation history + latest user message.
+  // Sent via stdin to avoid ARG_MAX limits and CLI option-parsing issues
+  // (e.g. prompts that start with "---" being misread as flags).
   let prompt = system + '\n\n';
 
   for (const msg of messages.slice(0, -1)) {
@@ -499,17 +501,30 @@ async function callViaCLI(cliCmd, system, messages) {
   const lastMsg = messages[messages.length - 1];
   prompt += `Human: ${lastMsg.content}`;
 
-  const result = spawnSync(cliCmd, ['-p', prompt], {
-    encoding: 'utf8',
-    maxBuffer: 10 * 1024 * 1024,
-    timeout: 120000,
-  });
+  return new Promise((resolve, reject) => {
+    const proc = spawn(cliCmd, ['--print', '--dangerously-skip-permissions'], {
+      stdio: ['pipe', 'pipe', 'pipe'],
+    });
 
-  if (result.error) throw result.error;
-  if (result.status !== 0) {
-    throw new Error(result.stderr?.trim() || `${cliCmd} CLI exited with code ${result.status}`);
-  }
-  return result.stdout.trim();
+    let stdout = '';
+    let stderr = '';
+
+    proc.stdout.on('data', chunk => { stdout += chunk; });
+    proc.stderr.on('data', chunk => { stderr += chunk; });
+
+    proc.on('close', code => {
+      if (code !== 0) {
+        reject(new Error(stderr.trim() || `${cliCmd} CLI exited with code ${code}`));
+      } else {
+        resolve(stdout.trim());
+      }
+    });
+
+    proc.on('error', reject);
+
+    proc.stdin.write(prompt, 'utf8');
+    proc.stdin.end();
+  });
 }
 
 async function callAnthropic(apiKey, model, system, messages) {
