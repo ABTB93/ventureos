@@ -104,14 +104,15 @@ You talk to Victor. He calls in the right specialist at the right time.
 VentureOS follows a structured process so you always know where you are and what's next.
 
 ```
-Week 1        Weeks 2–3       Weeks 4–7       Weeks 8–10        Weeks 11–12
-──────────    ─────────────   ─────────────   ───────────────   ─────────────
-Set up        Understand      Find customer   Build business    Design the
-your team  →  the market   →  pain        →   case           →  business
-                              Design your         ↓                  ↓
-                              solution        CHECK-IN           FINAL PITCH
-                                              Week 8             Week 12
-                                              (Go/Pivot/Kill)    (Go/Pivot/Kill)
+      Week 1           Weeks 2–4         Weeks 5–8          Weeks 8–12
+  ───────────────   ───────────────   ───────────────   ──────────────────
+  Setup the team    Find customer     Design your       Build the business
+  Understand    →   pain          →   solution      →   Financials, GTM,
+  the market                              ↓             Prototype
+                                      CHECK-IN              ↓
+                                       Week 8           FINAL PITCH
+                                    (Go/Pivot/Kill)       Week 12
+                                                       (Go/Pivot/Kill)
 ```
 
 At each phase, VentureOS generates documents for you — market maps, interview guides, business model canvases, pitch decks — so you never start from a blank page.
