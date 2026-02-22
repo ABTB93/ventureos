@@ -392,7 +392,7 @@ function showFreeToolsHelp() {
   console.log('\n' + line());
   console.log('  AI tools you can use for free — no API key needed:\n');
   console.log('  Antigravity  (Google)  — free preview, Gemini + Claude + more');
-  console.log('  → https://antigravity.dev\n');
+  console.log('  → https://antigravity.google\n');
   console.log('  Cursor       — popular AI code editor');
   console.log('  → https://cursor.com\n');
   console.log('  Windsurf     — AI IDE by Codeium');

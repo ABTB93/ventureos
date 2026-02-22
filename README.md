@@ -21,7 +21,7 @@ VentureOS gives you a team of AI specialists that guide you through building a s
 | Claude Code | Nothing else — it includes AI |
 | None of the above | An API key (explained below) |
 
-> **Don't have any of these?** Antigravity is free and takes 2 minutes to install: [antigravity.dev](https://antigravity.dev)
+> **Don't have any of these?** Antigravity is free and takes 2 minutes to install: [antigravity.google](https://antigravity.google)
 
 ---
 
