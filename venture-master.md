@@ -39,12 +39,12 @@ If venture_name is empty, replace the table with: _No venture started yet. Type 
 | 1 | **VS** | Venture Status — current phase, artifacts, next actions |
 | 2 | **NV** | New Venture — start a new venture |
 | 3 | **EX** | Explore Domain — opportunity discovery (pre-incubation) |
-| 4 | **ST** | Setup the Team — Phase 1, Week 1 |
-| 5 | **UM** | Understand the Market — Phase 2, Weeks 2–3 |
-| 6 | **FP** | Find Customer Pain — Phase 3, Weeks 2–7 |
-| 7 | **DS** | Define the Solution — Phase 4, Weeks 4–7 |
-| 8 | **BC** | Build Business Case — Phase 5, Weeks 7–10 |
-| 9 | **DB** | Design the Business — Phase 6, Weeks 10–12 |
+| 4 | **ST** | Setup the Team — Week 1 |
+| 5 | **UM** | Understand the Market — Week 1 |
+| 6 | **FP** | Find Customer Pain — Weeks 2–4 |
+| 7 | **DS** | Define the Solution — Weeks 5–8 |
+| 8 | **BC** | Build Business Case — Weeks 8–12 |
+| 9 | **DB** | Design the Business — Weeks 8–12 |
 | 10 | **NVB** | Board Feedback — on-demand evaluation |
 | 11 | **AG** | Agents — view all specialists |
 | 12 | **MH** | Show this menu again |
@@ -140,12 +140,12 @@ _Type a number or a command (e.g. **NV**, **FP**, "market research", "start a ve
   <item cmd="VS or fuzzy match on status" action="#venture-status-report">[VS] Venture Status — Current phase, answered questions, artifacts, next actions</item>
   <item cmd="NV or fuzzy match on new-venture or start" action="#new-venture">[NV] New Venture — Start a new venture (domain or idea entry point)</item>
   <item cmd="EX or fuzzy match on explore or domain" workflow="{project-root}/ventureOS/workflows/0-explore/domain-deep-dive/workflow.yaml">[EX] Explore Domain — Opportunity discovery for domain entry point (pre-incubation)</item>
-  <item cmd="ST or fuzzy match on setup-team or team" workflow="{project-root}/ventureOS/workflows/1-setup-team/team-formation/workflow.yaml">[ST] Setup the Team — Team charter, mothership alignment, sponsor (Phase 1, Week 1)</item>
-  <item cmd="UM or fuzzy match on understand-market or market" workflow="{project-root}/ventureOS/workflows/2-understand-market/market-mapping/workflow.yaml">[UM] Understand the Market — Competitive landscape, market sizing, stakeholders (Phase 2, Weeks 2-3)</item>
-  <item cmd="FP or fuzzy match on find-pain or pain" exec="{project-root}/ventureOS/workflows/3-find-pain/customer-pain-discovery/workflow.md">[FP] Find Customer Pain — Pain hypothesis, interviews, synthesis, atomization, journey map (Phase 3, Weeks 2-7)</item>
-  <item cmd="DS or fuzzy match on define-solution or solution" exec="{project-root}/ventureOS/workflows/4-define-solution/wedge-design/workflow.md">[DS] Define the Solution — Wedge design, value props, prototype, feasibility (Phase 4, Weeks 4-7)</item>
-  <item cmd="BC or fuzzy match on business-case" workflow="{project-root}/ventureOS/workflows/5-business-case/initial-business-case/workflow.yaml">[BC] Build Business Case — Risks, experiment plan, pilot pipeline, check-in pitch (Phase 5, Weeks 7-10)</item>
-  <item cmd="DB or fuzzy match on design-business" workflow="{project-root}/ventureOS/workflows/6-design-business/business-model-design/workflow.yaml">[DB] Design the Business — Business model, market experiments, final pitch (Phase 6, Weeks 10-12)</item>
+  <item cmd="ST or fuzzy match on setup-team or team" workflow="{project-root}/ventureOS/workflows/1-setup-team/team-formation/workflow.yaml">[ST] Setup the Team — Team charter, mothership alignment, sponsor (Week 1)</item>
+  <item cmd="UM or fuzzy match on understand-market or market" workflow="{project-root}/ventureOS/workflows/2-understand-market/market-mapping/workflow.yaml">[UM] Understand the Market — Competitive landscape, market sizing, stakeholders (Week 1)</item>
+  <item cmd="FP or fuzzy match on find-pain or pain" exec="{project-root}/ventureOS/workflows/3-find-pain/customer-pain-discovery/workflow.md">[FP] Find Customer Pain — Pain hypothesis, interviews, synthesis, atomization, journey map (Weeks 2-4)</item>
+  <item cmd="DS or fuzzy match on define-solution or solution" exec="{project-root}/ventureOS/workflows/4-define-solution/wedge-design/workflow.md">[DS] Define the Solution — Wedge design, value props, prototype, feasibility (Weeks 5-8)</item>
+  <item cmd="BC or fuzzy match on business-case" workflow="{project-root}/ventureOS/workflows/5-business-case/initial-business-case/workflow.yaml">[BC] Build Business Case — Risks, experiment plan, pilot pipeline, check-in pitch (Weeks 8-12)</item>
+  <item cmd="DB or fuzzy match on design-business" workflow="{project-root}/ventureOS/workflows/6-design-business/business-model-design/workflow.yaml">[DB] Design the Business — Business model, financials, GTM, final pitch (Weeks 8-12)</item>
   <item cmd="NVB or fuzzy match on board or evaluate" action="Load {project-root}/ventureOS/agents/venture-evaluator.md and activate Eva for on-demand synthetic board feedback. Pass current venture state as context.">[NVB] Board Feedback — On-demand NVB evaluation of current venture progress</item>
   <item cmd="AG or fuzzy match on agents or specialists" action="Display the full list of VentureOS specialist agents with their names, roles, and how to activate them. Explain that any agent can be loaded directly using the appropriate syntax for {llm} (e.g. @ventureOS/agents/domain-explorer.md in Claude Code).">[AG] Agents — View all specialist agents and how to activate them directly</item>
   <item cmd="MH or fuzzy match on menu or help">[MH] Redisplay Menu</item>
