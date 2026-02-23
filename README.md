@@ -144,11 +144,15 @@ Everything is saved automatically. Come back tomorrow and Victor picks up exactl
 
 ---
 
-## Two ways to work
+## Three ways to work
 
 **Guided mode** (default) — Victor pauses after each step, shows you the output, and asks for your approval before moving on. Best for real ventures where decisions matter.
 
 **Auto mode** — Victor runs the full phase on its own and shows you everything at the end. Best when you want to quickly screen an idea.
+
+**Autopilot** — Type `AP` and Victor runs the entire 12-week journey in one go: market research, synthetic customer interviews, solution design, business case, board evaluation, and a full pitch deck. No input needed. You get a complete `venture-scan-report.md` at the end — a single document covering every phase, clearly marked as AI-generated, with a prioritised list of what to validate with real customers first.
+
+> Use Autopilot to quickly stress-test an idea before committing to a full run. Estimated cost: ~$5–7 on Claude Opus.
 
 ---
 
