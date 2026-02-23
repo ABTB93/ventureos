@@ -69,11 +69,23 @@ VentureOS asks which service (Claude, ChatGPT, or Gemini), walks you through ent
 
 ## Keeping VentureOS up to date
 
+Already using VentureOS on a project? Run this from your project folder to get the latest version:
+
 ```bash
 npx ventureos update
 ```
 
-Pulls the latest agents, workflows, and framework files into your project. Your venture state, documents, and settings are never touched.
+**What gets updated:**
+- Victor (the orchestrator)
+- All specialist agents
+- All workflows, templates, and scoring files
+
+**What is never touched:**
+- `ventureOS/config.yaml` — your settings
+- `ventureOS/_memory/` — your venture state and progress
+- `_ventures/` — all your documents and outputs
+
+You can update at any time without losing any work.
 
 ## Changing your settings
 
