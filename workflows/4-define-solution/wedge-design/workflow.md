@@ -24,8 +24,8 @@ Load from venture-state.yaml:
 1. Primary pain hypothesis (hypotheses.problem)
 2. ICP hypothesis (hypotheses.customer)
 3. Load `pain-atomization.md`, `icp-profile.md`, `pain-journey-map.md`
-4. Load `{project-root}/ventureOS/data/techniques/brainstorming-techniques.csv` for wedge-storm and value-prop-sprint techniques
-5. Load `{project-root}/ventureOS/data/techniques/synthetic-tools.csv` for vibe-code-wedge and synthetic testing tools
+4. Load `{project-root}/ventureOS/techniques/brainstorming-techniques.csv` for wedge-storm and value-prop-sprint techniques
+5. Load `{project-root}/ventureOS/techniques/synthetic-tools.csv` for vibe-code-wedge and synthetic testing tools
 
 ---
 

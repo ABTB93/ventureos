@@ -252,8 +252,9 @@ output_folder: "_ventures"
 # deep     = exhaustive multi-source research with cross-validation
 research_depth: "${researchDepth}"
 
-# Your AI provider (used when running via built-in chat)
-# Options: anthropic | openai | gemini
+# Your AI tool or provider
+# IDE users: claude-code | cursor | windsurf | other
+# API users: anthropic | openai | gemini
 llm: "${llm}"
 
 # Execution mode for workflows
@@ -303,7 +304,7 @@ async function runSetupWizard(rl, { forIDE = false } = {}) {
 
   console.log('\n  How should workflows run by default?\n');
   console.log('     1.  Guided  — pauses so you review each step  (recommended)');
-  console.log('     2.  Auto    — runs everything on its own\n');
+  console.log('     2.  Yolo    — runs everything on its own\n');
   const modeInput = await rl.question('     Select [1-2]: ');
   const defaultMode = modeInput.trim() === '2' ? 'yolo' : 'guided';
 
@@ -502,7 +503,8 @@ async function main() {
     console.log('  Installing...');
     console.log(line() + '\n');
 
-    const configYaml = generateConfig({ userName, researchDepth, llm: 'anthropic', defaultMode });
+    const ideLlm = chosenIDE.id === 'claude' ? 'claude-code' : (['cursor', 'windsurf'].includes(chosenIDE.id) ? chosenIDE.id : 'other');
+    const configYaml = generateConfig({ userName, researchDepth, llm: ideLlm, defaultMode });
     installFiles(projectRoot, ventureOSDir, configYaml);
 
     console.log('\n' + line());

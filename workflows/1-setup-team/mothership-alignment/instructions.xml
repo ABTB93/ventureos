@@ -81,7 +81,7 @@
       Add Sponsor details to mothership-asset-map.md (Sponsor Alignment section).
       Update venture-state.yaml: category_progress.mothership = "complete".
     </instructions>
-    <state-update file="{project-root}/ventureOS/_memory/venture-sidecar/venture-state.yaml">
+    <state-update file="{project-root}/ventureOS/_memory/venture-state.yaml">
       Update: completed_artifacts, category_progress.mothership, guiding_questions.setup answers for mothership questions
     </state-update>
   </step>

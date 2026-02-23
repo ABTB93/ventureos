@@ -129,7 +129,7 @@
     <template-output file="{output_folder}/{venture_name}/venture-canvas.md">
       Save venture canvas as starting artifact.
     </template-output>
-    <state-update file="{project-root}/ventureOS/_memory/venture-sidecar/venture-state.yaml">
+    <state-update file="{project-root}/ventureOS/_memory/venture-state.yaml">
       Update: venture_name, entry_point: "domain", current_phase: "1-setup-team", completed_artifacts with all domain research files
     </state-update>
   </step>

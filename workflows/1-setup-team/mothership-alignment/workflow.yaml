@@ -14,8 +14,8 @@ installed_path: "{project-root}/ventureOS/workflows/1-setup-team/mothership-alig
 instructions: "{installed_path}/instructions.xml"
 
 templates:
-  - "{project-root}/ventureOS/data/templates/mothership-asset-map.md"
-  - "{project-root}/ventureOS/data/templates/stakeholder-map.md"
+  - "{project-root}/ventureOS/templates/mothership-asset-map.md"
+  - "{project-root}/ventureOS/templates/stakeholder-map.md"
 
 tags:
   - mothership

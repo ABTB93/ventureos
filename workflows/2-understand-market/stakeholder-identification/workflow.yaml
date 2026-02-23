@@ -14,8 +14,8 @@ installed_path: "{project-root}/ventureOS/workflows/2-understand-market/stakehol
 instructions: "{installed_path}/instructions.xml"
 
 templates:
-  - "{project-root}/ventureOS/data/templates/stakeholder-map.md"
-  - "{project-root}/ventureOS/data/templates/pain-hypothesis.md"
+  - "{project-root}/ventureOS/templates/stakeholder-map.md"
+  - "{project-root}/ventureOS/templates/pain-hypothesis.md"
 
 tags:
   - stakeholder-mapping

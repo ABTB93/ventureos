@@ -74,7 +74,7 @@
     <template-output file="{output_folder}/{venture_name}/monetisation-plan.md">
       Save monetisation plan.
     </template-output>
-    <state-update file="{project-root}/ventureOS/_memory/venture-sidecar/venture-state.yaml">
+    <state-update file="{project-root}/ventureOS/_memory/venture-state.yaml">
       Update: completed_artifacts (business-model-canvas, pricing-model, monetisation-plan), guiding_questions.design_business
     </state-update>
   </step>

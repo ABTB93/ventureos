@@ -21,13 +21,13 @@ default_output_folder: "{output_folder}/{venture_name}/domain-research/"
 
 # Templates used
 templates:
-  - "{project-root}/ventureOS/data/templates/venture-canvas.md"
-  - "{project-root}/ventureOS/data/templates/market-sizing.md"
-  - "{project-root}/ventureOS/data/templates/stakeholder-map.md"
+  - "{project-root}/ventureOS/templates/venture-canvas.md"
+  - "{project-root}/ventureOS/templates/market-sizing.md"
+  - "{project-root}/ventureOS/templates/stakeholder-map.md"
 
 # Data files
 data:
-  brainstorming: "{project-root}/ventureOS/data/techniques/brainstorming-techniques.csv"
+  brainstorming: "{project-root}/ventureOS/techniques/brainstorming-techniques.csv"
 
 tags:
   - exploration

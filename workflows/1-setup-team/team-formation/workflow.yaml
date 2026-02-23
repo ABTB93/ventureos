@@ -16,8 +16,8 @@ instructions: "{installed_path}/instructions.xml"
 default_output_folder: "{output_folder}/{venture_name}/"
 
 templates:
-  - "{project-root}/ventureOS/data/templates/team-charter.md"
-  - "{project-root}/ventureOS/data/templates/venture-canvas.md"
+  - "{project-root}/ventureOS/templates/team-charter.md"
+  - "{project-root}/ventureOS/templates/venture-canvas.md"
 
 tags:
   - setup-team

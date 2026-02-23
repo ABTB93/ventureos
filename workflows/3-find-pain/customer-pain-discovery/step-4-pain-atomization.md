@@ -10,7 +10,7 @@ Decompose the validated broad pain into atomic, testable units. Score each unit 
 ## 4.1 Load FIP Framework and Context
 
 Load:
-- `{project-root}/ventureOS/data/scoring/pain-scoring.yaml` — FIP scoring framework
+- `{project-root}/ventureOS/scoring/pain-scoring.yaml` — FIP scoring framework
 - `interview-synthesis.md` — all interview learnings
 - `pain-hypothesis.md` — current pain hypothesis
 

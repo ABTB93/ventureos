@@ -24,10 +24,10 @@ Modes can be combined (e.g., run real interviews AND run synthetic simulations t
 
 Before starting, the agent should:
 1. Load `{project-root}/ventureOS/config.yaml`
-2. Load `{project-root}/ventureOS/_memory/venture-sidecar/venture-state.yaml`
+2. Load `{project-root}/ventureOS/_memory/venture-state.yaml`
 3. Load `pain-hypothesis.md` if it exists (from Phase 2)
 4. Load `stakeholder-map.md` if it exists (from Phase 2)
-5. Load `{project-root}/ventureOS/data/scoring/pain-scoring.yaml` (FIP framework)
+5. Load `{project-root}/ventureOS/scoring/pain-scoring.yaml` (FIP framework)
 6. Confirm: discovery mode (T/S/I) and execution mode (Guided/Yolo)
 
 ---

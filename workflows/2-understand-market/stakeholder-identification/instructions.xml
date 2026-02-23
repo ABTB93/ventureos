@@ -82,7 +82,7 @@
     <template-output file="{output_folder}/{venture_name}/stakeholder-map.md">
       Save completed Stakeholder Map.
     </template-output>
-    <state-update file="{project-root}/ventureOS/_memory/venture-sidecar/venture-state.yaml">
+    <state-update file="{project-root}/ventureOS/_memory/venture-state.yaml">
       Update: completed_artifacts, hypotheses.customer, guiding_questions.domain
     </state-update>
   </step>

@@ -81,7 +81,7 @@
     <template-output file="{output_folder}/{venture_name}/team-charter.md">
       Save completed Team Charter.
     </template-output>
-    <state-update file="{project-root}/ventureOS/_memory/venture-sidecar/venture-state.yaml">
+    <state-update file="{project-root}/ventureOS/_memory/venture-state.yaml">
       Update: completed_artifacts, category_progress.team, guiding_questions.setup answers
     </state-update>
   </step>

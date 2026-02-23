@@ -73,7 +73,7 @@
 
       Update venture-state.yaml: completed_artifacts, guiding_questions.solution (technical feasibility question)
     </instructions>
-    <state-update file="{project-root}/ventureOS/_memory/venture-sidecar/venture-state.yaml">
+    <state-update file="{project-root}/ventureOS/_memory/venture-state.yaml">
       Update: completed_artifacts (solution-feasibility, ecosystem-map), guiding_questions.solution
     </state-update>
   </step>
