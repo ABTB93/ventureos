@@ -11,7 +11,7 @@ Test the prototype with target customers. Gather usability and desirability feed
 
 Using the solution testing section of `interview-script.md`:
 
-**Conduct 5-10 solution testing interviews:**
+**Conduct 15-20 solution testing interviews:**
 1. Walkthrough the prototype with the ICP persona
 2. Ask participants to think aloud as they interact
 3. Probe: What's confusing? What's delightful? What would you do next?
@@ -22,7 +22,7 @@ Using the solution testing section of `interview-script.md`:
 **Synthetic Solution Testing (if needed):**
 Using "synthetic-solution-testing" tool from `synthetic-tools.csv`:
 1. Generate ICP personas from interview data
-2. Simulate 5+ personas experiencing the prototype walkthrough
+2. Simulate 15+ personas experiencing the prototype walkthrough
 3. Label ALL output: "⚠️ SIMULATED — Not real user testing"
 
 ---

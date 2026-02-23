@@ -63,7 +63,7 @@ Phase 3 is complete when ALL of the following guiding questions are answered wit
 - [ ] What do people need? (primary pain identified)
 - [ ] Can the team prioritize the most important pain to solve?
 - [ ] Is the pain frequent, intense, and/or prevalent enough to support a business? (FIP ≥ 3.0 average)
-- [ ] Has the team validated the pain exists? (minimum 10 interviews recommended)
+- [ ] Has the team validated the pain exists? (minimum 30 interviews recommended)
 - [ ] Can they identify their ideal customer? (ICP defined)
 - [ ] Does the team understand who the buyer is? (buyer vs. user mapped)
 

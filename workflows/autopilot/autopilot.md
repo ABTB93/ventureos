@@ -132,12 +132,12 @@ Load and follow `{project-root}/ventureOS/agents/customer-discovery.md` — acti
 **Clara's task:**
 
 **Part A — Persona generation**
-Generate 6 distinct customer personas based on domain scan and market mapping findings.
-Vary across: role, company size, industry sub-vertical, geography, pain intensity.
+Generate 25 distinct customer personas based on domain scan and market mapping findings.
+Vary across: role, company size, industry sub-vertical, geography, pain intensity, seniority, and tech-savviness.
 For each persona define: name, role, company context, daily workflow, current tools, suspected pain level.
 
 **Part B — Synthetic interviews**
-Simulate a 30-minute pain interview for each of the 6 personas.
+Simulate a 30-minute pain interview for each of the 25 personas.
 Each interview must include:
 - Natural conversation (not Q&A format)
 - Genuine moments of resistance and surprise
@@ -145,8 +145,10 @@ Each interview must include:
 - Preliminary FIP signals embedded in responses
 
 **Part C — Expert interviews**
-Simulate 2 domain expert interviews (e.g. industry analyst, veteran practitioner).
+Simulate 5 domain expert interviews (e.g. industry analyst, veteran practitioner, former competitor employee, market regulator, academic researcher).
 Focus: pain prevalence across the market, why current solutions fail, what a breakthrough would look like.
+
+**Total: minimum 30 interviews (25 customer + 5 expert).**
 
 **All output labeled:**
 ```
@@ -162,7 +164,7 @@ Update progress tracker: `[✓] Phase 2 — Customer Pain Discovery`
 ### Step 6 — Pain synthesis and FIP scoring (Clara)
 
 **Clara's task:**
-- Extract recurring pain themes across all 6 interviews
+- Extract recurring pain themes across all 30 interviews
 - Atomise into 4–6 distinct pain units
 - Score each on FIP framework using `{project-root}/ventureOS/scoring/pain-scoring.yaml`
 - Select primary pain: highest FIP AND most aligned with domain opportunity
@@ -359,17 +361,36 @@ Load and follow `{project-root}/ventureOS/agents/pitch-master.md` — activate P
 Run autonomously.
 
 **Petra's task:**
-Build a complete investor pitch deck covering:
-1. **Problem** — the primary pain with FIP evidence
-2. **Customer** — ICP profile with key signals from synthetic interviews
-3. **Solution** — the wedge and big vision
-4. **Why now** — market timing from domain scan
-5. **Market** — TAM / SAM / SOM with methodology
-6. **Business model** — revenue model and unit economics
-7. **Go-to-market** — first 100 customers strategy
-8. **Traction** (synthetic) — what the experiments are designed to prove
-9. **Team** — placeholder (to be filled by user)
-10. **The ask** — what the venture needs to reach the next milestone
+Build a complete investor pitch deck. Use the narrative-first format for every slide — no bullet dumps.
+
+**Each slide must follow this exact structure:**
+```
+---
+### Slide N — [Slide Title]
+
+**Headline:** [One punchy sentence the investor reads and remembers — max 12 words]
+
+**Visual:** [What goes on screen: one dominant image, chart, stat, or quote — described concisely]
+
+**You say:** [2–3 sentences the presenter delivers out loud — the story, not a list]
+
+**Proof:** [The one data point, quote, or evidence that makes this real]
+---
+```
+
+**Slides to build (10):**
+1. **Hook** — the market shift or undeniable truth that makes this venture inevitable
+2. **Problem** — the primary pain with FIP evidence and a customer quote that lands like a gut-punch
+3. **Customer** — ICP profile, their world before the solution, what they fear and want
+4. **Solution** — the wedge and the big vision arc (smallest entry → where this goes)
+5. **Why now** — the timing argument: what changed in the last 2–3 years that opens this window
+6. **Market** — TAM / SAM / SOM with bottom-up reasoning, not just numbers
+7. **Business model** — how money flows, pricing, unit economics in one clear visual
+8. **Go-to-market** — the first 100 customers: who, where, how, in what sequence
+9. **Traction** (synthetic) — what the 90-day experiments are designed to prove, and what GO looks like
+10. **Team + The ask** — placeholder team section + what the venture needs to reach the next milestone
+
+**Narrative arc rule:** Slides 1–3 build the villain (the problem). Slides 4–5 introduce the hero (the solution and timing). Slides 6–8 prove the business. Slides 9–10 close the deal.
 
 **Output:** Save as `{output_folder}/{venture_name}/autopilot/pitch-deck.md`
 

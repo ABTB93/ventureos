@@ -40,7 +40,7 @@ Save cards to `{output_folder}/{venture_name}/concept-cards/card-{N}.md`
 
 **Option A: Real Concept Card Interviews**
 Using the interview script from Phase 3 (concept card section):
-1. Run 5-10 concept card interviews with ICP
+1. Run 15-20 concept card interviews with ICP
 2. Show each concept card and probe: resonance, differentiation, willingness to use/pay
 3. Capture scores and quotes per card
 

@@ -115,7 +115,7 @@ Before declaring Phase 3 complete, verify all guiding questions:
 | What do people need? | Yes/No | |
 | Can the team prioritize the most important pain? | Yes/No | pain-atomization.md |
 | Is the pain frequent, intense, prevalent enough? | Yes/No | pain-atomization.md (FIP ≥ 3.0) |
-| Has the team validated the pain exists? (10+ interviews) | Yes/No | interview-synthesis.md |
+| Has the team validated the pain exists? (30+ interviews) | Yes/No | interview-synthesis.md |
 | Can they identify their ideal customer? | Yes/No | icp-profile.md |
 | Does the team understand who the buyer is? | Yes/No | icp-profile.md |
 
@@ -133,9 +133,9 @@ When Phase 3 is complete, brief the Venture Master and Product Strategist:
 5. What must the solution do to address the validated pain?
 
 **Phase 4 can begin when:**
-- Primary pain FIP ≥ 3.0 (weak signal — need more interviews)
+- Primary pain FIP ≥ 3.0 (weak signal — need more interviews, target 30+)
 - ICP is defined
-- At least 10 interviews completed
+- At least 30 interviews completed
 - Pain journey map shows at least one viable solution entry point
 
 ---
