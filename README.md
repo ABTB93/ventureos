@@ -67,7 +67,15 @@ VentureOS asks which service (Claude, ChatGPT, or Gemini), walks you through ent
 
 ---
 
-## Changing your settings later
+## Keeping VentureOS up to date
+
+```bash
+npx ventureos update
+```
+
+Pulls the latest agents, workflows, and framework files into your project. Your venture state, documents, and settings are never touched.
+
+## Changing your settings
 
 ```bash
 npx ventureos config

@@ -3,6 +3,7 @@
  * VentureOS CLI
  * Usage:
  *   npx ventureos           — setup wizard + start (auto-detects your environment)
+ *   npx ventureos update    — update framework files, keep all your work
  *   npx ventureos config    — update your configuration
  *   npx ventureos start     — launch Victor chat (if already installed)
  *
@@ -126,6 +127,20 @@ const IDE_TOOLS = [
   },
 ];
 
+// ─── Constants (must be before entry point) ────────────────────────────────────
+
+// Files skipped when doing a fresh install (copyDir to ventureOS/)
+const SKIP = new Set([
+  'install.js', 'package.json', 'package-lock.json',
+  '.gitignore', 'config.yaml', 'node_modules', '.git', '.DS_Store',
+]);
+
+// Files/folders that belong to the user — never overwritten on update
+const USER_DATA = new Set([
+  'config.yaml', '_memory', 'node_modules', '.git', '.gitignore', '.DS_Store',
+  'package.json', 'package-lock.json',
+]);
+
 // ─── Entry point ───────────────────────────────────────────────────────────────
 
 const cmd = process.argv[2];
@@ -134,6 +149,8 @@ if (cmd === 'start') {
   legacyStart().catch(handleFatalError);
 } else if (cmd === 'config') {
   reconfigure().catch(handleFatalError);
+} else if (cmd === 'update') {
+  update().catch(handleFatalError);
 } else {
   main().catch(handleFatalError);
 }
@@ -200,11 +217,6 @@ function detectIDEs() {
 }
 
 // ─── File helpers ───────────────────────────────────────────────────────────────
-
-const SKIP = new Set([
-  'install.js', 'package.json', 'package-lock.json',
-  '.gitignore', 'config.yaml', 'node_modules', '.git', '.DS_Store',
-]);
 
 function copyDir(src, dest, skipSet = new Set()) {
   fs.mkdirSync(dest, { recursive: true });
@@ -417,7 +429,8 @@ async function main() {
       const config = parseSimpleYaml(fs.readFileSync(configPath, 'utf8'));
       console.log(`  Welcome back, ${config.user_name || 'Founder'}!\n`);
       console.log('  VentureOS is already set up in this folder.');
-      console.log('  To update your settings, run:  npx ventureos config\n');
+      console.log('  To get the latest framework:   npx ventureos update');
+      console.log('  To update your settings:       npx ventureos config\n');
       await launchChat(rl, projectRoot, config);
       return;
     }
@@ -556,6 +569,49 @@ async function reconfigure() {
     if (err.code === 'ERR_USE_AFTER_CLOSE') return;
     throw err;
   }
+}
+
+// ─── Update ────────────────────────────────────────────────────────────────────
+
+async function update() {
+  showBanner();
+
+  const projectRoot = process.cwd();
+  const ventureOSDir = path.join(projectRoot, 'ventureOS');
+  const configPath = path.join(ventureOSDir, 'config.yaml');
+
+  if (!fs.existsSync(configPath)) {
+    console.error('  VentureOS is not set up here. Run: npx ventureos\n');
+    process.exit(1);
+  }
+
+  // Read current version from the installed package.json for display
+  const pkgPath = path.join(PACKAGE_ROOT, 'package.json');
+  const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
+
+  console.log(`  Updating to VentureOS v${pkg.version}...\n`);
+  console.log('  Your work is safe — these are never touched:\n');
+  console.log('    ✓  ventureOS/config.yaml        (your settings)');
+  console.log('    ✓  ventureOS/_memory/            (your venture state)');
+  console.log('    ✓  _ventures/                    (all your documents)\n');
+  console.log(line());
+  console.log('  Updating framework files...');
+  console.log(line() + '\n');
+
+  copyDir(PACKAGE_ROOT, ventureOSDir, USER_DATA);
+
+  console.log('  ✓  venture-master.md updated');
+  console.log('  ✓  agents/ updated');
+  console.log('  ✓  workflows/ updated');
+  console.log('  ✓  templates/ updated');
+  console.log('  ✓  techniques/ updated');
+  console.log('  ✓  scoring/ updated');
+
+  console.log('\n' + line());
+  console.log(`  VentureOS is up to date!  (v${pkg.version})`);
+  console.log(line() + '\n');
+  console.log('  Your venture state and all documents are unchanged.');
+  console.log('  Run  npx ventureos  to continue where you left off.\n');
 }
 
 // ─── Legacy start command ───────────────────────────────────────────────────────
