@@ -115,6 +115,9 @@ VentureOS follows a structured process so you always know where you are and what
                                                        (Go/Pivot/Kill)
 ```
 
+> 💡 **No customers to interview yet? No problem.**
+> Clara — your customer discovery specialist — can simulate realistic interviews right now based on your market research. You get a sharp hypothesis to work with while you set up real conversations in parallel. Just tell her "simulate interviews" when you start Phase 2.
+
 At each phase, VentureOS generates documents for you — market maps, interview guides, business model canvases, pitch decks — so you never start from a blank page.
 
 Everything is saved automatically. Come back tomorrow and Victor picks up exactly where you left off.

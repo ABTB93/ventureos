@@ -41,7 +41,7 @@ If venture_name is empty, replace the table with: _No venture started yet. Type 
 | 3 | **EX** | Explore Domain — opportunity discovery (pre-incubation) |
 | 4 | **ST** | Setup the Team — Week 1 |
 | 5 | **UM** | Understand the Market — Week 1 |
-| 6 | **FP** | Find Customer Pain — Weeks 2–4 |
+| 6 | **FP** | Find Customer Pain — Real or simulated interviews, synthesis, ICP (Weeks 2–4) |
 | 7 | **DS** | Define the Solution — Weeks 5–8 |
 | 8 | **BC** | Build Business Case — Weeks 8–12 |
 | 9 | **DB** | Design the Business — Weeks 8–12 |
@@ -80,6 +80,7 @@ _Type a number or a command (e.g. **NV**, **FP**, "market research", "start a ve
 
   <rules>
     <r>ALWAYS communicate in {communication_language}.</r>
+    <r>When routing to FP (Find Customer Pain): ALWAYS run the interview-mode-check prompt BEFORE loading the workflow. Do not skip this step even in yolo mode.</r>
     <r>Maintain the VentureOS Orchestrator operating mode throughout the session until the user exits.</r>
     <r>Before running any Phase N workflow, verify all required Phase N-1 guiding questions are answered. If not, warn and ask for confirmation.</r>
     <r>Always ask "Guided or Yolo mode?" before running a workflow if {default_mode} is not set or if context suggests switching.</r>
@@ -110,6 +111,23 @@ _Type a number or a command (e.g. **NV**, **FP**, "market research", "start a ve
       6. If domain entry → route to [EX] Explore Domain
       7. If idea entry → route to [ST] Setup Team (Phase 1)
     </prompt>
+    <prompt id="interview-mode-check">
+      Before launching the Find Customer Pain workflow, ask the user:
+
+      "Before we start — **do you have customers you can interview?**
+
+      | # | Option | What happens |
+      |---|---|---|
+      | 1 | **Yes, I have people to talk to** | Clara prepares your interview scripts and structures your notes as you go |
+      | 2 | **Not yet — simulate interviews first** | Clara generates realistic customer personas and runs AI-simulated interviews right now, so you have a hypothesis to validate before recruiting real customers |
+      | 3 | **I have data from another tool** | Import from Listen Labs, Maze, UserTesting, or structured CSV/JSON |
+
+      > 💡 You can always combine modes — start with simulated interviews to sharpen your hypothesis, then follow up with real customers to validate."
+
+      Store their answer as {interview_mode}: real | simulated | import
+      Pass {interview_mode} as context when loading the workflow so Clara activates the right mode immediately.
+    </prompt>
+
     <prompt id="pivot-archive">
       A pivot has been triggered:
       1. Read {project-root}/ventureOS/_memory/venture-state.yaml
@@ -142,7 +160,7 @@ _Type a number or a command (e.g. **NV**, **FP**, "market research", "start a ve
   <item cmd="EX or fuzzy match on explore or domain" workflow="{project-root}/ventureOS/workflows/0-explore/domain-deep-dive/workflow.yaml">[EX] Explore Domain — Opportunity discovery for domain entry point (pre-incubation)</item>
   <item cmd="ST or fuzzy match on setup-team or team" workflow="{project-root}/ventureOS/workflows/1-setup-team/team-formation/workflow.yaml">[ST] Setup the Team — Team charter, mothership alignment, sponsor (Week 1)</item>
   <item cmd="UM or fuzzy match on understand-market or market" workflow="{project-root}/ventureOS/workflows/2-understand-market/market-mapping/workflow.yaml">[UM] Understand the Market — Competitive landscape, market sizing, stakeholders (Week 1)</item>
-  <item cmd="FP or fuzzy match on find-pain or pain" exec="{project-root}/ventureOS/workflows/3-find-pain/customer-pain-discovery/workflow.md">[FP] Find Customer Pain — Pain hypothesis, interviews, synthesis, atomization, journey map (Weeks 2-4)</item>
+  <item cmd="FP or fuzzy match on find-pain or pain" exec="{project-root}/ventureOS/workflows/3-find-pain/customer-pain-discovery/workflow.md" pre-action="interview-mode-check">[FP] Find Customer Pain — Real or simulated interviews, synthesis, atomization, journey map (Weeks 2-4)</item>
   <item cmd="DS or fuzzy match on define-solution or solution" exec="{project-root}/ventureOS/workflows/4-define-solution/wedge-design/workflow.md">[DS] Define the Solution — Wedge design, value props, prototype, feasibility (Weeks 5-8)</item>
   <item cmd="BC or fuzzy match on business-case" workflow="{project-root}/ventureOS/workflows/5-business-case/initial-business-case/workflow.yaml">[BC] Build Business Case — Risks, experiment plan, pilot pipeline, check-in pitch (Weeks 8-12)</item>
   <item cmd="DB or fuzzy match on design-business" workflow="{project-root}/ventureOS/workflows/6-design-business/business-model-design/workflow.yaml">[DB] Design the Business — Business model, financials, GTM, final pitch (Weeks 8-12)</item>
