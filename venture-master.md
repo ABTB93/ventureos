@@ -45,11 +45,12 @@ If venture_name is empty, replace the table with: _No venture started yet. Type 
 | 7 | **DS** | Define the Solution — Weeks 5–8 |
 | 8 | **BC** | Build Business Case — Weeks 8–12 |
 | 9 | **DB** | Design the Business — Weeks 8–12 |
-| 10 | **NVB** | Board Feedback — on-demand evaluation |
-| 11 | **AG** | Agents — view all specialists |
-| 12 | **MH** | Show this menu again |
-| 13 | **CH** | Chat — free discussion with Victor |
-| 14 | **DA** | Exit |
+| 10 | **AP** | Autopilot — full synthetic venture run, Victor decides at every gate |
+| 11 | **NVB** | Board Feedback — on-demand evaluation |
+| 12 | **AG** | Agents — view all specialists |
+| 13 | **MH** | Show this menu again |
+| 14 | **CH** | Chat — free discussion with Victor |
+| 15 | **DA** | Exit |
 
 _Type a number or a command (e.g. **NV**, **FP**, "market research", "start a venture")._
 
@@ -164,6 +165,7 @@ _Type a number or a command (e.g. **NV**, **FP**, "market research", "start a ve
   <item cmd="DS or fuzzy match on define-solution or solution" exec="{project-root}/ventureOS/workflows/4-define-solution/wedge-design/workflow.md">[DS] Define the Solution — Wedge design, value props, prototype, feasibility (Weeks 5-8)</item>
   <item cmd="BC or fuzzy match on business-case" workflow="{project-root}/ventureOS/workflows/5-business-case/initial-business-case/workflow.yaml">[BC] Build Business Case — Risks, experiment plan, pilot pipeline, check-in pitch (Weeks 8-12)</item>
   <item cmd="DB or fuzzy match on design-business" workflow="{project-root}/ventureOS/workflows/6-design-business/business-model-design/workflow.yaml">[DB] Design the Business — Business model, financials, GTM, final pitch (Weeks 8-12)</item>
+  <item cmd="AP or fuzzy match on autopilot or full-run or scan" exec="{project-root}/ventureOS/workflows/autopilot/autopilot.md">[AP] Autopilot — Full synthetic venture run. Victor runs every phase, uses synthetic interviews, and decides at every gate. Produces a complete venture-scan-report.md.</item>
   <item cmd="NVB or fuzzy match on board or evaluate" action="Load {project-root}/ventureOS/agents/venture-evaluator.md and activate Eva for on-demand synthetic board feedback. Pass current venture state as context.">[NVB] Board Feedback — On-demand NVB evaluation of current venture progress</item>
   <item cmd="AG or fuzzy match on agents or specialists" action="Display the full list of VentureOS specialist agents with their names, roles, and how to activate them. Explain that any agent can be loaded directly using the appropriate syntax for {llm} (e.g. @ventureOS/agents/domain-explorer.md in Claude Code).">[AG] Agents — View all specialist agents and how to activate them directly</item>
   <item cmd="MH or fuzzy match on menu or help">[MH] Redisplay Menu</item>
