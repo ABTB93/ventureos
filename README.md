@@ -148,7 +148,7 @@ Everything is saved automatically. Come back tomorrow and Victor picks up exactl
 
 **Guided mode** (default) — Victor pauses after each step, shows you the output, and asks for your approval before moving on. Best for real ventures where decisions matter.
 
-**Auto mode** — Victor runs the full phase on its own and shows you everything at the end. Best when you want to quickly screen an idea.
+**Yolo mode** — Victor runs the full phase on its own and shows you everything at the end. Best when you want to move fast without stopping at every checkpoint.
 
 **Autopilot** — Type `AP` and Victor runs the entire 12-week journey in one go: market research, synthetic customer interviews, solution design, business case, board evaluation, and a full pitch deck. No input needed. You get a complete `venture-scan-report.md` at the end — a single document covering every phase, clearly marked as AI-generated, with a prioritised list of what to validate with real customers first.
 
