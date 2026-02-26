@@ -258,8 +258,9 @@ research_depth: "${researchDepth}"
 llm: "${llm}"
 
 # Execution mode for workflows
-# guided = agent pauses at each checkpoint for review and approval (recommended)
-# yolo   = agent runs the full workflow autonomously
+# guided    = agent pauses at each checkpoint for review and approval (recommended)
+# yolo      = agent runs the full workflow autonomously and presents all outputs at the end
+# autopilot = Victor runs all phases in sequence, decides at every gate, produces a full venture-scan-report
 default_mode: "${defaultMode}"
 `;
 }
