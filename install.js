@@ -594,7 +594,7 @@ async function update() {
 
   console.log(`  Updating to VentureOS v${pkg.version}...\n`);
   console.log('  Your work is safe — these are never touched:\n');
-  console.log('    ✓  ventureOS/config.yaml        (your settings)');
+  console.log('    ✓  ventureOS/config.yaml        (your values — comments refreshed)');
   console.log('    ✓  ventureOS/_memory/            (your venture state)');
   console.log('    ✓  _ventures/                    (all your documents)\n');
   console.log(line());
@@ -609,6 +609,17 @@ async function update() {
   console.log('  ✓  templates/ updated');
   console.log('  ✓  techniques/ updated');
   console.log('  ✓  scoring/ updated');
+
+  // Refresh config.yaml comments/template while preserving user values
+  const existingConfig = parseSimpleYaml(fs.readFileSync(configPath, 'utf8'));
+  const refreshedConfig = generateConfig({
+    userName:      existingConfig.user_name      || '',
+    researchDepth: existingConfig.research_depth || 'standard',
+    llm:           existingConfig.llm            || 'claude-code',
+    defaultMode:   existingConfig.default_mode   || 'guided',
+  });
+  fs.writeFileSync(configPath, refreshedConfig, 'utf8');
+  console.log('  ✓  config.yaml comments refreshed  (your values preserved)');
 
   console.log('\n' + line());
   console.log(`  VentureOS is up to date!  (v${pkg.version})`);
