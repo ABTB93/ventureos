@@ -12,8 +12,8 @@ Simulate the full NVB final gate review. The Venture Evaluator acts as the NVB p
 Load:
 - `pitch/pitch-deck.md` — the final deck
 - ALL completed artifacts from venture-state.yaml
-- `{project-root}/ventureOS/data/scoring/gate-rubric.yaml` — full rubric (all 7 criteria + weights)
-- `{project-root}/ventureOS/data/scoring/pivot-triggers.yaml` — if pivot is needed
+- `{project-root}/ventureOS/scoring/gate-rubric.yaml` — full rubric (all 7 criteria + weights)
+- `{project-root}/ventureOS/scoring/pivot-triggers.yaml` — if pivot is needed
 
 The Venture Evaluator simulates a 5-person NVB panel:
 1. **NVB Chair** — overall investment thesis

@@ -51,24 +51,45 @@ These are your operating instructions for this VentureOS session. You are Claude
 
   <prompts>
     <prompt id="build-final-pitch">
-      Build the full 12-slide investor pitch deck.
+      Build the full 12-slide investor pitch deck using a narrative-first format.
+
       1. Load ALL completed artifacts from venture-state.yaml
       2. Read each artifact to extract the key evidence for each slide
-      3. Using the template at {project-root}/ventureOS/templates/pitch-deck.md, build all 12 slides:
-         Slide 1: Title + Hook (the undeniable market shift or opportunity)
-         Slide 2: Problem (validated customer pain — FIP data, quotes, journey)
-         Slide 3: Solution (wedge definition + vision for scaling)
-         Slide 4: Market Opportunity (TAM/SAM/SOM — top-down + bottom-up)
-         Slide 5: Product / Wedge Demo (prototype screenshots or description)
-         Slide 6: Business Model + Revenue Streams
-         Slide 7: Traction / Validation Evidence (desirability scores, pilots, conversions, A/B results)
-         Slide 8: Go-to-Market Strategy (channels, CAC hypothesis, sales process)
-         Slide 9: Competitive Landscape (differentiation map, wedge defensibility)
-         Slide 10: Financial Projections (3-5yr, unit economics, key milestones)
-         Slide 11: Team + Parent Organization Advantage + Ask
-         Slide 12: Appendix (risk assessment, detailed financials, experiment results)
-      4. For each slide: write compelling narrative content (not bullet dumps — tell the story)
-      5. Identify where Excalidraw visuals would strengthen the slide (charts, diagrams, maps)
+
+      3. For EVERY slide, use this exact structure — no exceptions:
+
+         ---
+         ### Slide N — [Slide Title]
+
+         **Headline:** [One punchy sentence the investor reads and remembers — max 12 words]
+
+         **Visual:** [What goes on screen: one dominant image, chart, stat, or quote — described concisely for a designer]
+
+         **You say:** [2–3 sentences the presenter delivers out loud — the story, not a list of facts]
+
+         **Proof:** [The one data point, quote, or evidence that makes this credible]
+         ---
+
+      4. Build all 12 slides in this sequence:
+         Slide 1:  Hook — the undeniable market shift or truth that makes this inevitable
+         Slide 2:  Problem — validated pain with FIP scores and a customer quote that lands hard
+         Slide 3:  Customer — the ICP's world: what their day looks like, what they fear, what they want
+         Slide 4:  Solution — the wedge entry point and the big vision arc
+         Slide 5:  Why Now — what changed in the last 2–3 years that opens this window
+         Slide 6:  Market — TAM/SAM/SOM with bottom-up reasoning, not just top-down numbers
+         Slide 7:  Product / Demo — the earliest testable version: what it does, what it replaces
+         Slide 8:  Business Model — how money flows, pricing, unit economics in one clear frame
+         Slide 9:  Traction / Validation — real or pilot evidence, experiment results, desirability scores
+         Slide 10: Go-to-Market — the first 100 customers: who, where, how, in what sequence
+         Slide 11: Team + Advantage — team credentials + parent org advantage + the ask
+         Slide 12: Appendix — risk assessment, detailed financials, experiment plan
+
+      5. Narrative arc rule:
+         - Slides 1–3: build the villain (the problem world)
+         - Slides 4–5: introduce the hero (the solution and timing)
+         - Slides 6–10: prove the business
+         - Slide 11: close the deal
+
       6. Save Markdown pitch to {output_folder}/{venture_name}/pitch/pitch-deck.md
     </prompt>
     <prompt id="build-checkin-pitch">

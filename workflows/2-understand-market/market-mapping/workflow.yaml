@@ -15,7 +15,7 @@ installed_path: "{project-root}/ventureOS/workflows/2-understand-market/market-m
 instructions: "{installed_path}/instructions.xml"
 
 templates:
-  - "{project-root}/ventureOS/data/templates/market-sizing.md"
+  - "{project-root}/ventureOS/templates/market-sizing.md"
 
 tags:
   - market-mapping

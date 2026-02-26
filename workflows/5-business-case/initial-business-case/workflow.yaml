@@ -14,8 +14,8 @@ installed_path: "{project-root}/ventureOS/workflows/5-business-case/initial-busi
 instructions: "{installed_path}/instructions.xml"
 
 templates:
-  - "{project-root}/ventureOS/data/templates/venture-killer-risks.md"
-  - "{project-root}/ventureOS/data/templates/experiment-plan.md"
+  - "{project-root}/ventureOS/templates/venture-killer-risks.md"
+  - "{project-root}/ventureOS/templates/experiment-plan.md"
 
 tags:
   - business-case

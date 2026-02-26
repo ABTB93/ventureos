@@ -9,8 +9,8 @@
     <title>Load Venture State</title>
     <instructions>
       Load and parse:
-      1. {project-root}/ventureOS/_memory/venture-sidecar/venture-state.yaml
-      2. {project-root}/ventureOS/_memory/venture-sidecar/pivot-history.yaml
+      1. {project-root}/ventureOS/_memory/venture-state.yaml
+      2. {project-root}/ventureOS/_memory/pivot-history.yaml
       3. {project-root}/ventureOS/config.yaml (for venture_name, user_name)
     </instructions>
   </step>

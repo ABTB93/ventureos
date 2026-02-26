@@ -14,12 +14,12 @@ installed_path: "{project-root}/ventureOS/workflows/6-design-business/business-m
 instructions: "{installed_path}/instructions.xml"
 
 templates:
-  - "{project-root}/ventureOS/data/templates/business-model-canvas.md"
-  - "{project-root}/ventureOS/data/templates/pricing-model.md"
-  - "{project-root}/ventureOS/data/templates/monetisation-plan.md"
+  - "{project-root}/ventureOS/templates/business-model-canvas.md"
+  - "{project-root}/ventureOS/templates/pricing-model.md"
+  - "{project-root}/ventureOS/templates/monetisation-plan.md"
 
 data:
-  brainstorming: "{project-root}/ventureOS/data/techniques/brainstorming-techniques.csv"
+  brainstorming: "{project-root}/ventureOS/techniques/brainstorming-techniques.csv"
 
 tags:
   - business-model

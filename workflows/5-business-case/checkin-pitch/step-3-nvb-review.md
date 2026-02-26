@@ -12,7 +12,7 @@ Simulate the New Venture Board check-in review. The Venture Evaluator acts as th
 Load:
 - `pitch/checkin-pitch.md` (the deck)
 - `checkin-evidence.md` (supporting evidence)
-- `{project-root}/ventureOS/data/scoring/gate-rubric.yaml` (rubric + checkin_gate focus criteria)
+- `{project-root}/ventureOS/scoring/gate-rubric.yaml` (rubric + checkin_gate focus criteria)
 - All completed artifacts from venture-state.yaml
 
 Note: For the check-in gate, focus evaluation on:

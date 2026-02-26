@@ -14,8 +14,8 @@ installed_path: "{project-root}/ventureOS/workflows/4-define-solution/feasibilit
 instructions: "{installed_path}/instructions.xml"
 
 templates:
-  - "{project-root}/ventureOS/data/templates/solution-feasibility.md"
-  - "{project-root}/ventureOS/data/templates/ecosystem-map.md"
+  - "{project-root}/ventureOS/templates/solution-feasibility.md"
+  - "{project-root}/ventureOS/templates/ecosystem-map.md"
 
 tags:
   - feasibility

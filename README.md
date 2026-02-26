@@ -1,161 +1,196 @@
 # VentureOS
 
-**A multi-agent AI framework for structured venture building.**
+**Your AI co-founder. From raw idea to investor-ready pitch — step by step.**
 
-VentureOS guides teams from a raw domain or idea all the way to an investor-ready pitch — through a structured 12-week incubation process powered by specialized AI agents.
+VentureOS gives you a team of AI specialists that guide you through building a startup: researching the market, finding real customer problems, designing your solution, stress-testing your business model, and preparing your pitch. It follows a proven 12-week process so nothing gets skipped.
 
 ---
 
-## Getting Started
+## What you need before starting
 
-**Requirements:** Node.js 18+ — [download here](https://nodejs.org) if you don't have it.
+**1. Node.js** (a small program that runs VentureOS)
+- Check if you already have it: open your terminal and type `node --version`
+- If you see a number like `v20.x.x` you're good
+- If not, download it free at [nodejs.org](https://nodejs.org) → click the big green "LTS" button → install it like any app
 
-### Step 1 — Create a project folder and install VentureOS inside it
+**2. An AI tool** — pick whichever you have:
 
-Open your terminal and run:
+| You have this | You need |
+|---|---|
+| Cursor, Windsurf, or Antigravity | Nothing else — they include AI |
+| Claude Code | Nothing else — it includes AI |
+| None of the above | An API key (explained below) |
+
+> **Don't have any of these?** Antigravity is free and takes 2 minutes to install: [antigravity.google](https://antigravity.google)
+
+---
+
+## Get started
+
+Open your terminal, create a folder for your project, and run one command:
 
 ```bash
-mkdir my-venture && cd my-venture
-npx ventureos install
+mkdir my-venture
+cd my-venture
+npx ventureos
 ```
 
-> **Important:** always run this inside a project folder. VentureOS installs a `ventureOS/` directory in whatever folder you are in when you run the command.
+That's it. VentureOS will detect what AI tools you have, ask you a few quick questions, and tell you exactly how to start.
 
-The installer asks a few questions (your name, AI tool, research depth, execution mode), then sets up the full framework in under 30 seconds.
+> **What's a terminal?**
+> On Mac: press `Cmd + Space`, type "Terminal", press Enter.
+> On Windows: press the Windows key, type "cmd", press Enter.
 
-### Step 2 — Start a session
+---
+
+## What happens when you run it
+
+**VentureOS scans your computer** and finds any AI tools you already have.
+
+**Then it routes you to the best experience:**
+
+### If you have Cursor, Windsurf, Antigravity, or Claude Code
+
+VentureOS installs itself and gives you one line to type in your AI tool:
+
+```
+@ventureOS/venture-master.md
+```
+
+Type that in your AI chat panel and Victor — your AI co-founder — introduces himself and takes it from there. No API keys. No extra setup.
+
+### If you have an API key
+
+VentureOS asks which service (Claude, ChatGPT, or Gemini), walks you through entering your key, and launches the chat for you directly in the terminal.
+
+**No key yet?** VentureOS will show you a link to get one. If you get stuck, it never just crashes — it always gives you options.
+
+---
+
+## Keeping VentureOS up to date
+
+Already using VentureOS on a project? Run this from your project folder to get the latest version:
 
 ```bash
-npx ventureos start
+npx ventureos update
 ```
 
-Launches an interactive terminal chat with Victor — no copy-pasting files. Connects directly to the LLM API of your choice.
+**What gets updated:**
+- Victor (the orchestrator)
+- All specialist agents
+- All workflows, templates, and scoring files
 
-Supports **Claude (Anthropic)**, **ChatGPT (OpenAI)**, and **Gemini (Google)**. Set your API key as an environment variable to skip the prompt on future sessions:
+**What is never touched:**
+- `ventureOS/config.yaml` — your settings
+- `ventureOS/_memory/` — your venture state and progress
+- `_ventures/` — all your documents and outputs
+
+You can update at any time without losing any work.
+
+## Changing your settings
 
 ```bash
-export ANTHROPIC_API_KEY=your-key   # for Claude
-export OPENAI_API_KEY=your-key      # for ChatGPT
-export GOOGLE_API_KEY=your-key      # for Gemini
+npx ventureos config
 ```
 
-**If you use Claude Code, Cursor, or Windsurf**, you can also load VentureOS directly in your AI tool instead of using the terminal — see [SETUP.md](SETUP.md) for instructions.
+Change your name, research depth, execution mode, or AI provider anytime — without starting over.
 
 ---
 
-## What VentureOS Does
+## Meet Victor and your AI team
 
-- Tracks where your venture is in the incubation journey
-- Routes you to the right specialist agent for each phase
-- Generates first drafts of every deliverable so you never start from a blank page
-- Enforces evidence-based progression: guiding questions must be answered before advancing
-- Manages two decision gates where ventures are evaluated for continuation, pivot, or kill
+When you start a session, **Victor** greets you. He's the orchestrator — think of him as your main point of contact. He knows where you are in the journey, what's been done, and what comes next.
+
+When you need deep specialist work, Victor brings in the right expert:
+
+| Specialist | What they do |
+|---|---|
+| **Diana** | Researches your market — competitors, trends, opportunities |
+| **Clara** | Helps you find and validate real customer pain |
+| **Paulo** | Designs your product wedge and early solution |
+| **Bernard** | Builds your business model and revenue logic |
+| **Fiona** | Sizes the market and builds your financial model |
+| **Eva** | Plays the tough investor — stress-tests your venture |
+| **Petra** | Creates your pitch deck and investor narrative |
+| **Grace** | Builds your go-to-market and growth strategy |
+| **Olivia** | Sets up your team structure and operations |
+
+You talk to Victor. He calls in the right specialist at the right time.
 
 ---
 
-## How It Works
+## The journey (12 weeks)
 
-VentureOS is a collection of AI agent files and workflow files that you load into your preferred AI coding assistant. The agents collaborate through a shared venture state file to guide you through the full incubation lifecycle.
-
-**Entry points:**
-- **Domain exploration** — You have a domain (e.g., "energy management"). VentureOS maps the opportunity landscape first, then moves into incubation.
-- **Idea development** — You have a specific idea. VentureOS jumps directly into incubation.
-
-**Final output:** Investor-ready pitch deck (Markdown + Excalidraw) or a documented pivot/kill decision with full rationale and archived artifacts.
-
----
-
-## The Incubation Journey (12 Weeks)
+VentureOS follows a structured process so you always know where you are and what's next.
 
 ```
-Week 1          Weeks 2-3           Weeks 4-7              Weeks 10-12
-┌──────────┐   ┌──────────────┐   ┌────────────────────┐  ┌──────────────────┐
-│ SETUP    │   │ UNDERSTAND   │   │ DEFINE SOLUTION    │  │ DESIGN BUSINESS  │
-│ THE TEAM │   │ THE MARKET   │   │                    │  │                  │
-└──────────┘   │              │   │                    │  │                  │
-               │ FIND         │   │ BUILD INITIAL      │  │                  │
-               │ CUSTOMER     │──▶│ BUSINESS CASE      │──▶│                  │
-               │ PAIN         │   │                    │  │                  │
-               └──────────────┘   └──────┬─────────────┘  └────────┬─────────┘
-                                         │                          │
-                                    CHECK-IN PITCH             FINAL PITCH
-                                    to Venture Board           to Venture Board
-                                    (Go/Pivot/Kill)            (Go/Pivot/Kill)
+      Week 1           Weeks 2–4         Weeks 5–8          Weeks 8–12
+  ───────────────   ───────────────   ───────────────   ──────────────────
+  Setup the team    Find customer     Design your       Build the business
+  Understand    →   pain          →   solution      →   Financials, GTM,
+  the market                              ↓             Prototype
+                                      CHECK-IN              ↓
+                                       Week 8           FINAL PITCH
+                                    (Go/Pivot/Kill)       Week 12
+                                                       (Go/Pivot/Kill)
 ```
 
----
+> 💡 **No customers to interview yet? No problem.**
+> Clara — your customer discovery specialist — can simulate realistic interviews right now based on your market research. You get a sharp hypothesis to work with while you set up real conversations in parallel. Just tell her "simulate interviews" when you start Phase 2.
 
-## The Agents
+At each phase, VentureOS generates documents for you — market maps, interview guides, business model canvases, pitch decks — so you never start from a blank page.
 
-| Agent | Name | Role |
-|-------|------|------|
-| `venture-master.md` | Victor | Orchestrator — load this first |
-| `agents/domain-explorer.md` | Diana | Market & domain research |
-| `agents/customer-discovery.md` | Clara | Customer pain & interviews |
-| `agents/product-strategist.md` | Paulo | Wedge design & prototyping |
-| `agents/business-architect.md` | Bernard | Business model & revenue |
-| `agents/financial-analyst.md` | Fiona | Market sizing & financial modeling |
-| `agents/venture-evaluator.md` | Eva | Venture Board gate evaluation |
-| `agents/pitch-master.md` | Petra | Pitch deck creation |
-| `agents/growth-strategist.md` | Grace | GTM & market experiments |
-| `agents/venture-ops.md` | Olivia | Team setup & parent org alignment |
+Everything is saved automatically. Come back tomorrow and Victor picks up exactly where you left off.
 
 ---
 
-## Directory Structure
+## Three ways to work
 
-```
-ventureOS/
-├── venture-master.md          ← START HERE — load this file first
-├── workflow-engine.md         ← Workflow execution engine
-├── config.yaml                ← Your configuration (edit before first use)
-├── README.md                  ← This file
-├── SETUP.md                   ← Installation guide
-├── agents/                    ← Specialist agents (loaded on demand)
-│   ├── domain-explorer.md
-│   ├── customer-discovery.md
-│   ├── product-strategist.md
-│   ├── business-architect.md
-│   ├── financial-analyst.md
-│   ├── venture-evaluator.md
-│   ├── pitch-master.md
-│   ├── growth-strategist.md
-│   └── venture-ops.md
-├── workflows/                 ← Phase-specific workflow definitions
-│   ├── 0-explore/
-│   ├── 1-setup-team/
-│   ├── 2-understand-market/
-│   ├── 3-find-pain/
-│   ├── 4-define-solution/
-│   ├── 5-business-case/
-│   ├── 6-design-business/
-│   └── venture-status/
-├── templates/                 ← Output document templates (30+)
-├── scoring/                   ← Gate rubric, pain scoring, pivot triggers
-├── techniques/                ← Brainstorming techniques, synthetic tools
-└── _memory/
-    └── venture-state.yaml     ← Active venture state (auto-managed)
-```
+**Guided mode** (default) — Victor pauses after each step, shows you the output, and asks for your approval before moving on. Best for real ventures where decisions matter.
 
-Outputs are saved to: `_ventures/{venture_name}/`
+**Yolo mode** — Victor runs the full phase on its own and shows you everything at the end. Best when you want to move fast without stopping at every checkpoint.
+
+**Autopilot** — Type `AP` and Victor runs the entire 12-week journey in one go: market research, synthetic customer interviews, solution design, business case, board evaluation, and a full pitch deck. No input needed. You get a complete `venture-scan-report.md` at the end — a single document covering every phase, clearly marked as AI-generated, with a prioritised list of what to validate with real customers first.
+
+> Use Autopilot to quickly stress-test an idea before committing to a full run. Estimated cost: ~$5–7 on Claude Opus.
 
 ---
 
-## Two Execution Modes
+## Your outputs
 
-**Guided mode (default):** The agent pauses at each checkpoint, shows you the output, and waits for your approval before proceeding. Best for real ventures where strategic decisions matter.
+Everything VentureOS creates is saved as readable files in `_ventures/your-venture-name/`:
 
-**Yolo mode:** The agent runs the full workflow autonomously and presents all outputs at the end for batch review. Best for rapid idea screening.
+- Market research and competitive analysis
+- Customer interview scripts and synthesis
+- Problem and solution definition documents
+- Business model canvas
+- Financial model
+- Go-to-market plan
+- Check-in pitch and final investor pitch deck
 
-Set your preferred default in `config.yaml` or switch modes per workflow.
+If you pivot or decide to stop, VentureOS archives everything and documents the decision with full rationale — so the work is never lost.
 
 ---
 
-## Pivot & Kill Mechanism
+## Common questions
 
-VentureOS tracks every pivot and kill decision:
+**Do I need to know how to code?**
+No. You type in plain English. VentureOS handles everything else.
 
-- **Pivot:** Archives current artifacts, classifies pivot type (customer/problem/solution/model/market), identifies re-entry phase, preserves relevant work
-- **Kill:** Documents learnings, archives all artifacts, marks venture as killed with full rationale
+**What's an API key?**
+It's like a password that gives you access to an AI service (like ChatGPT or Claude). If you use Cursor, Windsurf, or Antigravity, you don't need one — they include AI access in their apps.
 
-Pivot history is preserved in `ventureOS/_memory/venture-state.yaml`.
+**Does it save my work?**
+Yes. Every session is saved automatically. Start and stop whenever you like.
+
+**Can I use it for multiple ideas?**
+Yes. Run `npx ventureos config` to switch ventures or start a new one.
+
+**What if something goes wrong?**
+VentureOS never just crashes. If there's a problem (wrong key, no connection, etc.), it shows you your options and waits for you to decide what to do next.
+
+---
+
+## Need help?
+
+Open an issue on GitHub: [github.com/ABTB93/ventureos/issues](https://github.com/ABTB93/ventureos/issues)

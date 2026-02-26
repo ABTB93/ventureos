@@ -75,7 +75,7 @@
       Save pilot pipeline to experiment-plan.md (Pilot section).
       Update venture-state.yaml with guiding_questions.business_case answers.
     </instructions>
-    <state-update file="{project-root}/ventureOS/_memory/venture-sidecar/venture-state.yaml">
+    <state-update file="{project-root}/ventureOS/_memory/venture-state.yaml">
       Update: completed_artifacts, guiding_questions.business_case
     </state-update>
   </step>

@@ -3,7 +3,7 @@
 <!-- Agent: Customer Discovery Specialist -->
 
 ## Objective
-Gather raw interview data using the selected mode: Toolkit (real interviews), Simulation (AI-generated), or Integration (external platform import). Process runs iteratively — run Step 3 (Synthesis) after each batch of 5-10 interviews.
+Gather raw interview data using the selected mode: Toolkit (real interviews), Simulation (AI-generated), or Integration (external platform import). Process runs iteratively — run Step 3 (Synthesis) after each batch of 10 interviews. Minimum 30 interviews total (25 customer + 5 expert) before proceeding to synthesis.
 
 ---
 
@@ -37,8 +37,8 @@ After every 5-10 interviews: prompt user to proceed to Step 3 (Synthesis) before
 ### 2S.1 Generate Customer Personas
 
 Using the ICP hypothesis and domain research:
-1. Generate 4-6 distinct customer personas representing the ICP
-2. Vary across: role, company size, industry vertical, level of pain, context
+1. Generate 25 distinct customer personas representing the ICP
+2. Vary across: role, company size, industry vertical, level of pain, context, geography, seniority, and tech-savviness
 3. Each persona: name, role, company context, day-in-the-life, technology stack, reporting structure
 
 ### 2S.2 Simulate Pain-Point Interviews
@@ -54,7 +54,7 @@ Save: `{output_folder}/{venture_name}/interviews/synthetic/synthetic-interviews.
 
 ### 2S.3 Simulate Expert Interviews
 
-Generate 2 domain expert personas (consultant, industry analyst, ex-practitioner):
+Generate 5 domain expert personas (consultant, industry analyst, ex-practitioner, market regulator or policy expert, academic researcher):
 1. Run expert interview script
 2. Simulate responses about: pain prevalence across the market, what companies typically do, where the biggest gaps are
 3. Label all output: "⚠️ SIMULATED EXPERT — AI-generated"

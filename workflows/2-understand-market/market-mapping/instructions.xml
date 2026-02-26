@@ -93,7 +93,7 @@
       5. Is this market large enough to support a venture? (≥$100M TAM?)
       Update venture-state.yaml with completed artifacts and guiding_questions.domain answers.
     </instructions>
-    <state-update file="{project-root}/ventureOS/_memory/venture-sidecar/venture-state.yaml">
+    <state-update file="{project-root}/ventureOS/_memory/venture-state.yaml">
       Update: completed_artifacts (market-sizing, competitive-analysis, market-landscape), guiding_questions.domain
     </state-update>
   </step>
