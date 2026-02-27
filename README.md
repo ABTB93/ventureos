@@ -105,15 +105,16 @@ When you need deep specialist work, Victor brings in the right expert:
 
 | Specialist | What they do |
 |---|---|
-| **Diana** | Researches your market — competitors, trends, opportunities |
-| **Clara** | Helps you find and validate real customer pain |
-| **Paulo** | Designs your product wedge and early solution |
-| **Bernard** | Builds your business model and revenue logic |
-| **Fiona** | Sizes the market and builds your financial model |
-| **Eva** | Plays the tough investor — stress-tests your venture |
-| **Petra** | Creates your pitch deck and investor narrative |
-| **Grace** | Builds your go-to-market and growth strategy |
-| **Olivia** | Sets up your team structure and operations |
+| **Researcher** | Researches your market — competitors, trends, opportunities |
+| **Discovery** | Helps you find and validate real customer pain |
+| **Product** | Designs your product wedge and early solution |
+| **Business** | Builds your business model and revenue logic |
+| **Finance** | Sizes the market and builds your financial model |
+| **Evaluator** | Plays the tough investor — stress-tests your venture |
+| **Pitch** | Creates your pitch deck and investor narrative |
+| **Growth** | Builds your go-to-market and growth strategy |
+| **Ops** | Sets up your team structure and operations |
+| **Designer** | Generates board-quality HTML slide decks for PDF export |
 
 You talk to Victor. He calls in the right specialist at the right time.
 
@@ -136,7 +137,7 @@ VentureOS follows a structured process so you always know where you are and what
 ```
 
 > 💡 **No customers to interview yet? No problem.**
-> Clara — your customer discovery specialist — can simulate realistic interviews right now based on your market research. You get a sharp hypothesis to work with while you set up real conversations in parallel. Just tell her "simulate interviews" when you start Phase 2.
+> Discovery — your customer discovery specialist — can simulate realistic interviews right now based on your market research. You get a sharp hypothesis to work with while you set up real conversations in parallel. Just tell her "simulate interviews" when you start Phase 2.
 
 At each phase, VentureOS generates documents for you — market maps, interview guides, business model canvases, pitch decks — so you never start from a blank page.
 
@@ -166,7 +167,8 @@ Everything VentureOS creates is saved as readable files in `_ventures/your-ventu
 - Business model canvas
 - Financial model
 - Go-to-market plan
-- Check-in pitch and final investor pitch deck
+- Check-in pitch, incubation pitch, and final investor pitch deck
+- HTML slide deck (open in browser → print to PDF)
 
 If you pivot or decide to stop, VentureOS archives everything and documents the decision with full rationale — so the work is never lost.
 
