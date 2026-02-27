@@ -1,0 +1,96 @@
+# Evidence Registry — {venture_name}
+# Single source of truth for all quantitative claims in this venture.
+#
+# USAGE FOR AGENTS:
+#   BEFORE using any number in any output → look up the metric here. If found, use the registered value EXACTLY. Do not re-derive or re-estimate.
+#   AFTER producing any new quantitative claim → register it here before saving the output.
+#   IF a registered value needs to change (new evidence) → update the value, change tier if appropriate, add a note in basis explaining what changed and why.
+#
+# EVIDENCE TIERS (use in all outputs and here):
+#   [R] Real       — from actual customer interviews, signed LOIs, live experiment results, or real transactions
+#   [D] Derived    — mathematically calculated from one or more [R] values (e.g., LTV = ACV × GM / Churn)
+#   [B] Benchmark  — from published market data, industry reports, or validated comparable companies
+#   [A] Assumed    — working hypothesis with no evidence yet; MUST be validated before final gate
+#
+# CONSISTENCY RULE:
+#   If a metric appears in ANY artifact (pitch deck, financial model, business case, etc.),
+#   its value MUST match the value registered here. A mismatch is a consistency error.
+#
+# VALIDATION GOAL:
+#   By the Final Gate, all [A] entries must be upgraded to [R], [D], or [B], or explicitly
+#   acknowledged as remaining assumptions with a mitigation plan.
+
+venture_name: ""
+last_updated: ""
+
+# ─── PRICING ──────────────────────────────────────────────────────────────────
+pricing: []
+# Entry format:
+# - id: subscription_monthly_local           # unique snake_case identifier
+#   label: "Monthly subscription (local currency)"
+#   value: ""
+#   unit: "MAD/month"                        # always specify unit
+#   usd_equivalent: ""                       # always provide USD equivalent if using local currency
+#   tier: "A"                                # R | D | B | A
+#   source_artifact: ""                      # e.g. pricing-model.md
+#   basis: ""                               # how was this number determined?
+#   registered_by: ""                        # which agent registered this
+#   date: ""
+
+# ─── MARKET SIZING ────────────────────────────────────────────────────────────
+market: []
+# - id: tam_usd
+#   label: "Total Addressable Market"
+#   value: ""
+#   unit: "USD"
+#   tier: "B"
+#   source_artifact: market-sizing.md
+#   basis: ""
+#   registered_by: ""
+#   date: ""
+
+# ─── UNIT ECONOMICS ───────────────────────────────────────────────────────────
+unit_economics: []
+# - id: acv_usd
+#   label: "Annual Contract Value per customer"
+#   value: ""
+#   unit: "USD/year"
+#   tier: "D"                               # e.g. Derived from monthly subscription × 12
+#   source_artifact: financial-model.md
+#   basis: ""
+#   registered_by: ""
+#   date: ""
+
+# ─── CUSTOMER EVIDENCE ────────────────────────────────────────────────────────
+customer_evidence: []
+# - id: interviews_conducted
+#   label: "Total customer interviews conducted"
+#   value: ""
+#   unit: "interviews"
+#   tier: "R"
+#   source_artifact: customer-synthesis.md
+#   basis: ""
+#   registered_by: ""
+#   date: ""
+
+# ─── FINANCIAL PROJECTIONS ────────────────────────────────────────────────────
+financials: []
+# - id: year1_arr_usd
+#   label: "Year 1 ARR projection (base case)"
+#   value: ""
+#   unit: "USD"
+#   tier: "D"
+#   source_artifact: financial-model.md
+#   basis: ""
+#   registered_by: ""
+#   date: ""
+
+# ─── VALIDATION STATUS ────────────────────────────────────────────────────────
+# Updated at each gate evaluation by NVB.
+validation_status:
+  total_metrics: 0
+  real_count: 0        # [R] entries
+  derived_count: 0     # [D] entries
+  benchmark_count: 0   # [B] entries
+  assumed_count: 0     # [A] entries — target: 0 by Final Gate
+  open_assumptions: [] # list of [A] metric ids that must be validated before Final Gate

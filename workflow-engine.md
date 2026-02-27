@@ -85,6 +85,53 @@ After any workflow completes (or after each step in guided mode):
 
 ---
 
+## Evidence Validation Protocol
+
+Every output that contains quantitative claims (numbers, percentages, currency values, counts, ratios, dates) MUST follow this protocol. No exceptions.
+
+### Step 1 — Read the Evidence Registry BEFORE generating numbers
+Before producing any output with numbers:
+1. Read `{project-root}/ventureOS/_memory/evidence-registry.yaml`
+2. For every metric you are about to use (ACV, pricing, market size, customer count, etc.):
+   - If the metric **is registered**: use the registered value EXACTLY — do NOT re-derive, re-estimate, or round differently
+   - If the metric **is not registered**: generate it, label it with its evidence tier, and register it immediately (see Step 3)
+
+### Step 2 — Label every number in the output
+Every quantitative value in every document must carry an inline evidence tier label:
+- `[R]` **Real** — from actual customer interviews, signed pilots, live experiments, or real transactions
+- `[D]` **Derived** — mathematically calculated from [R] values (show the formula in a footnote)
+- `[B]` **Benchmark** — from published market data, industry reports, or validated comparables (cite the source)
+- `[A]` **Assumed** — working hypothesis with no evidence yet
+
+**Format in text:** `$1,200 ACV [D: monthly_subscription × 12]` or `$500M TAM [B: UNESCO EdTech Africa 2024]`
+**In tables:** add a "Tier" column to any table with numbers.
+
+### Step 3 — Register new metrics BEFORE saving the output
+After producing any new quantitative claim:
+1. Open `{project-root}/ventureOS/_memory/evidence-registry.yaml`
+2. Add an entry for each new metric: id, label, value, unit, usd_equivalent (if local currency), tier, source_artifact, basis, registered_by, date
+3. Update `validation_status` counts
+4. Save the registry
+
+### Step 4 — Cross-check BEFORE saving any output
+Before saving the final output document:
+1. Read the evidence registry
+2. Scan every number in the output
+3. For each number: verify it matches the registered value for that metric
+4. **If there is a mismatch**: STOP. Do not save. State the discrepancy clearly:
+   > ⚠️ CONSISTENCY ERROR: [metric name] shows [value in document] but evidence registry has [registered value]. Resolving to registered value before saving.
+   Correct the document to match the registry. Then save.
+5. **If an [A] label appears in a Phase 5 or Phase 6 document**: flag it:
+   > ⚠️ UNVALIDATED ASSUMPTION: [metric] is still [A] at Phase [N]. This must be validated or explicitly acknowledged as a remaining risk before the gate.
+
+### Step 5 — Consistency error = blocking, not a warning
+A number mismatch between an output and the evidence registry is a blocking error. The output is not saved until the mismatch is resolved. The agent must choose one of:
+- Accept the registered value (if the document was wrong)
+- Update the registered value with a new entry (if new evidence has changed the metric, with explanation)
+- Flag to the user that two conflicting values exist and ask them to confirm which is correct
+
+---
+
 ## Output Formatting
 
 All produced documents must:
@@ -93,6 +140,8 @@ All produced documents must:
 3. Be structured with clear H2 sections
 4. Distinguish AI-generated content from user-provided content when relevant
 5. End with a "Next Steps" or "What this unlocks" section
+6. Every table containing numbers must have a "Tier" column ([R]/[D]/[B]/[A])
+7. Every standalone number in prose must have an inline tier label: `value [tier: source]`
 
 ---
 
