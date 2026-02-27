@@ -119,14 +119,14 @@ _Type a number or a command (e.g. **NV**, **FP**, "market research", "start a ve
 
       | # | Option | What happens |
       |---|---|---|
-      | 1 | **Yes, I have people to talk to** | Clara prepares your interview scripts and structures your notes as you go |
-      | 2 | **Not yet — simulate interviews first** | Clara generates realistic customer personas and runs AI-simulated interviews right now, so you have a hypothesis to validate before recruiting real customers |
+      | 1 | **Yes, I have people to talk to** | Discovery prepares your interview scripts and structures your notes as you go |
+      | 2 | **Not yet — simulate interviews first** | Discovery generates realistic customer personas and runs AI-simulated interviews right now, so you have a hypothesis to validate before recruiting real customers |
       | 3 | **I have data from another tool** | Import from Listen Labs, Maze, UserTesting, or structured CSV/JSON |
 
       > 💡 You can always combine modes — start with simulated interviews to sharpen your hypothesis, then follow up with real customers to validate."
 
       Store their answer as {interview_mode}: real | simulated | import
-      Pass {interview_mode} as context when loading the workflow so Clara activates the right mode immediately.
+      Pass {interview_mode} as context when loading the workflow so Discovery activates the right mode immediately.
     </prompt>
 
     <prompt id="pivot-archive">
@@ -166,7 +166,7 @@ _Type a number or a command (e.g. **NV**, **FP**, "market research", "start a ve
   <item cmd="BC or fuzzy match on business-case" workflow="{project-root}/ventureOS/workflows/5-business-case/initial-business-case/workflow.yaml">[BC] Build Business Case — Risks, experiment plan, pilot pipeline, check-in pitch (Weeks 8-12)</item>
   <item cmd="DB or fuzzy match on design-business" workflow="{project-root}/ventureOS/workflows/6-design-business/business-model-design/workflow.yaml">[DB] Design the Business — Business model, financials, GTM, final pitch (Weeks 8-12)</item>
   <item cmd="AP or fuzzy match on autopilot or full-run or scan" exec="{project-root}/ventureOS/workflows/autopilot/autopilot.md">[AP] Autopilot — Full synthetic venture run. Victor runs every phase, uses synthetic interviews, and decides at every gate. Produces a complete venture-scan-report.md.</item>
-  <item cmd="NVB or fuzzy match on board or evaluate" action="Load {project-root}/ventureOS/agents/venture-evaluator.md and activate Eva for on-demand synthetic board feedback. Pass current venture state as context.">[NVB] Board Feedback — On-demand NVB evaluation of current venture progress</item>
+  <item cmd="NVB or fuzzy match on board or evaluate" action="Load {project-root}/ventureOS/agents/venture-evaluator.md and activate Evaluator for on-demand synthetic board feedback. Pass current venture state as context.">[NVB] Board Feedback — On-demand NVB evaluation of current venture progress</item>
   <item cmd="AG or fuzzy match on agents or specialists" action="Display the full list of VentureOS specialist agents with their names, roles, and how to activate them. Explain that any agent can be loaded directly using the appropriate syntax for {llm} (e.g. @ventureOS/agents/domain-explorer.md in Claude Code).">[AG] Agents — View all specialist agents and how to activate them directly</item>
   <item cmd="MH or fuzzy match on menu or help">[MH] Redisplay Menu</item>
   <item cmd="CH or fuzzy match on chat">[CH] Chat — Free discussion with Victor about venture strategy</item>
