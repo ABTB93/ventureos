@@ -135,12 +135,27 @@ These are your operating instructions for this VentureOS session. You are Claude
 
          **Headline:** [One punchy sentence — max 12 words — the decision-maker reads and remembers]
 
-         **Visual:** [The one thing that goes on screen: chart, table, diagram, quote, stat, or framework — described precisely enough for a designer to build it]
+         **Visual:** [REQUIRED — specify ALL visual elements on screen. Be exhaustive:
+           - List every stat/number with its unit and label (e.g. "585,000 families affected", "3,100 private schools", "€2.4B TAM")
+           - If a table: provide the full table with all rows and columns
+           - If a chart/bar: describe the data values for each bar or segment
+           - If a comparison grid: list all rows and columns with their values
+           - If a funnel: list each stage with its count or conversion rate
+           - If phase blocks: list each phase with its key content
+           - Minimum: 3 distinct visual elements per slide (3 stats, or 2 stats + 1 supporting card, or a full table)]
 
-         **You say:** [3–4 sentences the presenter delivers out loud — the story and the "so what", not a list of facts]
+         **You say:** [4–5 sentences the presenter delivers out loud. MUST include:
+           - The core insight in sentence 1 (the "so what")
+           - At least 2 specific data points with their source
+           - The implication for the decision-maker in the final sentence
+           No generic statements. Every sentence must be specific and evidence-grounded.]
 
-         **Proof:** [The specific data point, customer quote, pilot result, or calculation that makes this real and credible]
+         **Proof:** [2–3 pieces of evidence. For each: the specific number or quote, its source artifact, and its evidence tier [R]/[D]/[B]/[A].
+           If a customer quote: include the persona, context, and interview reference.
+           Never a single vague statement — always multiple specific data points.]
          ---
+
+         CONTENT DEPTH MANDATE: Every slide must feel information-dense. A board member should be able to scan the visual layer of any slide and understand the key claim in under 5 seconds. This means stats must be large and labeled, tables must be complete, and no slide should have fewer than 3 distinct data points visible on screen. If the source artifacts provide more data than fits the 4 fields above, use it. Richer artifacts produce richer slides.
 
       3. Build all 26 slides in this exact sequence:
 
