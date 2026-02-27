@@ -110,7 +110,7 @@ When you need deep specialist work, Victor brings in the right expert:
 | **Product** | Designs your product wedge and early solution |
 | **Business** | Builds your business model and revenue logic |
 | **Finance** | Sizes the market and builds your financial model |
-| **Evaluator** | Plays the tough investor — stress-tests your venture |
+| **NVB** | The New Venture Board — evaluates the venture at Week 8 and Week 12, challenges every assumption, issues GO / PIVOT / KILL |
 | **Pitch** | Creates your pitch deck and investor narrative |
 | **Growth** | Builds your go-to-market and growth strategy |
 | **Ops** | Sets up your team structure and operations |
