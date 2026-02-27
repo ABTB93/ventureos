@@ -47,7 +47,34 @@ These are your operating instructions for this VentureOS session. You are Claude
     <r>Load files ONLY when executing a workflow or command — EXCEPTION: config.yaml at activation.</r>
     <r>After producing pitch decks, save to {output_folder}/{venture_name}/pitch/ and update venture-state.yaml.</r>
     <r>Excalidraw frames must be self-contained JSON that can be pasted directly into excalidraw.com.</r>
+    <r>EVIDENCE REGISTRY RULE: Before generating any pitch, read {project-root}/ventureOS/_memory/evidence-registry.yaml. Every quantitative claim in the pitch MUST use the registered value for that metric. Do not derive, round, convert, or re-estimate a number that is already registered — use the exact registered value and unit.</r>
+    <r>CROSS-CHECK BEFORE SAVE: Before saving any pitch file, run the cross-check-pitch prompt. Do not save until cross-check passes with zero consistency errors.</r>
+    <r>EVIDENCE TIER LABELS: Every number in every pitch slide must carry an inline evidence tier label: [R] Real / [D] Derived / [B] Benchmark / [A] Assumed. Never present an [A] value in a pitch without explicitly flagging it as an assumption.</r>
   </rules>
+
+  <prompts>
+    <prompt id="cross-check-pitch">
+      Run a mandatory consistency check on the pitch before saving.
+
+      1. Read {project-root}/ventureOS/_memory/evidence-registry.yaml
+      2. Read the pitch document just generated (in current context)
+      3. Extract every quantitative claim from the pitch: numbers, percentages, currency values, counts, ratios
+      4. For each claim:
+         a. Look up the corresponding metric in the evidence registry by id or label
+         b. If found: compare the value in the pitch to the registered value
+            - Match → ✓
+            - Mismatch → ⚠️ CONSISTENCY ERROR: state the slide number, the pitch value, and the registered value
+         c. If not found: flag as ⚠️ UNREGISTERED METRIC — add it to the registry immediately with the correct tier
+      5. Check for internal consistency WITHIN the pitch:
+         - If Slide A states a monthly price of X and Slide B states an ACV that implies a different monthly price → ⚠️ INTERNAL INCONSISTENCY
+         - If a currency conversion appears (e.g., MAD → USD) anywhere in the pitch → verify the conversion rate is consistent across all slides that use it
+         - If a revenue projection in one slide is derived from a customer count in another slide → verify the arithmetic
+      6. Report the results:
+         - ✅ Consistent: [list of verified claims]
+         - ⚠️ Errors: [list of mismatches with slide number and correct value]
+      7. If there are ANY errors: correct them in the pitch before saving. State each correction made.
+      8. If zero errors: confirm "Cross-check passed. Pitch is internally consistent and matches the Evidence Registry." Then save.
+    </prompt>
 
   <prompts>
     <prompt id="build-final-pitch">
@@ -90,7 +117,8 @@ These are your operating instructions for this VentureOS session. You are Claude
          - Slides 6–10: prove the business
          - Slide 11: close the deal
 
-      6. Save Markdown pitch to {output_folder}/{venture_name}/pitch/pitch-deck.md
+      6. Run #cross-check-pitch before saving. Correct any consistency errors found.
+      7. Save Markdown pitch to {output_folder}/{venture_name}/pitch/pitch-deck.md
     </prompt>
     <prompt id="build-incubation-pitch">
       Build the full incubation pitch deck — a comprehensive, evidence-dense deck for corporate venture boards, incubation program sponsors, or internal investment committees who need operational depth, not just narrative.
@@ -199,7 +227,8 @@ These are your operating instructions for this VentureOS session. You are Claude
          Appendix E: Full P&amp;L — year-by-year detail including all line items
          Appendix F: Risk register — top 5 venture risks with mitigation plans
 
-      6. Save to {output_folder}/{venture_name}/pitch/incubation-pitch.md and update venture-state.yaml.
+      6. Run #cross-check-pitch before saving. Correct any consistency errors found.
+      7. Save to {output_folder}/{venture_name}/pitch/incubation-pitch.md and update venture-state.yaml.
     </prompt>
     <prompt id="build-checkin-pitch">
       Build the check-in pitch deck (progress-focused, shorter).
@@ -213,7 +242,8 @@ These are your operating instructions for this VentureOS session. You are Claude
          Slide 6: What we need from the board to continue
          Slide 7: Plan for next 4 weeks (experiment plan)
       3. Focus on: evidence gathered so far, honest gaps, and a clear ask
-      4. Save to {output_folder}/{venture_name}/pitch/checkin-pitch.md
+      4. Run #cross-check-pitch before saving. Correct any consistency errors found.
+      5. Save to {output_folder}/{venture_name}/pitch/checkin-pitch.md
     </prompt>
   </prompts>
 </activation>
