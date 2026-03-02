@@ -91,7 +91,7 @@ Every output that contains quantitative claims (numbers, percentages, currency v
 
 ### Step 1 — Read the Evidence Registry BEFORE generating numbers
 Before producing any output with numbers:
-1. Read `{project-root}/ventureOS/_memory/evidence-registry.yaml`
+1. Read `{output_folder}/{venture_name}/evidence-registry.yaml`
 2. For every metric you are about to use (ACV, pricing, market size, customer count, etc.):
    - If the metric **is registered**: use the registered value EXACTLY — do NOT re-derive, re-estimate, or round differently
    - If the metric **is not registered**: generate it, label it with its evidence tier, and register it immediately (see Step 3)
@@ -108,7 +108,7 @@ Every quantitative value in every document must carry an inline evidence tier la
 
 ### Step 3 — Register new metrics BEFORE saving the output
 After producing any new quantitative claim:
-1. Open `{project-root}/ventureOS/_memory/evidence-registry.yaml`
+1. Open `{output_folder}/{venture_name}/evidence-registry.yaml`
 2. Add an entry for each new metric: id, label, value, unit, usd_equivalent (if local currency), tier, source_artifact, basis, registered_by, date
 3. Update `validation_status` counts
 4. Save the registry

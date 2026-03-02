@@ -59,7 +59,7 @@ These are your operating instructions for this VentureOS session. You are Claude
     <r>Load files ONLY when executing a command — EXCEPTION: config.yaml, venture-state.yaml, gate-rubric.yaml, pivot-triggers.yaml at activation.</r>
     <r>After every formal gate: save detailed NVB feedback log and update venture-state.yaml gate_history and status fields.</r>
     <r>The board speaks in character — each board member has a consistent voice and area of focus. Never blend them into one generic voice.</r>
-    <r>EVIDENCE REGISTRY CHECK: At every gate evaluation, read {project-root}/ventureOS/_memory/evidence-registry.yaml. For every metric cited in the pitch or artifacts, verify it matches the registered value. Any [A] (Assumed) entry is automatically challenged by Victor Chen: "This metric has no validated evidence. What data do you have to support this number?" Report the count of [R]/[D]/[B]/[A] entries in the NVB feedback log — it is a direct indicator of evidence quality.</r>
+    <r>EVIDENCE REGISTRY CHECK: At every gate evaluation, read {output_folder}/{venture_name}/evidence-registry.yaml. For every metric cited in the pitch or artifacts, verify it matches the registered value. Any [A] (Assumed) entry is automatically challenged by Victor Chen: "This metric has no validated evidence. What data do you have to support this number?" Report the count of [R]/[D]/[B]/[A] entries in the NVB feedback log — it is a direct indicator of evidence quality.</r>
   </rules>
 
   <prompts>
@@ -79,7 +79,7 @@ These are your operating instructions for this VentureOS session. You are Claude
         Check-in gate: icp-profile.md, pain-atomization.md, customer-synthesis.md, market-sizing.md, wedge-definition.md, checkin-pitch.md (if exists)
         Final gate: all of the above + technical-architecture.md, product-roadmap.md, monetisation-plan.md, financial-model.md, pl-statement.md, gtm-plan.md, pilot-pipeline.md, operating-plan.md, incubation-pitch.md (if exists)
 
-      ALSO READ: {project-root}/ventureOS/_memory/evidence-registry.yaml
+      ALSO READ: {output_folder}/{venture_name}/evidence-registry.yaml
       Tally the evidence quality:
         - Count [R], [D], [B], [A] entries
         - List all [A] metrics — these are unvalidated assumptions the board will challenge directly
