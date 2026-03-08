@@ -1,5 +1,7 @@
 # VentureOS
 
+[![npm version](https://img.shields.io/npm/v/ventureos.svg)](https://www.npmjs.com/package/ventureos)
+
 **Your AI co-founder. From raw idea to investor-ready pitch — step by step.**
 
 VentureOS gives you a team of AI specialists that guide you through building a startup: researching the market, finding real customer problems, designing your solution, stress-testing your business model, and preparing your pitch. It follows a proven 12-week process so nothing gets skipped.
@@ -195,4 +197,4 @@ VentureOS never just crashes. If there's a problem (wrong key, no connection, et
 
 ## Need help?
 
-Open an issue on GitHub: [github.com/ABTB93/ventureos/issues](https://github.com/ABTB93/ventureos/issues)
+Open an issue on GitHub: [github.com/A-Boutaib/ventureos/issues](https://github.com/A-Boutaib/ventureos/issues)
