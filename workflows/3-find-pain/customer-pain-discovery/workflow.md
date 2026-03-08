@@ -73,6 +73,7 @@ Phase 3 is complete when ALL of the following guiding questions are answered wit
 
 | Artifact | File | Status |
 |---------|------|--------|
+| Social signal scan | `social-signal-scan.md` | |
 | Interview scripts | `interviews/scripts/` | |
 | Interview notes | `interviews/notes/` | |
 | Interview synthesis | `interview-synthesis.md` | |

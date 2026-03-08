@@ -44,7 +44,28 @@ Analyze the batch for patterns:
 
 ---
 
-## 3.3 Archetype / Persona Development
+## 3.3 Social Signal Triangulation
+
+Load `social-signal-scan.md`. Cross-reference the forum signals against this batch's interview findings.
+
+For each top pain theme from interviews:
+- Does it appear in the social signal scan? If yes → **converging signal** (stronger evidence)
+- If absent from social signals → ask: is this pain too niche to surface publicly, or is it not as prevalent as interviews suggest?
+
+For each top theme in the social signal scan:
+- Did it come up in interviews? If yes → **double-confirmed**
+- If absent from interviews → flag: "Forum signals suggest [X] — worth probing in next interview batch"
+
+**Flag divergences explicitly:**
+> ⚠️ DIVERGENCE: Social signals strongly indicate [X] but interviews have not surfaced it. Possible explanations: ICP mix mismatch, interviews not probing deep enough, or public complainers are a different segment than target ICP.
+
+> ✅ CONVERGENCE: [Pain theme] confirmed by both interview batch and social signal scan — elevate confidence in this pain.
+
+Include a "Signal Triangulation" section in the synthesis report with these findings.
+
+---
+
+## 3.4 Archetype / Persona Development
 
 Based on this batch:
 - Are 2-3 distinct customer archetypes emerging?
@@ -53,7 +74,7 @@ Based on this batch:
 
 ---
 
-## 3.4 Produce Synthesis Report
+## 3.5 Produce Synthesis Report
 
 Using the `interview-synthesis.md` template, produce the batch synthesis report:
 - Batch #, interview count, cumulative count
@@ -71,7 +92,7 @@ Update cumulative synthesis: `{output_folder}/{venture_name}/interview-synthesis
 
 ---
 
-## 3.5 Hypothesis Update
+## 3.6 Hypothesis Update
 
 Based on synthesis findings:
 1. Is the primary pain hypothesis confirmed, partially confirmed, or contradicted?
@@ -83,7 +104,7 @@ Update `pain-hypothesis.md` if changes are needed. Note version and rationale.
 
 ---
 
-## 3.6 Checkpoint
+## 3.7 Checkpoint
 
 **GUIDED MODE:**
 Present synthesis findings. Ask:
