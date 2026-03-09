@@ -2,7 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/ventureos.svg)](https://www.npmjs.com/package/ventureos)
 
-**Your AI co-founder. From raw idea to investor-ready pitch — step by step.**
+**Your AI co-founder. From raw idea to validated venture — 12 weeks of structured ideation and incubation.**
 
 VentureOS gives you a team of AI specialists that guide you through building a startup: researching the market, finding real customer problems, designing your solution, stress-testing your business model, and preparing your pitch. It follows a proven 12-week process so nothing gets skipped.
 

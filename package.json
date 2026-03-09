@@ -1,7 +1,7 @@
 {
   "name": "ventureos",
-  "version": "1.1.13",
-  "description": "VentureOS — AI-powered venture building framework. From raw idea to investor-ready pitch in 12 structured weeks.",
+  "version": "1.1.14",
+  "description": "VentureOS — AI-powered venture building framework. From raw idea to validated venture — 12 weeks of structured ideation and incubation.",
   "type": "module",
   "bin": {
     "ventureos": "./install.js"
@@ -37,7 +37,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ABTB93/ventureos.git"
+    "url": "https://github.com/A-Boutaib/ventureos.git"
   },
-  "homepage": "https://github.com/ABTB93/ventureos#readme"
+  "homepage": "https://github.com/A-Boutaib/ventureos#readme"
 }
