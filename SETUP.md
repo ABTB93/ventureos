@@ -64,6 +64,20 @@ To load a specialist:
 Load ventureOS/agents/domain-explorer.md and follow the activation instructions.
 ```
 
+### Antigravity
+
+Make sure your project folder is set as a trusted workspace in Antigravity (required for agents to read files).
+
+In the chat panel:
+```
+Load the file ventureOS/venture-master.md and follow the activation instructions.
+```
+
+To load a specialist directly:
+```
+Load ventureOS/agents/customer-discovery.md and follow the activation instructions.
+```
+
 ### Other AI Tools (ChatGPT, Gemini, etc.)
 
 1. Open `ventureOS/venture-master.md` in a text editor
@@ -81,13 +95,11 @@ When you load `venture-master.md`, Victor (the orchestrator) will:
 
 1. Read your `config.yaml`
 2. Load venture state from `_memory/venture-state.yaml`
-3. Greet you and display the venture status banner
-4. Show the phase-aware menu
-5. Wait for your input
+3. Greet you and wait for your input
 
-**If this is your first venture**, type `NV` (New Venture) and Victor will guide you through setup.
+**If this is your first venture**, Victor will ask: _"Would you like to start a new venture, or explore a domain first?"_ — just answer naturally.
 
-**If you have an existing venture**, Victor will pick up where you left off based on the saved state.
+**If you have an existing venture**, Victor will display the venture status and phase-aware menu, then pick up where you left off.
 
 ---
 
@@ -106,8 +118,10 @@ Victor's main menu:
 | `DS` | Define the Solution — wedge design, prototyping (Phase 4) |
 | `BC` | Build Business Case — risks, experiment plan, check-in pitch (Phase 5) |
 | `DB` | Design the Business — business model, GTM, final pitch (Phase 6) |
-| `NVB` | Board Feedback — on-demand synthetic venture board feedback |
+| `AP` | Autopilot — full synthetic venture run, Victor decides at every gate |
+| `NVB` | New Venture Board — formal gate evaluation (Week 8 / Week 12) |
 | `AG` | Agents — view all specialists and how to activate them |
+| `MH` | Show this menu again |
 | `CH` | Chat — free discussion with Victor |
 | `DA` | Dismiss Agent |
 
@@ -124,15 +138,16 @@ You can also load specialists directly at any time:
 | Specialist | File |
 |-----------|------|
 | Victor (Orchestrator) | `ventureOS/venture-master.md` |
-| Diana (Market Research) | `ventureOS/agents/domain-explorer.md` |
-| Clara (Customer Discovery) | `ventureOS/agents/customer-discovery.md` |
-| Paulo (Product Strategy) | `ventureOS/agents/product-strategist.md` |
-| Bernard (Business Model) | `ventureOS/agents/business-architect.md` |
-| Fiona (Financial Analysis) | `ventureOS/agents/financial-analyst.md` |
-| Eva (Venture Board) | `ventureOS/agents/venture-evaluator.md` |
-| Petra (Pitch Creation) | `ventureOS/agents/pitch-master.md` |
-| Grace (GTM & Growth) | `ventureOS/agents/growth-strategist.md` |
-| Olivia (Team & Ops) | `ventureOS/agents/venture-ops.md` |
+| Researcher (Market Research) | `ventureOS/agents/domain-explorer.md` |
+| Discovery (Customer Discovery) | `ventureOS/agents/customer-discovery.md` |
+| Product (Product Strategy) | `ventureOS/agents/product-strategist.md` |
+| Business (Business Model) | `ventureOS/agents/business-architect.md` |
+| Finance (Financial Analysis) | `ventureOS/agents/financial-analyst.md` |
+| NVB (New Venture Board) | `ventureOS/agents/venture-evaluator.md` |
+| Pitch (Pitch Creation) | `ventureOS/agents/pitch-master.md` |
+| Growth (GTM & Growth) | `ventureOS/agents/growth-strategist.md` |
+| Ops (Team & Operations) | `ventureOS/agents/venture-ops.md` |
+| Designer (Slide Decks) | `ventureOS/agents/slide-designer.md` |
 
 ---
 
