@@ -304,10 +304,11 @@ async function runSetupWizard(rl, { forIDE = false } = {}) {
   const researchDepth = ({ '1': 'standard', '2': 'light', '3': 'deep' })[depthInput.trim()] ?? 'standard';
 
   console.log('\n  How should workflows run by default?\n');
-  console.log('     1.  Guided  — pauses so you review each step  (recommended)');
-  console.log('     2.  Yolo    — runs everything on its own\n');
-  const modeInput = await rl.question('     Select [1-2]: ');
-  const defaultMode = modeInput.trim() === '2' ? 'yolo' : 'guided';
+  console.log('     1.  Guided    — pauses so you review each step  (recommended)');
+  console.log('     2.  Yolo      — runs everything autonomously, shows outputs at the end');
+  console.log('     3.  Autopilot — Victor runs the full 12-week journey in one go\n');
+  const modeInput = await rl.question('     Select [1-3]: ');
+  const defaultMode = modeInput.trim() === '2' ? 'yolo' : modeInput.trim() === '3' ? 'autopilot' : 'guided';
 
   let llm = 'anthropic';
   if (!forIDE) {
