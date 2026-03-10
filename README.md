@@ -181,17 +181,12 @@ If you pivot or decide to stop, VentureOS archives everything and documents the 
 **Do I need to know how to code?**
 No. You type in plain English. VentureOS handles everything else.
 
-**What's an API key?**
-It's like a password that gives you access to an AI service (like ChatGPT or Claude). If you use Cursor, Windsurf, or Antigravity, you don't need one — they include AI access in their apps.
-
 **Does it save my work?**
 Yes. Every session is saved automatically. Start and stop whenever you like.
 
 **Can I use it for multiple ideas?**
 Yes. Run `npx ventureos config` to switch ventures or start a new one.
 
-**What if something goes wrong?**
-VentureOS never just crashes. If there's a problem (wrong key, no connection, etc.), it shows you your options and waits for you to decide what to do next.
 
 ---
 
