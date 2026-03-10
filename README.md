@@ -1,6 +1,7 @@
 # VentureOS
 
 [![npm version](https://img.shields.io/npm/v/ventureos.svg)](https://www.npmjs.com/package/ventureos)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 **Your AI co-founder. From raw idea to validated venture — 12 weeks of structured ideation and incubation.**
 
@@ -189,3 +190,5 @@ Yes. Run `npx ventureos config` to switch ventures or start a new one.
 ## Need help?
 
 Open an issue on GitHub: [github.com/A-Boutaib/ventureos/issues](https://github.com/A-Boutaib/ventureos/issues)
+
+Want to contribute? See [CONTRIBUTING.md](CONTRIBUTING.md).
