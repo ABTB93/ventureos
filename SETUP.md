@@ -190,9 +190,10 @@ _ventures/my-venture/
 
 ## Tips
 
-**Guided vs Yolo mode**
+**Guided vs Yolo vs Autopilot**
 - Guided: agent pauses at each step for your review. Best for real ventures.
 - Yolo: agent runs everything and presents all outputs at once. Best for rapid screening of multiple ideas.
+- Autopilot: Victor runs the full 12-week journey in one go — synthetic interviews, gate decisions, full venture-scan-report at the end. Best for quickly stress-testing an idea before committing.
 
 **Resuming a session**
 - VentureOS saves state to `ventureOS/_memory/venture-state.yaml` after each step.
