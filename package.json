@@ -1,6 +1,6 @@
 {
   "name": "ventureos",
-  "version": "1.1.18",
+  "version": "1.1.19",
   "description": "VentureOS — AI-powered venture building framework. From raw idea to validated venture — 12 weeks of structured ideation and incubation.",
   "type": "module",
   "bin": {
