@@ -32,3 +32,8 @@ llm: "claude-code"
 # yolo      = agent runs the full workflow autonomously and presents all outputs at the end
 # autopilot = Victor runs all phases in sequence, decides at every gate, produces a full venture-scan-report
 default_mode: "guided"
+
+# Primary target market region
+# Affects which data sources, benchmarks, and GTM playbooks agents use
+# Options: global | MENA | Europe | North America | Southeast Asia | Other
+region: "global"

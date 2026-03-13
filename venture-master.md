@@ -11,7 +11,7 @@ These are your operating instructions for this VentureOS session. You are Claude
   <step n="1">Load persona from this current agent file (already in context)</step>
   <step n="2">🚨 IMMEDIATE ACTION REQUIRED - BEFORE ANY OUTPUT:
     - Load and read {project-root}/ventureOS/config.yaml NOW
-    - Store ALL fields as session variables: {venture_name}, {user_name}, {communication_language}, {output_folder}, {research_depth}, {llm}, {default_mode}
+    - Store ALL fields as session variables: {venture_name}, {user_name}, {communication_language}, {output_folder}, {research_depth}, {llm}, {default_mode}, {region}
     - VERIFY: If config not loaded, STOP and report: "Config not found. Please ensure ventureOS/config.yaml exists in your project root and has user_name filled in."
     - DO NOT PROCEED to step 3 until config is successfully loaded
   </step>

@@ -232,7 +232,7 @@ function copyDir(src, dest, skipSet = new Set()) {
   }
 }
 
-function generateConfig({ userName, researchDepth, llm, defaultMode }) {
+function generateConfig({ userName, researchDepth, llm, defaultMode, region }) {
   return `# VentureOS Configuration
 # Edit this file anytime to update your settings.
 # ─────────────────────────────────────────
@@ -262,6 +262,11 @@ llm: "${llm}"
 # yolo      = agent runs the full workflow autonomously and presents all outputs at the end
 # autopilot = Victor runs all phases in sequence, decides at every gate, produces a full venture-scan-report
 default_mode: "${defaultMode}"
+
+# Primary target market region
+# Affects which data sources, benchmarks, and GTM playbooks agents use
+# Options: global | MENA | Europe | North America | Southeast Asia | Other
+region: "${region}"
 `;
 }
 
@@ -310,6 +315,15 @@ async function runSetupWizard(rl, { forIDE = false } = {}) {
   const modeInput = await rl.question('     Select [1-3]: ');
   const defaultMode = modeInput.trim() === '2' ? 'yolo' : modeInput.trim() === '3' ? 'autopilot' : 'guided';
 
+  console.log('\n  What region is your primary market?\n');
+  console.log('     1.  Global          (recommended if multi-region)');
+  console.log('     2.  MENA            — Middle East & North Africa');
+  console.log('     3.  Europe');
+  console.log('     4.  North America');
+  console.log('     5.  Southeast Asia\n');
+  const regionInput = await rl.question('     Select [1-5]: ');
+  const region = ({ '1': 'global', '2': 'MENA', '3': 'Europe', '4': 'North America', '5': 'Southeast Asia' })[regionInput.trim()] ?? 'global';
+
   let llm = 'anthropic';
   if (!forIDE) {
     console.log('\n  Which AI service will you use?\n');
@@ -320,7 +334,7 @@ async function runSetupWizard(rl, { forIDE = false } = {}) {
     llm = ({ '1': 'anthropic', '2': 'openai', '3': 'gemini' })[llmInput.trim()] ?? 'anthropic';
   }
 
-  return { userName, researchDepth, llm, defaultMode };
+  return { userName, researchDepth, llm, defaultMode, region };
 }
 
 // ─── API Key Recovery ──────────────────────────────────────────────────────────
@@ -498,7 +512,7 @@ async function main() {
     }
 
     // ── IDE setup ──────────────────────────────────────────────────────────
-    const { userName, researchDepth, defaultMode } = await runSetupWizard(rl, { forIDE: true });
+    const { userName, researchDepth, defaultMode, region } = await runSetupWizard(rl, { forIDE: true });
     rl.close();
 
     console.log('\n' + line());
@@ -506,7 +520,7 @@ async function main() {
     console.log(line() + '\n');
 
     const ideLlm = chosenIDE.id === 'claude' ? 'claude-code' : (['cursor', 'windsurf'].includes(chosenIDE.id) ? chosenIDE.id : 'other');
-    const configYaml = generateConfig({ userName, researchDepth, llm: ideLlm, defaultMode });
+    const configYaml = generateConfig({ userName, researchDepth, llm: ideLlm, defaultMode, region });
     installFiles(projectRoot, ventureOSDir, configYaml);
 
     console.log('\n' + line());
@@ -524,13 +538,13 @@ async function main() {
 }
 
 async function installAndChat(rl, projectRoot, ventureOSDir, configPath, { forIDE, providerKey, apiKey }) {
-  const { userName, researchDepth, llm, defaultMode } = await runSetupWizard(rl, { forIDE });
+  const { userName, researchDepth, llm, defaultMode, region } = await runSetupWizard(rl, { forIDE });
 
   console.log('\n' + line());
   console.log('  Installing...');
   console.log(line() + '\n');
 
-  const configYaml = generateConfig({ userName, researchDepth, llm, defaultMode });
+  const configYaml = generateConfig({ userName, researchDepth, llm, defaultMode, region });
   installFiles(projectRoot, ventureOSDir, configYaml);
 
   console.log('\n' + line());
@@ -563,9 +577,9 @@ async function reconfigure() {
 
   const rl = readline.createInterface({ input, output });
   try {
-    const { userName, researchDepth, llm, defaultMode } = await runSetupWizard(rl, { forIDE: false });
+    const { userName, researchDepth, llm, defaultMode, region } = await runSetupWizard(rl, { forIDE: false });
     rl.close();
-    const newConfig = generateConfig({ userName, researchDepth, llm, defaultMode });
+    const newConfig = generateConfig({ userName, researchDepth, llm, defaultMode, region });
     fs.writeFileSync(configPath, newConfig, 'utf8');
     console.log('\n  ✓  Configuration updated  →  ventureOS/config.yaml\n');
   } catch (err) {
@@ -618,6 +632,7 @@ async function update() {
     researchDepth: existingConfig.research_depth || 'standard',
     llm:           existingConfig.llm            || 'claude-code',
     defaultMode:   existingConfig.default_mode   || 'guided',
+    region:        existingConfig.region         || 'global',
   });
   fs.writeFileSync(configPath, refreshedConfig, 'utf8');
   console.log('  ✓  config.yaml comments refreshed  (your values preserved)');
@@ -676,6 +691,7 @@ async function launchChat(rl, projectRoot, config, credentials = null) {
     .replace(/\{llm\}/g,                   config.llm            || 'anthropic')
     .replace(/\{research_depth\}/g,        config.research_depth || 'standard')
     .replace(/\{default_mode\}/g,          config.default_mode   || 'guided')
+    .replace(/\{region\}/g,                config.region         || 'global')
     .replace(/\{output_folder\}/g,         config.output_folder  || '_ventures');
 
   const configContent  = fs.readFileSync(path.join(projectRoot, 'ventureOS', 'config.yaml'), 'utf8');
