@@ -3,9 +3,13 @@
 [![npm version](https://img.shields.io/npm/v/ventureos.svg)](https://www.npmjs.com/package/ventureos)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**Your AI co-founder. From raw idea to validated venture — 12 weeks of structured ideation and incubation.**
+**Your AI venture operating system. From raw idea to validated venture — 12 weeks of structured ideation and incubation.**
 
-VentureOS gives you a team of AI specialists that guide you through building a startup: researching the market, finding real customer problems, designing your solution, stress-testing your business model, and preparing your pitch. It follows a proven 12-week process so nothing gets skipped.
+VentureOS gives you a team of AI specialists that guide you through building a venture: researching the market, finding real customer problems, designing your solution, stress-testing your business model, and preparing your pitch. It follows a proven 12-week process so nothing gets skipped.
+
+**Built for founders — and for the organizations that support them.**
+
+Whether you're a solo founder, an EIR, or running a program with 20 ventures in parallel — VentureOS adapts. Incubators, accelerators, venture studios, and university innovation labs use it to bring structure and consistency across their entire portfolio.
 
 ---
 
@@ -170,6 +174,20 @@ Everything VentureOS creates is saved as readable files in `_ventures/your-ventu
 - HTML slide deck (open in browser → print to PDF)
 
 If you pivot or decide to stop, VentureOS archives everything and documents the decision with full rationale — so the work is never lost.
+
+---
+
+## For programs and institutions
+
+VentureOS works equally well for organizations running multiple innovation projects.
+
+**Incubators and accelerators** — run every cohort venture through the same rigorous process. Each team gets structured market research, customer discovery, business model design, and formal gate evaluations. Program managers get a portfolio dashboard showing all ventures, their phase, and gate decisions.
+
+**University innovation labs and tech transfer offices** — researchers with IP often know their technology but not their customer. VentureOS guides them through the commercialization process: who has the problem, what they'll pay, which business model fits, and whether the venture is worth pursuing.
+
+**Corporate innovation teams and EIRs** — build ventures within a parent organization with full mothership asset mapping, sponsor alignment, and structured gate evaluations.
+
+**Venture studios** — run multiple bets in parallel with Autopilot mode, getting a full venture scan for each idea in one go before committing resources.
 
 ---
 
