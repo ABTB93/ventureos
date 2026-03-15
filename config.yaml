@@ -8,14 +8,6 @@ user_name: ""
 # Active venture name — leave blank to start a new venture
 venture_name: ""
 
-# Program context (set automatically — do not edit manually)
-# program_name: name of the incubator/accelerator/innovation program
-# venture_context: independent | org
-# program_type: A=Incubator/Accelerator | C=Corporate Innovation | R=Research Commercialization | S=Venture Studio
-program_name: ""
-venture_context: ""
-program_type: ""
-
 # Language for all agent communication
 # Options: English | French | Arabic | Spanish | Portuguese | Other
 communication_language: "English"
