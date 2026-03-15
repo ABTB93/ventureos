@@ -22,23 +22,11 @@
 
 ### Core Features (must-have for wedge)
 
-**Feature: [Name]**
-- User story: As a [ICP], I want to [action] so that [benefit]
-- Priority: Must-have
-- Effort: S / M / L
-- Status:
-
-**Feature: [Name]**
-- User story: As a [ICP], I want to [action] so that [benefit]
-- Priority: Must-have
-- Effort: S / M / L
-- Status:
-
-**Feature: [Name]**
-- User story: As a [ICP], I want to [action] so that [benefit]
-- Priority: Must-have
-- Effort: S / M / L
-- Status:
+| Feature | User Story | Priority | Effort | Status |
+|---------|-----------|---------|--------|--------|
+| | As a [ICP], I want to [action] so that [benefit] | Must-have | S/M/L | |
+| | | Must-have | | |
+| | | Must-have | | |
 
 ### Wedge Success Metrics
 - **Primary metric (the one thing that matters):**
@@ -95,25 +83,12 @@ _(What does the full product/platform look like at scale?)_
 
 ## Technology Decisions by Phase
 
-**Build vs. buy**
-- Phase 1 choice:
-- Phase 2 implication:
-- Phase 3 implication:
-
-**Core infrastructure**
-- Phase 1 choice:
-- Phase 2 implication:
-- Phase 3 implication:
-
-**AI/ML**
-- Phase 1 choice:
-- Phase 2 implication:
-- Phase 3 implication:
-
-**Data architecture**
-- Phase 1 choice:
-- Phase 2 implication:
-- Phase 3 implication:
+| Decision | Phase 1 Choice | Phase 2 Implication | Phase 3 Implication |
+|----------|---------------|--------------------|--------------------|
+| Build vs. buy | | | |
+| Core infrastructure | | | |
+| AI/ML | | | |
+| Data architecture | | | |
 
 ---
 

@@ -11,19 +11,11 @@
 
 ### Primary Stakeholders (directly experience the pain or benefit from the solution)
 
-**[Stakeholder Name]**
-- Role / Title:
-- Organization type:
-- Primary pain:
-- Buying power: High / Med / Low
-- Research priority: High / Med / Low
-
-**[Stakeholder Name]**
-- Role / Title:
-- Organization type:
-- Primary pain:
-- Buying power: High / Med / Low
-- Research priority: High / Med / Low
+| Stakeholder | Role / Title | Organization Type | Primary Pain | Buying Power | Research Priority |
+|-------------|-------------|-------------------|--------------|--------------|-------------------|
+| | | | | High/Med/Low | High/Med/Low |
+| | | | | | |
+| | | | | | |
 
 ### Secondary Stakeholders (influence the decision or are affected by the solution)
 
@@ -40,11 +32,9 @@
 
 ### Influencers & Champions
 
-**[Name / Role]**
-- Organization:
-- Why they matter:
-- How to reach:
-- Priority: High / Med / Low
+| Name / Role | Organization | Why They Matter | How to Reach | Priority |
+|------------|-------------|----------------|-------------|---------|
+| | | | | |
 
 ### Blockers & Detractors
 

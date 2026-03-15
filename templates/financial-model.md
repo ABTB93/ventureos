@@ -41,33 +41,15 @@
 
 ## Revenue Projections (Base Case)
 
-**Month 1**
-- New customers: — Churned: — Total customers:
-- MRR: $ — ARR: $
-
-**Month 3**
-- New customers: — Churned: — Total customers:
-- MRR: $ — ARR: $
-
-**Month 6**
-- New customers: — Churned: — Total customers:
-- MRR: $ — ARR: $
-
-**Month 12**
-- New customers: — Churned: — Total customers:
-- MRR: $ — ARR: $
-
-**Month 18**
-- New customers: — Churned: — Total customers:
-- MRR: $ — ARR: $
-
-**Month 24**
-- New customers: — Churned: — Total customers:
-- MRR: $ — ARR: $
-
-**Month 36**
-- New customers: — Churned: — Total customers:
-- MRR: $ — ARR: $
+| Month | New Customers | Churned | Total Customers | MRR | ARR |
+|-------|-------------|---------|----------------|-----|-----|
+| Month 1 | | | | $ | $ |
+| Month 3 | | | | $ | $ |
+| Month 6 | | | | $ | $ |
+| Month 12 | | | | $ | $ |
+| Month 18 | | | | $ | $ |
+| Month 24 | | | | $ | $ |
+| Month 36 | | | | $ | $ |
 
 ---
 
@@ -86,20 +68,13 @@
 
 ### Fixed Costs (per month)
 
-**Salaries & benefits**
-- Month 1-6: $ — Month 7-12: $ — Year 2: $ — Year 3: $
-
-**Technology infrastructure**
-- Month 1-6: $ — Month 7-12: $ — Year 2: $ — Year 3: $
-
-**Office / operations**
-- Month 1-6: $ — Month 7-12: $ — Year 2: $ — Year 3: $
-
-**Legal & compliance**
-- Month 1-6: $ — Month 7-12: $ — Year 2: $ — Year 3: $
-
-**Total Fixed**
-- Month 1-6: $ — Month 7-12: $ — Year 2: $ — Year 3: $
+| Cost Item | Month 1-6 | Month 7-12 | Year 2 | Year 3 |
+|-----------|----------|-----------|--------|--------|
+| Salaries & benefits | $ | $ | $ | $ |
+| Technology infrastructure | $ | $ | $ | $ |
+| Office / operations | $ | $ | $ | $ |
+| Legal & compliance | $ | $ | $ | $ |
+| **Total Fixed** | $ | $ | $ | $ |
 
 ### Variable Costs (per customer / per month)
 

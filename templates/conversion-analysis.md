@@ -112,26 +112,11 @@ GROWTH (expansion / renewal)
 
 ## Desirability Scores
 
-**Concept card interviews**
-- Participants:
-- Would use (%):
-- Would pay (%):
-- Enthusiasm (1-5):
-- Method: Real / Synthetic
-
-**Landing page signups**
-- Participants:
-- Would use (%):
-- Would pay (%):
-- Enthusiasm (1-5):
-- Method: Real
-
-**Prototype testing**
-- Participants:
-- Would use (%):
-- Would pay (%):
-- Enthusiasm (1-5):
-- Method: Real
+| Test Wave | # Participants | Would Use (%) | Would Pay (%) | Enthusiasm (1-5) | Method |
+|-----------|-------------|--------------|--------------|-------------------|--------|
+| Concept card interviews | | | | | Real / Synthetic |
+| Landing page signups | | | | | Real |
+| Prototype testing | | | | | Real |
 
 **Overall desirability score:** ___/5
 

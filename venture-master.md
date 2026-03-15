@@ -131,14 +131,14 @@ _Type a number or a command (e.g. **NV**, **FP**, "market research", "start a ve
     - business-case/ → business-model-canvas.md, financial-model.md, pricing-model.md, experiment-plan.md, gate-evaluation.md, pitch/checkin-pitch.md
     - design-business/ → gtm-plan.md, pilot-pipeline.md, market-experiment.md, pitch/pitch-deck.md, pitch/deck.html
     Example: pain-hypothesis.md → {output_folder}/{venture_name}/find-pain/pain-hypothesis.md</r>
-    <r>TABLE FORMATTING RULE — Max 3 columns in any markdown table. For any item with 4 or more attributes, use structured sections instead of a table row:
+    <r>TABLE FORMATTING RULE — Max 6 columns in any markdown table. For any item with 7 or more attributes, use structured sections instead of a table row:
 
     **Item Name**
     - Attribute 1: value
     - Attribute 2: value
     - Attribute 3: value
 
-    Exception: 2-column key/value tables (| Metric | Value |) are fine as-is. Apply this rule to ALL generated output.</r>
+    Apply this rule to ALL generated output.</r>
   </rules>
 
   <prompts>

@@ -21,37 +21,15 @@
 
 ## Journey Map
 
-**Stage 1 — Trigger** 😐 Neutral
-- Customer action:
-- Customer thought:
-- Pain points:
-- Workaround used:
+| Stage | Customer Action | Customer Thought | Emotional State | Pain Points | Workaround Used |
+|-------|----------------|-----------------|-----------------|-------------|----------------|
+| **1. Trigger** | | | 😐 Neutral | | |
+| **2. Awareness** | | | 😤 Frustrated | | |
+| **3. Struggle** | | | 😫 Struggling | | |
+| **4. Workaround** | | | 😒 Resigned | | |
+| **5. Outcome** | | | 😔 Dissatisfied | | |
 
-**Stage 2 — Awareness** 😤 Frustrated
-- Customer action:
-- Customer thought:
-- Pain points:
-- Workaround used:
-
-**Stage 3 — Struggle** 😫 Struggling
-- Customer action:
-- Customer thought:
-- Pain points:
-- Workaround used:
-
-**Stage 4 — Workaround** 😒 Resigned
-- Customer action:
-- Customer thought:
-- Pain points:
-- Workaround used:
-
-**Stage 5 — Outcome** 😔 Dissatisfied
-- Customer action:
-- Customer thought:
-- Pain points:
-- Workaround used:
-
-_(Add more stages as needed for this specific pain journey)_
+_(Copy rows for each stage relevant to your pain journey)_
 
 ---
 
@@ -111,23 +89,11 @@ Based on this journey map, the ideal customer is:
 
 ## Buyer vs. User in This Journey
 
-**User**
-- Who:
-- Stage they enter:
-- What they need:
-- How they measure success:
-
-**Buyer**
-- Who:
-- Stage they enter:
-- What they need:
-- How they measure success:
-
-**Influencer**
-- Who:
-- Stage they enter:
-- What they need:
-- How they measure success:
+| Role | Who | Stage They Enter | What They Need | How They Measure Success |
+|------|-----|-----------------|----------------|--------------------------|
+| **User** | | | | |
+| **Buyer** | | | | |
+| **Influencer** | | | | |
 
 ---
 
