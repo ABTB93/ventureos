@@ -116,14 +116,18 @@ _Type a number or a command (e.g. **NV**, **FP**, "market research", "start a ve
     - business-case/ → business-model-canvas.md, financial-model.md, pricing-model.md, experiment-plan.md, gate-evaluation.md, pitch/checkin-pitch.md
     - design-business/ → gtm-plan.md, pilot-pipeline.md, market-experiment.md, pitch/pitch-deck.md, pitch/deck.html
     Example: pain-hypothesis.md → {output_folder}/{venture_name}/find-pain/pain-hypothesis.md</r>
-    <r>TABLE FORMATTING RULE — Max 6 columns in any markdown table. For any item with 7 or more attributes, use structured sections instead of a table row:
+    <r>TABLE FORMATTING RULE — Two conditions must BOTH be met to use a markdown table:
+    (1) Max 6 columns
+    (2) Every cell contains 6 words or fewer — short labels, numbers, names, single phrases only
+
+    If EITHER condition fails — too many columns OR any cell has more than 6 words — use structured sections instead:
 
     **Item Name**
-    - Attribute 1: value
+    - Attribute 1: value (can be as long as needed)
     - Attribute 2: value
     - Attribute 3: value
 
-    Apply this rule to ALL generated output.</r>
+    Competitive analysis, stakeholder profiles, risk descriptions, and pain journey stages always use structured sections because their cells are naturally long. Apply this rule to ALL generated output without exception.</r>
   </rules>
 
   <prompts>
