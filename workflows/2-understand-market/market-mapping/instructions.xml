@@ -29,7 +29,7 @@
       6. Flag: which competitors could pivot into our space if we find strong demand?
       Cite all sources. Apply research_depth setting.
     </instructions>
-    <template-output file="{output_folder}/{venture_name}/competitive-analysis.md">
+    <template-output file="{output_folder}/{venture_name}/understand-market/competitive-analysis.md">
       Save competitive landscape report with differentiation map.
     </template-output>
     <checkpoint>
@@ -57,7 +57,7 @@
 
       Flag if TAM &lt; $100M — significant risk signal.
     </instructions>
-    <template-output file="{output_folder}/{venture_name}/market-sizing.md">
+    <template-output file="{output_folder}/{venture_name}/understand-market/market-sizing.md">
       Save market sizing with both methodologies and all sources.
     </template-output>
   </step>
@@ -76,7 +76,7 @@
          - Economic shifts
       4. Assess: does the mothership have assets that lower key barriers?
     </instructions>
-    <template-output file="{output_folder}/{venture_name}/market-landscape.md">
+    <template-output file="{output_folder}/{venture_name}/understand-market/market-landscape.md">
       Save full market landscape report including barriers and trends.
     </template-output>
   </step>
