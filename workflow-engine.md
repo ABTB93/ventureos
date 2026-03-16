@@ -73,6 +73,17 @@ After any workflow completes (or after each step in guided mode):
 2. Add the new artifact to `completed_artifacts` list
 3. Update any `guiding_questions` that were answered by this workflow
 4. Save the updated venture-state.yaml
+5. **Update venture-brief.md** — open `{output_folder}/{venture_name}/venture-brief.md` and update:
+   - Phase / Week / Status / Last Updated header fields
+   - The Problem section (if pain has been identified or refined)
+   - The Solution section (if a wedge has been defined)
+   - The Market section (if TAM/SAM/SOM have been sized)
+   - The Evidence section (add any new [V]/[P]/[A] findings from this workflow)
+   - The Business Model section (if revenue model or unit economics have been defined)
+   - The Gate Status section (if a gate was evaluated)
+   - The Artifacts checklist — check off the newly completed artifact(s)
+   - Next step — update to reflect the single most important next action
+   This is mandatory after every workflow. venture-brief.md must always reflect the current state of the venture.
 
 ---
 
