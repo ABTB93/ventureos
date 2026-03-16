@@ -35,7 +35,7 @@
       For each risk: likelihood (1-5), impact (1-5), risk score, priority, owner, mitigation action.
       Identify the Top 5 Venture Killer Risks and assign mitigation owners and deadlines.
     </instructions>
-    <template-output file="{output_folder}/{venture_name}/venture-killer-risks.md">
+    <template-output file="{output_folder}/{venture_name}/business-case/venture-killer-risks.md">
       Save completed risk registry.
     </template-output>
   </step>
@@ -55,7 +55,7 @@
 
       This plan feeds directly into the check-in pitch.
     </instructions>
-    <template-output file="{output_folder}/{venture_name}/experiment-plan.md">
+    <template-output file="{output_folder}/{venture_name}/business-case/experiment-plan.md">
       Save operating and experiment plan.
     </template-output>
   </step>

@@ -63,7 +63,7 @@
       Prioritize: identify Top 3 Unfair Advantages. List assets to activate in next 30 days.
       Save to output folder. Update venture-state.yaml.
     </instructions>
-    <template-output file="{output_folder}/{venture_name}/mothership-asset-map.md">
+    <template-output file="{output_folder}/{venture_name}/setup-team/mothership-asset-map.md">
       Save completed Mothership Asset Map.
     </template-output>
   </step>

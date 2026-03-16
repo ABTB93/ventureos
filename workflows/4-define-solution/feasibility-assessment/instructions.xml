@@ -36,7 +36,7 @@
       Score each option 1-5 on feasibility.
       Recommend a route (or hybrid approach).
     </instructions>
-    <template-output file="{output_folder}/{venture_name}/solution-feasibility.md">
+    <template-output file="{output_folder}/{venture_name}/define-solution/solution-feasibility.md">
       Save feasibility analysis with all four routes evaluated.
     </template-output>
   </step>
@@ -55,7 +55,7 @@
 
       Use web search to identify technology players, platforms, and ecosystem participants.
     </instructions>
-    <template-output file="{output_folder}/{venture_name}/ecosystem-map.md">
+    <template-output file="{output_folder}/{venture_name}/define-solution/ecosystem-map.md">
       Save ecosystem map with partnership candidates.
     </template-output>
   </step>

@@ -78,7 +78,7 @@
       Fill all sections. Review with user. Save to output folder.
       Update venture-state.yaml: mark team-charter as complete in category_progress.team.
     </instructions>
-    <template-output file="{output_folder}/{venture_name}/team-charter.md">
+    <template-output file="{output_folder}/{venture_name}/setup-team/team-charter.md">
       Save completed Team Charter.
     </template-output>
     <state-update file="{project-root}/ventureOS/_memory/venture-state.yaml">

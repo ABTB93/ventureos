@@ -35,7 +35,7 @@
       - Revenue Streams, Key Resources, Key Activities, Key Partnerships, Cost Structure
       Include unit economics summary: ACV, Gross Margin, LTV, CAC, LTV:CAC ratio, Payback Period.
     </instructions>
-    <template-output file="{output_folder}/{venture_name}/business-model-canvas.md">
+    <template-output file="{output_folder}/{venture_name}/business-case/business-model-canvas.md">
       Save Business Model Canvas.
     </template-output>
   </step>
@@ -52,7 +52,7 @@
       5. Design a pricing validation experiment (landing page A/B, customer interview, pilot pricing)
       6. Calculate revenue implications per tier
     </instructions>
-    <template-output file="{output_folder}/{venture_name}/pricing-model.md">
+    <template-output file="{output_folder}/{venture_name}/business-case/pricing-model.md">
       Save pricing model with tiers and validation plan.
     </template-output>
   </step>
@@ -71,7 +71,7 @@
 
       Update venture-state.yaml: completed_artifacts, guiding_questions.design_business
     </instructions>
-    <template-output file="{output_folder}/{venture_name}/monetisation-plan.md">
+    <template-output file="{output_folder}/{venture_name}/business-case/monetisation-plan.md">
       Save monetisation plan.
     </template-output>
     <state-update file="{project-root}/ventureOS/_memory/venture-state.yaml">
