@@ -16,116 +16,22 @@ import { stdin as input, stdout as output } from 'process';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { spawnSync, spawn } from 'child_process';
+import { spawn } from 'child_process';
+import {
+  PROVIDERS,
+  IDE_TOOLS,
+  copyDir,
+  detectIDEs,
+  getIdeToolByLlm,
+  isIdeLlm,
+  parseSimpleYaml,
+  resolveProviderKey,
+} from './lib/runtime.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const PACKAGE_ROOT = path.dirname(__filename);
 
 let _spinner;
-
-// ─── Providers ─────────────────────────────────────────────────────────────────
-
-const PROVIDERS = {
-  anthropic: {
-    label:        'Claude (Anthropic)',
-    envVar:       'ANTHROPIC_API_KEY',
-    defaultModel: 'claude-opus-4-6',
-    keyUrl:       'https://console.anthropic.com',
-  },
-  openai: {
-    label:        'ChatGPT (OpenAI)',
-    envVar:       'OPENAI_API_KEY',
-    defaultModel: 'gpt-4o',
-    keyUrl:       'https://platform.openai.com/api-keys',
-  },
-  gemini: {
-    label:        'Gemini (Google)',
-    envVar:       'GOOGLE_API_KEY',
-    defaultModel: 'gemini-2.0-flash',
-    keyUrl:       'https://aistudio.google.com/app/apikey',
-  },
-};
-
-// ─── Known AI IDEs ─────────────────────────────────────────────────────────────
-
-const IDE_TOOLS = [
-  {
-    id:          'cursor',
-    label:       'Cursor',
-    description: 'no API key needed',
-    cmds:        ['cursor'],
-    appPaths:    ['/Applications/Cursor.app'],
-    instructions: (dir) => [
-      '  1.  Open this folder in Cursor',
-      `      cursor "${dir}"`,
-      '      (or: File → Open Folder → select this folder)',
-      '',
-      '  2.  In the Cursor chat panel, type exactly this:',
-      '      @ventureOS/venture-master.md',
-      '',
-      '  3.  Victor — your AI co-founder — will take it from there.',
-      '',
-      '  No API key. No extra setup. Just open and chat.',
-    ],
-  },
-  {
-    id:          'windsurf',
-    label:       'Windsurf',
-    description: 'no API key needed',
-    cmds:        ['windsurf'],
-    appPaths:    ['/Applications/Windsurf.app'],
-    instructions: (dir) => [
-      '  1.  Open this folder in Windsurf',
-      `      windsurf "${dir}"`,
-      '      (or: File → Open Folder → select this folder)',
-      '',
-      '  2.  In the Windsurf chat panel, type:',
-      '      @ventureOS/venture-master.md',
-      '',
-      '  3.  Victor — your AI co-founder — will take it from there.',
-      '',
-      '  No API key. No extra setup. Just open and chat.',
-    ],
-  },
-  {
-    id:          'claude',
-    label:       'Claude Code',
-    description: 'no API key needed',
-    cmds:        ['claude'],
-    appPaths:    [],
-    instructions: (dir) => [
-      '  1.  Open this folder in your terminal and start Claude Code',
-      `      cd "${dir}"`,
-      '      claude',
-      '',
-      '  2.  Type this to activate VentureOS:',
-      '      @ventureOS/venture-master.md',
-      '',
-      '  3.  Victor — your AI co-founder — will take it from there.',
-      '',
-      '  Full markdown rendering, streaming, all native Claude Code features.',
-    ],
-  },
-  {
-    id:          'antigravity',
-    label:       'Antigravity',
-    description: 'free, no API key needed',
-    cmds:        ['antigravity'],
-    appPaths:    ['/Applications/Antigravity.app'],
-    instructions: (dir) => [
-      '  1.  Open this folder in Antigravity',
-      `      antigravity "${dir}"`,
-      '      (or: File → Open Folder → select this folder)',
-      '',
-      '  2.  In the chat panel, type:',
-      '      @ventureOS/venture-master.md',
-      '',
-      '  3.  Victor — your AI co-founder — will take it from there.',
-      '',
-      '  Free to use. Supports Gemini, Claude, and more.',
-    ],
-  },
-];
 
 // ─── Constants (must be before entry point) ────────────────────────────────────
 
@@ -166,24 +72,6 @@ function handleFatalError(err) {
 
 function line() { return '  ' + '─'.repeat(52); }
 
-function parseSimpleYaml(text) {
-  const result = {};
-  for (const rawLine of text.split('\n')) {
-    const l = rawLine.trim();
-    if (!l || l.startsWith('#')) continue;
-    const colonIdx = l.indexOf(':');
-    if (colonIdx === -1) continue;
-    const key = l.slice(0, colonIdx).trim();
-    let value = l.slice(colonIdx + 1).trim();
-    if ((value.startsWith('"') && value.endsWith('"')) ||
-        (value.startsWith("'") && value.endsWith("'"))) {
-      value = value.slice(1, -1);
-    }
-    result[key] = value;
-  }
-  return result;
-}
-
 function showBanner() {
   console.log('\n');
   console.log('  ┌' + '─'.repeat(52) + '┐');
@@ -197,39 +85,15 @@ function showBanner() {
   console.log('\n');
 }
 
-// ─── IDE Detection ─────────────────────────────────────────────────────────────
+function showIdeNextSteps(projectRoot, llm) {
+  const ide = getIdeToolByLlm(llm);
+  if (!ide) return false;
 
-function detectIDEs() {
-  const found = [];
-  for (const ide of IDE_TOOLS) {
-    const byCLI = ide.cmds.some(c => {
-      try {
-        const r = spawnSync('which', [c], { encoding: 'utf8', stdio: 'pipe' });
-        return r.status === 0 && r.stdout.trim();
-      } catch { return false; }
-    });
-    const byApp = ide.appPaths.some(p => {
-      try { return fs.existsSync(p); } catch { return false; }
-    });
-    if (byCLI || byApp) found.push(ide);
-  }
-  return found;
-}
-
-// ─── File helpers ───────────────────────────────────────────────────────────────
-
-function copyDir(src, dest, skipSet = new Set()) {
-  fs.mkdirSync(dest, { recursive: true });
-  for (const entry of fs.readdirSync(src)) {
-    if (skipSet.has(entry)) continue;
-    const srcPath = path.join(src, entry);
-    const destPath = path.join(dest, entry);
-    if (fs.statSync(srcPath).isDirectory()) {
-      copyDir(srcPath, destPath);
-    } else {
-      fs.copyFileSync(srcPath, destPath);
-    }
-  }
+  console.log(`  This project is configured for ${ide.label}.`);
+  console.log('  Open it in the configured IDE and load Victor there.\n');
+  ide.instructions(projectRoot).forEach((lineText) => console.log(lineText));
+  console.log('\n  To switch this project to API-key chat, run: npx ventureos config\n');
+  return true;
 }
 
 function generateConfig({ userName, researchDepth, llm, defaultMode, region }) {
@@ -448,7 +312,11 @@ async function main() {
       console.log('  VentureOS is already set up in this folder.');
       console.log('  To get the latest framework:   npx ventureos update');
       console.log('  To update your settings:       npx ventureos config\n');
-      await launchChat(rl, projectRoot, config);
+      if (isIdeLlm(config.llm)) {
+        showIdeNextSteps(projectRoot, config.llm);
+      } else {
+        await launchChat(rl, projectRoot, config);
+      }
       return;
     }
 
@@ -569,6 +437,7 @@ async function reconfigure() {
   }
 
   const current = parseSimpleYaml(fs.readFileSync(configPath, 'utf8'));
+  const configuredForIDE = isIdeLlm(current.llm);
   console.log('  Current settings:\n');
   console.log(`     Name:     ${current.user_name     || '—'}`);
   console.log(`     Research: ${current.research_depth || '—'}`);
@@ -577,9 +446,14 @@ async function reconfigure() {
 
   const rl = readline.createInterface({ input, output });
   try {
-    const { userName, researchDepth, llm, defaultMode, region } = await runSetupWizard(rl, { forIDE: false });
+    if (configuredForIDE) {
+      console.log('  This project is currently configured for an AI IDE.');
+      console.log('  Reconfiguring without switching it into API-key mode.\n');
+    }
+    const { userName, researchDepth, llm, defaultMode, region } = await runSetupWizard(rl, { forIDE: configuredForIDE });
     rl.close();
-    const newConfig = generateConfig({ userName, researchDepth, llm, defaultMode, region });
+    const nextLlm = configuredForIDE ? current.llm : llm;
+    const newConfig = generateConfig({ userName, researchDepth, llm: nextLlm, defaultMode, region });
     fs.writeFileSync(configPath, newConfig, 'utf8');
     console.log('\n  ✓  Configuration updated  →  ventureOS/config.yaml\n');
   } catch (err) {
@@ -655,6 +529,11 @@ async function legacyStart() {
     process.exit(1);
   }
   const config = parseSimpleYaml(fs.readFileSync(configPath, 'utf8'));
+  if (isIdeLlm(config.llm)) {
+    console.log('  This project is configured for IDE-based use.\n');
+    showIdeNextSteps(projectRoot, config.llm);
+    return;
+  }
   const rl = readline.createInterface({ input, output });
   try {
     await launchChat(rl, projectRoot, config);
@@ -666,7 +545,12 @@ async function legacyStart() {
 // ─── Chat ───────────────────────────────────────────────────────────────────────
 
 async function launchChat(rl, projectRoot, config, credentials = null) {
-  const providerKey = credentials?.providerKey || (PROVIDERS[config.llm] ? config.llm : 'anthropic');
+  const providerKey = credentials?.providerKey || resolveProviderKey(config.llm);
+  if (!providerKey) {
+    console.log('');
+    showIdeNextSteps(projectRoot, config.llm);
+    return;
+  }
   const provider = PROVIDERS[providerKey];
 
   // ── Resolve API key ────────────────────────────────────────────────────────

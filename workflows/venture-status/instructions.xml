@@ -10,7 +10,7 @@
     <instructions>
       Load and parse:
       1. {project-root}/ventureOS/_memory/venture-state.yaml
-      2. {project-root}/ventureOS/_memory/pivot-history.yaml
+      2. Use the `pivot_history` and `gate_history` sections from venture-state.yaml as the source of truth
       3. {project-root}/ventureOS/config.yaml (for venture_name, user_name)
     </instructions>
   </step>

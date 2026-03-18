@@ -16,6 +16,12 @@ jobs:
           node-version: '20'
           registry-url: 'https://registry.npmjs.org'
 
+      - name: Validate repository contracts
+        run: npm run validate
+
+      - name: Run tests
+        run: npm test
+
       - name: Publish to npm
         run: npm publish
         env:

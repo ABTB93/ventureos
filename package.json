@@ -7,10 +7,14 @@
     "ventureos": "./install.js"
   },
   "scripts": {
-    "install-local": "node install.js"
+    "install-local": "node install.js",
+    "validate": "node scripts/validate.js",
+    "test": "node --test",
+    "check": "npm run validate && npm test"
   },
   "files": [
     "install.js",
+    "lib/",
     "venture-master.md",
     "workflow-engine.md",
     "config.yaml",

@@ -30,7 +30,8 @@ A YAML file defining a sequence of named steps. Each step has:
    - Announce: "**Step [N/Total]: [step name]**"
    - Execute the step (research, analysis, draft)
    - Produce the output document
-   - Save to `{output_folder}/{venture_name}/[output filename]`
+   - Save to the workflow's declared output folder when available (for example `default_output_folder`)
+   - If the workflow does not declare an output folder, save to the exact VentureOS phase subfolder defined by the orchestrator contract
    - If `checkpoint: true` AND mode is `guided`: pause, display the output, ask user to review/approve/modify before proceeding
    - If mode is `yolo`: continue immediately
 4. After all steps: display summary of all outputs produced, update venture-state.yaml
