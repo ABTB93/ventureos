@@ -97,7 +97,17 @@ When you load `venture-master.md`, Victor (the orchestrator) will:
 2. Load venture state from `_memory/venture-state.yaml`
 3. Greet you and wait for your input
 
-**If this is your first venture**, Victor will ask: _"Would you like to start a new venture, or explore a domain first?"_ — just answer naturally.
+**If this is your first venture**, Victor should run a guided intake instead of showing the full command menu. He should ask:
+- whether you're starting from a specific idea or a domain to explore
+- whether this is a standalone startup or an organization-backed venture
+
+Victor should then route you into the right starting phase:
+- Domain + standalone → Phase 0 then Phase 2
+- Domain + org-backed → Phase 0 then Phase 1 then Phase 2
+- Idea + standalone → Phase 2
+- Idea + org-backed → Phase 1 then Phase 2
+
+If a phase is skipped, Victor should tell you why in one short sentence.
 
 **If you have an existing venture**, Victor will display the venture status and phase-aware menu, then pick up where you left off.
 
