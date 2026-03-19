@@ -65,25 +65,29 @@ List 2-3 candidate solution entry points ranked by: pain intensity × feasibilit
 
 ---
 
-## 5.5 Define the Ideal Customer Profile (ICP)
+## 5.5 Finalize the ICP — Version 1
 
-Using all Phase 3 evidence, define the ICP using the `icp-profile.md` template:
+Load the current `{output_folder}/{venture_name}/03-find-pain/icp-profile.md`. This has been progressively updated through each synthesis batch. This step finalizes it as v1.
 
-**From interview synthesis:**
-- Which participant profiles showed the strongest pain?
-- Which roles, company types, company sizes, geographies?
+**Check completeness — every field must now be [P] or [V]. Any remaining [A] fields must be:**
+- Updated with the best available interview evidence, or
+- Explicitly flagged: "⚠️ Still [A] — not surfaced in interviews. Treat as unvalidated before Phase 5."
 
-**ICP dimensions to define:**
-- Demographics/firmographics: role, industry, company size, geography, company stage
-- Psychographics: what they're measured on, what they fear, how they make decisions
-- Pain profile: primary pain, FIP score, workaround, switching motivation
-- Buying behavior: how they discover solutions, buying process, typical budget
+**Finalize from the full interview corpus:**
+- Primary ICP: the profile that appeared most frequently with the strongest FIP signal
+- Secondary ICP (if applicable): a distinct segment with meaningful but weaker signal
+- Buyer vs. User split: confirm whether buyer and user are the same person or different — and document both if different
+- Exclusion criteria: who explicitly did NOT respond — this is as valuable as who did
 
-**Buyer vs. User ICP:**
-If buyer ≠ user, define both with separate profiles.
+**ICP confidence assessment:**
+For each dimension (pain existence, pain severity, segment size, willingness to pay, buying process) — assign Low / Medium / High confidence based on interview sample size and signal consistency.
 
-**ICP exclusion criteria:**
-Who explicitly does NOT fit? (Helps focus GTM.)
+**Update the header:**
+ICP Version: v1 — Validated (Phase 3 complete, N interviews)
+
+Save: `{output_folder}/{venture_name}/03-find-pain/icp-profile.md`
+
+Tell the user: "ICP finalized at v1. [X] fields validated, [Y] fields provisional, [Z] fields still assumption. Downstream phases (4, 5, 6) will load this file as their customer foundation."
 
 ---
 

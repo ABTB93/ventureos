@@ -42,12 +42,32 @@ Update `wedge-definition.md` with testing insights.
 
 ---
 
-## 4.3 ICP Refinement from Solution Testing
+## 4.3 ICP Update — Version 2
 
-Based on who responded best to the prototype:
-- Refine the ICP: which specific profiles showed the strongest positive reaction?
-- Update `icp-profile.md` with solution testing signals
-- Narrow or expand the ICP based on new evidence
+Load `{output_folder}/{venture_name}/03-find-pain/icp-profile.md` (v1 from Phase 3).
+
+Solution testing reveals who actually wants the solution, not just who has the pain. These are often not identical. Update the ICP based on concept test responses:
+
+**Fields to update:**
+- Primary ICP: narrow or adjust based on who showed the strongest positive reaction (desirability score ≥ 4/5 + "would recommend to team")
+- Remove profiles that validated the pain but showed low desirability for this solution — they are not the ICP for this wedge
+- Update "Switching motivation" based on what participants said would make them switch
+- Update "Key objections" based on friction observed during concept walkthroughs
+- Update "Buying behavior" based on: who would need to approve this purchase? What process did they describe?
+- Update "Representative Quote" with the strongest quote from concept testing
+
+**Confidence upgrades:**
+- Willingness to pay: if any participant gave a price anchor unprompted → upgrade to [V]
+- Buying process: if participants described their procurement flow → upgrade to [V]
+
+**Update the header:**
+ICP Version: v2 — Solution-Validated (Phase 4 concept testing, N sessions)
+
+Save: `{output_folder}/{venture_name}/03-find-pain/icp-profile.md`
+
+Update the Validation Status table in `venture-brief.md`: set Phase 4 row to "real / synthetic | N sessions | v2 complete"
+
+Tell the user: "ICP updated to v2. The solution testing has [narrowed/confirmed/shifted] the primary ICP. Key change: [summarise the most significant update in one sentence]."
 
 ---
 

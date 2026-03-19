@@ -92,13 +92,31 @@ Update cumulative synthesis: `{output_folder}/{venture_name}/03-find-pain/interv
 
 ---
 
-## 3.6 Hypothesis Update
+## 3.6 ICP Update
+
+Load `{output_folder}/{venture_name}/03-find-pain/icp-profile.md` (the v0 draft created in Phase 2, or the latest version if this is batch > 1).
+
+For each field in the ICP:
+- If this batch's interviews **confirm** the hypothesis → upgrade label from [A] to [P], add the interview number(s) to the Evidence Log
+- If 3+ interviews confirm the same signal → upgrade from [P] to [V]
+- If this batch **contradicts** a field → update the field with the new finding, label [P], note the contradiction in the Evidence Log
+- If a new signal emerges that was not in the v0 draft → add it
+
+Increment the version: v0 → v0.1 after first batch, v0.2 after second, etc.
+Update the "Evidence Base" count and the "Date" field.
+
+Save the updated file: `{output_folder}/{venture_name}/03-find-pain/icp-profile.md`
+
+Tell the user: "ICP updated to v0.{N}. [X] fields upgraded from assumption to provisional/validated, [Y] fields updated based on new interview signals."
+
+---
+
+## 3.7 Hypothesis Update
 
 Based on synthesis findings:
 1. Is the primary pain hypothesis confirmed, partially confirmed, or contradicted?
 2. Should any secondary hypothesis be elevated to primary?
-3. Should the ICP hypothesis be updated?
-4. Should the interview script be updated for the next batch?
+3. Should the interview script be updated for the next batch?
 
 Update `pain-hypothesis.md` if changes are needed. Note version and rationale.
 

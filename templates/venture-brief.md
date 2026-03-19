@@ -29,12 +29,26 @@ _(1-3 sentences: the wedge — the smallest thing we are building first, and why
 
 ---
 
+## Target Customer (ICP)
+<!-- Victor updates this whenever icp-profile.md is versioned — v0 after Phase 2, v1 after Phase 3, v2 after Phase 4 -->
+
+- **ICP Version:** v___ _(v0 = hypothesis · v1 = validated · v2 = solution-validated)_
+- **Primary profile:** _(job title, company type, company size)_
+- **Core pain:** _(one sentence — what keeps them up at night)_
+- **Current workaround:** _(what they do today instead)_
+- **Buying trigger:** _(the event that makes them act)_
+- **Buyer vs. User:** _(same person / different — if different, name both)_
+- **Confidence:** Low / Medium / High  [V/P/A]
+
+→ Full profile: `03-find-pain/icp-profile.md`
+
+---
+
 ## Market
 
 - **TAM:** $___  [V/P/A]
 - **SAM:** $___  [V/P/A]
 - **SOM (Year 3):** $___  [V/P/A]
-- **ICP:** _(job title, company type, trigger event)_
 
 ---
 
